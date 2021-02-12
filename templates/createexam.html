@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Exams</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
+</head>
+
+<body class="is-preload">
+
+    <!-- Header -->
+    <header id="header">
+        <a class="logo" href="home">Online Exam System</a>
+        <nav>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
+
+    <!-- Nav -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="home">Home</a></li>
+            <li><a href="exams">Exams</a></li>
+            <li><a href="leaderboard">Leaderboard</a></li>
+            <li><a href="logout">Logout</a> </li>
+        </ul>
+    </nav>
+
+    <!-- Heading -->
+    <div id="heading">
+        <h1>Exams</h1>
+    </div>
+
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <div class="content">
+                <header>
+                    <h2>Create Exam</h2>
+                </header>
+                <div class="content">
+                    <form action="createexam/p=2" method="get">
+                        <label for="examname">Exam's name:</label>
+                        <input type="text" id="examname" name="examname">
+                        <label for="examstime">Exam starts at (date and time):</label>
+                        <input type="datetime-local" id="examstime" name="examstart">
+                        <label for="examendtime">Exam ends at (date and time):</label>
+                        <input type="datetime-local" id="examendtime" name="examend">
+                        <p> </p>
+                        <ul class="actions fit">
+                            <li><button class="button primary fit">Next</button></li>
+                        </ul>
+                        <!-- start date end date, question and answers textboxes
+							 next dedikten sonra soruları belirle? TARİH VE SINAV ADI KAYDEDİLECEK-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Scripts -->
+    <script src="static/assets/js/jquery.min.js"></script>
+    <script src="static/assets/js/browser.min.js"></script>
+    <script src="static/assets/js/breakpoints.min.js"></script>
+    <script src="static/assets/js/util.js"></script>
+    <script src="static/assets/js/main.js"></script>
+
+</body>
+
+</html>

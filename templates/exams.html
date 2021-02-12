@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>Exams</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
+</head>
+
+<body class="is-preload">
+
+    <!-- Header -->
+    <header id="header">
+        <a class="logo" href="home">Online Exam System</a>
+        <a class="logo" href="home">Online Exam System</a>
+        <nav>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
+
+    <!-- Nav -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="home">Home</a></li>
+            <li><a href="exams">Exams</a></li>
+            <li><a href="leaderboard">Leaderboard</a></li>
+            <li><a href="logout">Logout</a> </li>
+        </ul>
+    </nav>
+
+    <!-- Heading -->
+    <div id="heading">
+        <h1>Exams</h1>
+    </div>
+
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <div class="content">
+                <header>
+                    <h2>Current Exams</h2>
+                </header>
+                <p>
+                    {% for e in exam %}
+                    <button id="sinav">
+							{{e[0]}}
+							{{e[1]}}
+							{{e[2]}}
+							</button>
+                    <br> {% endfor %}
+                    <!--
+							!!!!!!LIST CURRENT EXAMS HERE !!!!!
+							-->
+                </p>
+                {% if user_type == "öğretmen" %}
+                <ul class="actions fit">
+                    <li><a href="createexam" class="button primary fit">Create an exam!</a></li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+
+
+    <script src="static/assets/js/jquery.min.js"></script>
+    <script src="static/assets/js/browser.min.js"></script>
+    <script src="static/assets/js/breakpoints.min.js"></script>
+    <script src="static/assets/js/util.js"></script>
+    <script src="static/assets/js/main.js"></script>
+
+</body>
+
+</html>
