@@ -19,7 +19,7 @@ def create_database():
     with db.get_cursor() as cursor:
         cursor.execute("CREATE TABLE Kullanici (kullanici_id serial PRIMARY KEY,kullanici_adi VARCHAR(50) NOT NULL,kullanici_sifre VARCHAR(50) NOT NULL,kullanici_tipi VARCHAR(50) NOT NULL);")
         cursor.execute("CREATE TABLE Sinav(sinav_id serial PRIMARY KEY,ogretmen_id INTEGER NOT NULL,sinav_adi VARCHAR(50) NOT NULL,sinav_baslama_tarihi timestamp  NOT NULL,sinav_bitis_tarihi timestamp NOT NULL,FOREIGN KEY (ogretmen_id) REFERENCES Kullanici(kullanici_id));")
-        cursor.execute("CREATE TABLE Soru(soru_id serial PRIMARY KEY,soru_sinav_id INTEGER NOT NULL,soru_metni VARCHAR(600) NOT NULL,soru_siklari VARCHAR(600) NOT NULL,soru_dogru_cevap CHAR(1) NOT NULL,soru_puani INTEGER NOT NULL,FOREIGN KEY(soru_sinav_id) REFERENCES Sinav(sinav_id));")
+        cursor.execute("CREATE TABLE Soru(soru_id serial PRIMARY KEY,soru_sinav_id INTEGER NOT NULL,soru_metni VARCHAR(100000) NOT NULL,soru_siklari VARCHAR(100000) NOT NULL,soru_dogru_cevap CHAR(1) NOT NULL,soru_puani INTEGER NOT NULL,FOREIGN KEY(soru_sinav_id) REFERENCES Sinav(sinav_id));")
         cursor.execute("CREATE TABLE Ogrenci_Soru(ogrenci_id INTEGER,soru_id INTEGER ,verilen_cevap CHAR(1) NOT NULL,aldigi_puan INTEGER NOT NULL,PRIMARY KEY(ogrenci_id,soru_id),FOREIGN KEY(ogrenci_id) REFERENCES Kullanici(kullanici_id),FOREIGN KEY (soru_id) REFERENCES Soru(soru_id));")
         cursor.execute("CREATE TABLE Ogrenci_Sinav(ogrenci_id INTEGER,sinav_id INTEGER,ogrenci_sinav_bitis_tarihi timestamp NOT NULL,dogru_sayi INTEGER NOT NULL ,yanlis_cevap INTEGER NOT NULL ,puan INTEGER NOT NULL,PRIMARY KEY(ogrenci_id,sinav_id),FOREIGN KEY(ogrenci_id) REFERENCES Kullanici(kullanici_id),FOREIGN KEY(sinav_id) REFERENCES Sinav(sinav_id));")
     db.commit()
