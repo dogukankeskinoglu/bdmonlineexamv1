@@ -49,8 +49,8 @@ def login():
             rows = cursor.fetchall()
             for row in rows:
                 if request.form.get("password") == str(row[2]):
-                    #return  "success"
-                    return redirect(url_for("show_exams"))
+                    return  "success"
+                    #return redirect(url_for("show_exams"))
                 else:
                     return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
     return render_template('home.html')  # userexists=current_user , user varsa tekrar login kısmını göstermesin!.
@@ -61,6 +61,7 @@ def login():
 @app.route("/exams", methods=["GET", "POST"])
 #@login_required
 def show_exams():
+    #createdexams=[]
     if request.method == "POST":
         examdetails = json.loads(request.data)
         # created exams ve exam details parse edilip eklenecek
