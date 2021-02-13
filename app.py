@@ -72,7 +72,7 @@ def show_exams():
         cursor.execute("INSERT INTO Sinav(sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi) VALUES (%s, %s,%s);",
                        (exams[-1][0], exams[-1][1], exams[-1][2]))
     db.commit()
-    return render_template("exams.html", user_type=current_user.kullanici_tipi, exam=createdexams)
+    return render_template("exams.html", user_type="Ogretmen", exam=createdexams)
 
 
 @app.route("/createexam")
