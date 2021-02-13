@@ -77,6 +77,11 @@ def show_exams():
         createdexams.append(exams[-1])
         print(createdexams, sys.stdout.flush())
         print(uuid.uuid4(), sys.stdout.flush()) #sınavın unique id'si
+    #cursor.execute("CREATE TABLE Sinav(sinav_id serial PRIMARY KEY,sinav_adi VARCHAR(50) NOT NULL,sinav_baslama_tarihi timestamp  NOT NULL,sinav_bitis_tarihi timestamp NOT NULL);")
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("INSERT INTO Sinav (sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi) VALUES (%s,%s,%s);",(exams[0],exams[1],exams[2])))
+    db.commit()
     user_type = "öğretmen"  # db'den kullanıcının user type'ı check edilmeli
     return render_template("exams.html", user_type=user_type, exam=createdexams)
     #exam değeri db'den alınacak?
@@ -121,3 +126,5 @@ if __name__ == '__main__':
     login_manager.init_app(app)
 
     app.run(debug=True)
+
+
