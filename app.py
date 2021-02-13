@@ -3,15 +3,15 @@ import sys
 import flask_login
 import uuid
 from flask import Flask, request, render_template, redirect, url_for, jsonify, json
-from flask_login import LoginManager, login_required, current_user
+#from flask_login import LoginManager, login_required, current_user
 
 from database import Database
 
-login_manager = LoginManager()
+#login_manager = LoginManager()
 
 app = Flask(__name__)
-login_manager.init_app(app)
-login_manager.login_view = 'login'
+#login_manager.init_app(app)
+#login_manager.login_view = 'login'
 
 # users = {'sakiratsui': {'password': 'secret'}, 'dogukan': {'password': '1234'}}
 
@@ -37,44 +37,27 @@ def redirecthome():
     return redirect(url_for("login"))
 
 
-@app.route("/home")
+@app.route("/home",methods=["GET","POST"])
 def login():
+    if request.method=="POST":
+        name = request.form.get("name")
+        db = Database()
+        print("sa",sys.stdout.flush())
+        with db.get_cursor() as cursor:
+            cursor.execute("SELECT * FROM Kullanici WHERE kullanici_adi= %s", (name,))
+            rows = cursor.fetchall()
+            for row in rows:
+                if request.form.get("password") == str(row[2]):
+                    return redirect(url_for("show_exams"))
+                else:
+                    return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
     return render_template('home.html')  # userexists=current_user , user varsa tekrar login kısmını göstermesin!.
 
-@login_manager.request_loader
-def request_loader(request):
-    name = request.form.get('name')
-    if name not in users:
-        return "bad request"
 
-    user = User()
-    user.id = name
-    user.is_authenticated = request.form['password'] == users[name]['password']
-
-    return user
-
-@app.route("/home", methods=["POST"])
-def logon():
-    name = request.form.get("name")
-    db = Database()
-    with db.get_cursor() as cursor:
-        cursor.execute("SELECT * FROM Kullanici WHERE kullanici_adi= %s", (name,))
-        rows = cursor.fetchall()
-        for row in rows:
-            if request.form.get("password") == str(row[2]):
-                usr = User()
-                usr.username = name
-                usr.usertype = row[3]
-                flask_login.login_user(usr)
-                return redirect(url_for("show_exams"))
-            else:
-                return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
-    # bu değerler db'de bir veriyle eşleşirse home'a gidilir.
-    # else return login again?
 
 
 @app.route("/exams", methods=["GET", "POST"])
-@login_required
+#@login_required
 def show_exams():
     if request.method == "POST":
         examdetails = json.loads(request.data)
@@ -91,13 +74,13 @@ def show_exams():
 
 
 @app.route("/createexam")
-@login_required
+#@login_required
 def create_exam():
     return render_template("createexam.html")
 
 
 @app.route("/createexam/p=2")
-@login_required
+#@login_required
 def exampagetwo():
     examname = request.args.get("examname")
     start = request.args.get("examstart")
@@ -107,7 +90,7 @@ def exampagetwo():
 
 
 @app.route("/leaderboard")
-@login_required
+#@login_required
 def leaderboard():
     names = "dogukan", "muge"  # db.get öğrenci sınav tablosundaki kullanıcı adları
     points = 90, 95  # db.get öğrencisınav tablosundaki notlar
@@ -117,13 +100,12 @@ def leaderboard():
 
 
 @app.route("/logout")
-@login_required
+#@login_required
 def logout():
-    flask_login.logout_user()
+    #flask_login.logout_user()
     return redirect(url_for("login"))
 
 
 if __name__ == '__main__':
-    app.secret_key = 'j1i5ek0eeg+lb0uj^rvm)d1a@qvz^l&1(ep8f54n(oe+uc6s)4'
-
+    app.secret_key = '!$w4wW~o|~8OVFX'
     app.run(debug=True)
