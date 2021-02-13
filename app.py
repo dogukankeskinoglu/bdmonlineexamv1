@@ -49,7 +49,7 @@ def login():
             rows = cursor.fetchall()
             for row in rows:
                 if request.form.get("password") == str(row[2]):
-                    return redirect(url_for("show_exams"))
+                    return render_template("create_exam.html")
                 else:
                     return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
     return render_template('home.html')  # userexists=current_user , user varsa tekrar login kısmını göstermesin!.
