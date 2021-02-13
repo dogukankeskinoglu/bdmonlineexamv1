@@ -17,10 +17,7 @@ app = Flask(__name__)
 
 exams = []
 createdexams = []  # tıklandıktan sonra kaydedilmeleri için
-connection = psycopg2.connect(user="desolex98",
-                                        password="Drs408590k*",
-                                        host="onlineexamcloudprojectbdmpostgresql.postgres.database.azure.com",
-                                        database="postgres")
+
 
 # db'den çekilecek
 
@@ -42,30 +39,9 @@ def redirecthome():
 
 @app.route("/home",methods=["GET","POST"])
 def login():
-    
     if request.method=="POST":
-        try: 
-            print("Using Python variable in PostgreSQL select Query")
-            name = request.form.get("name")
-            cursor = connection.cursor()
-            postgreSQL_select_Query = "select * from Kullanici where kullanici_adi = %s"
-
-            cursor.execute(postgreSQL_select_Query, (name,))
-            rows = cursor.fetchall()
-            for row in rows:
-                if request.form.get("password")==str(row[2]):
-                    return redirect(url_for("show_exams"))
-                else:   
-                    return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
-        except (Exception, psycopg2.Error) as error:
-            print("Error fetching data from PostgreSQL table", error)
-        finally:
-        # closing database connection
-            if (connection):
-                cursor.close()
-                connection.close()
-                print("PostgreSQL connection is closed \n")
-        """name = request.form.get("name")
+        name = request.form.get("name")
+        print(name,sys.stdout.flush())
         db = Database()
         print("sa",sys.stdout.flush())
         with db.get_cursor() as cursor:
@@ -75,7 +51,7 @@ def login():
                 if request.form.get("password") == str(row[2]):
                     return redirect(url_for("show_exams"))
                 else:
-                    return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")"""
+                    return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
     return render_template('home.html')  # userexists=current_user , user varsa tekrar login kısmını göstermesin!.
 
 
