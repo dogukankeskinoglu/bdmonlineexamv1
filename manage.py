@@ -25,6 +25,15 @@ def create_database():
     db.commit()
     print("Finished creating table")
 
+def fill_database():
+    db = Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("INSERT INTO Kullanici (kullanici_adi,kullanici_sifre,kullanici_tipi) VALUES (%s, %s, %s);", ("dogukan","public","Ogrenci"))
+        cursor.execute("INSERT INTO Kullanici (kullanici_adi,kullanici_sifre,kullanici_tipi) VALUES (%s, %s, %s);", ("mgselen","private","Ogrenci"))
+        cursor.execute("INSERT INTO Kullanici (kullanici_adi,kullanici_sifre,kullanici_tipi) VALUES (%s, %s, %s);", ("batuayyildiz","static","Ogrenci"))
+        cursor.execute("INSERT INTO Kullanici (kullanici_adi,kullanici_sifre,kullanici_tipi) VALUES (%s, %s, %s);", ("hasanbulut","bulutbilisim","Ogretmen"))
+    db.commit()
+    print("Inserted 4 rows of data")
 
 
 
@@ -46,7 +55,7 @@ if args.command == "init":
     else:
         try:
             create_database()
-            #fill_database()
+            fill_database()
             open("initialized.txt", "w+")
             print("project initialized")
         except Exception as inst:
