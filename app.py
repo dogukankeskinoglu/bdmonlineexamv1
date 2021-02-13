@@ -6,11 +6,11 @@ from flask import Flask, request, render_template, redirect, url_for, jsonify, j
 from flask_login import LoginManager, login_required, current_user
 from database import Database
 
-login_manager = LoginManager()
 app = Flask(__name__)
+app.secret_key = 'j1i5ek0eeg+lb0uj^rvm)d1a@qvz^l&1(ep8f54n(oe+uc6s)4'
+login_manager = LoginManager(app)
 
 users = {'sakiratsui': {'password': 'secret'}, 'dogukan': {'password': '1234'}}
-
 exams = []
 createdexams=[] #tıklandıktan sonra kaydedilmeleri için
 
@@ -18,31 +18,27 @@ createdexams=[] #tıklandıktan sonra kaydedilmeleri için
 # db'den çekilecek
 
 class User(flask_login.UserMixin):
-    def __init__(self,kullanici_id, kullanici_adi, kullanici_sifre, kullanici_tipi):
-        self.kullanici_id = kullanici_id
-        self.kullanici_adi = kullanici_adi
-        self.kullanici_sifre = kullanici_sifre
-        self.kullanici_tipi = kullanici_tipi
-        
+    pass
+
 
 @login_manager.user_loader
 def user_loader(username):
-    if username not in users: #düzelt
+    if username not in users:
         return "bad request"
 
     user = User()
-    user.kullanici_adi = username
+    user.id = username
     return user
 
 
 @login_manager.request_loader
 def request_loader(request):
     name = request.form.get('name')
-    if name not in users: #düzelt
+    if name not in users:
         return "bad request"
 
     user = User()
-    user.kullanici_adi = name
+    user.id = name
     user.is_authenticated = request.form['password'] == users[name]['password']
 
     return user
@@ -61,34 +57,42 @@ def login():
 @app.route("/home", methods=["POST"])
 def logon():
     name = request.form.get("name")
-    db = Database()
-    with db.get_cursor() as cursor:
-        cursor.execute("SELECT * FROM Kullanici WHERE kullanici_adi =" + name)
-        rows = cursor.fetchall()
-        for row in rows:
-            if request.form.get("password") == row[2]:
-                usr = User()
-                usr.kullanici_adi = name
-                usr.kullanici_tipi = row[3]
-                flask_login.login_user(usr)
-                return redirect(url_for("show_exams"))
-            else:
-                return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
+    if request.form.get("password") == users[name]["password"]:
+        usr = User()
+        usr.id = name
+        flask_login.login_user(usr)
+        return redirect(url_for("show_exams"))
     # bu değerler db'de bir veriyle eşleşirse home'a gidilir.
     # else return login again?
+    else:
+        return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
 
 
 @app.route("/exams", methods=["GET", "POST"])
 @login_required
 def show_exams():
+    user_type = "öğretmen"
     if request.method == "POST":
         examdetails = json.loads(request.data)
-        # created exams ve exam details parse edilip eklenecek
+        # sınav detayları ve adı tarihi db'ye kaydedilecek
         createdexams.append(exams[-1])
         print(createdexams, sys.stdout.flush())
-    return render_template("exams.html", user_type=current_user.kullanici_tipi, exam=createdexams)
-    #exam değeri db'den alınacak?
+        print(uuid.uuid4(), sys.stdout.flush()) #sınavın unique id'si
+        db=Database()
+        with db.get_cursor() as cursor:
+            cursor.execute("INSERT INTO Sinav(sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi) VALUES (%s, %s,%s);", ("sınav","04/23/17 04:34:22 +0000","04/25/17 04:34:22 +0000"))
+        db.commit()
+        return render_template("exams.html", user_type=user_type, exam=createdexams)
+      # db'den kullanıcının user type'ı check edilmeli
+    return render_template("exams.html", user_type=user_type, exam=createdexams)
+    # exam değeri db'den alınacak?
 
+
+@app.route("/exam/<exam_id>")
+@login_required
+def get_exam(exam_id):
+    exam_id = uuid.uuid4()
+    return url_for("exam", exam_id=exam_id)
 
 @app.route("/createexam")
 @login_required
@@ -103,6 +107,7 @@ def exampagetwo():
     start = request.args.get("examstart")
     end = request.args.get("examend")
     exams.append([examname, start, end])
+    # alınan değerler db'ye kaydedilecek!
     return render_template("pagetwo.html", examname=examname, start=start, end=end)
 
 
@@ -124,7 +129,7 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.secret_key = 'j1i5ek0eeg+lb0uj^rvm)d1a@qvz^l&1(ep8f54n(oe+uc6s)4'
+
     login_manager.init_app(app)
 
     app.run(debug=True)
