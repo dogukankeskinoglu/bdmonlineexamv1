@@ -50,7 +50,7 @@ def login():
             for row in rows:
                 if request.form.get("password") == str(row[2]):
                     #return  "success"
-                    return redirect(url_for("create_exam"))
+                    return redirect(url_for("show_exams"))
                 else:
                     return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
     return render_template('home.html')  # userexists=current_user , user varsa tekrar login kısmını göstermesin!.
