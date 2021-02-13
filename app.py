@@ -63,7 +63,7 @@ def logon():
     name = request.form.get("name")
     db = Database()
     with db.get_cursor() as cursor:
-        cursor.execute("SELECT kullanici_adi from Kullanici")
+        cursor.execute("SELECT * FROM Kullanici WHERE kullanici_adi =" + name)
         rows = cursor.fetchall()
         for row in rows:
             if request.form.get("password") == row[2]:
