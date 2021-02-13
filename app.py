@@ -41,6 +41,17 @@ def redirecthome():
 def login():
     return render_template('home.html')  # userexists=current_user , user varsa tekrar login kısmını göstermesin!.
 
+@login_manager.request_loader
+def request_loader(request):
+    name = request.form.get('name')
+    if name not in users:
+        return "bad request"
+
+    user = User()
+    user.id = name
+    user.is_authenticated = request.form['password'] == users[name]['password']
+
+    return user
 
 @app.route("/home", methods=["POST"])
 def logon():
