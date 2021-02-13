@@ -67,6 +67,7 @@ def logon():
         return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
 
 
+
 @app.route("/exams", methods=["GET", "POST"])
 @login_required
 def show_exams():
