@@ -1,8 +1,8 @@
 {
     "database": {
-        "host": "bdmonlineexampostgre.postgres.database.azure.com",
+        "host": "onlineexamcloudprojectbdmpostgresql.postgres.database.azure.com",
         "dbname": "postgres",
-        "user": "dogukankeskinoglu98",
+        "user": "desolex98",
         "password": "Drs408590k*",
         "ssl": "require"
     }
