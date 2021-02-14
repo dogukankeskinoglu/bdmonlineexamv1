@@ -63,7 +63,7 @@ def show_exams():
         examdetails = json.loads(request.data)
         # created exams ve exam details parse edilip eklenecek
         exam_object=Exam(++sinav_sayi,exams[-1][0], exams[-1][1], exams[-1][2])
-        created_exam.append(exam_object)
+        createdexams.append(exam_object)
         #createdexams.append(exams[-1])
         print(createdexams, sys.stdout.flush())
     # Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
