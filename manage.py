@@ -7,7 +7,7 @@ parser = argparse.ArgumentParser(description='App manager.')
 parser.add_argument('command', metavar="cmd", type=str, help='command to manage the app')
 
 args = parser.parse_args()
-
+sinav_id_sayac=0
 #Kullanıcı(kullanici_id,kullanici_adi,sifre,kullanici_type)
 #Sınav(sınav_id,ogretmen_id,sinav_adi,sınav_baslama,sınav_bitis)
 #Ogrenci_Sınav(ogrenci_id,sinav_id,ogrenci_dogru_sayı,ogrenci_yanlis_sayı,ogrenci_puan)
@@ -48,6 +48,16 @@ def drop_database():
     db.commit()
     print("Finished dropping tables")
 
+def getExamFromDataBase():
+    db = Database()
+    created_exam=[]
+    with db.get_cursor() as sinav_cursor:
+        cursor.execute("SELECT * FROM Sinav;")
+        rows = cursor.fetchall()
+        for row in rows:
+            exam_object=Exam(row[0],row[1],row[2],row[3])
+            created_exam.append(exam_object)
+    return created_exam
 
 if args.command == "init":
     if path.exists("initialized.txt"):

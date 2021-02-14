@@ -5,7 +5,7 @@ import uuid
 from flask import Flask, request, render_template, redirect, url_for, jsonify, json
 from flask_login import login_required
 from psycopg2._psycopg import cursor
-
+import manage
 from database import Database
 
 app = Flask(__name__)
@@ -14,8 +14,8 @@ app = Flask(__name__)
 #users = {'sakiratsui': {'password': 'secret'}, 'dogukan': {'password': '1234'}}
 
 exams = []
-#createdexams = []  # tıklandıktan sonra kaydedilmeleri için
-createdexams=[]
+createdexams = manage.getExamFromDataBase()  # tıklandıktan sonra kaydedilmeleri için
+sinav_sayi=len(createdexams)
 
 # db'den çekilecek
 
@@ -58,23 +58,18 @@ def logon():
 @app.route("/exams", methods=["GET", "POST"])
 #@login_required
 def show_exams():
-    db=Database()
-    with db.get_cursor() as cursor:
-        cursor.execute("SELECT * FROM Sinav;")
-        rows = cursor.fetchall()
-        for row in rows:
-            exam_object=Exam(row[0],row[1],row[2],row[3])
-            createdexams.append(exam_object)
+
     if request.method == "POST":
         examdetails = json.loads(request.data)
         # created exams ve exam details parse edilip eklenecek
+        exam_object=Exam(sinav_sayi,exams[-1][0], exams[-1][1], exams[-1][2]))
+        created_exam.append(exam_object)
         #createdexams.append(exams[-1])
         print(createdexams, sys.stdout.flush())
     # Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
         db = Database()
         with db.get_cursor() as cursor:
-            cursor.execute("INSERT INTO Sinav(sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi) VALUES (%s, %s,%s);",
-                       (exams[-1][0], exams[-1][1], exams[-1][2]))
+            cursor.execute("INSERT INTO Sinav(sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi) VALUES (%s, %s,%s);",(exams[-1][0], exams[-1][1], exams[-1][2]))
         db.commit()
     return render_template("exams.html", user_type="Ogretmen", exam=createdexams)
 
