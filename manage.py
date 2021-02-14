@@ -2,7 +2,7 @@ import argparse
 import os
 from os import path
 from database import Database
-
+from templates.exam import Exam
 parser = argparse.ArgumentParser(description='App manager.')
 parser.add_argument('command', metavar="cmd", type=str, help='command to manage the app')
 
