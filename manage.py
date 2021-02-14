@@ -59,6 +59,15 @@ def getExamFromDataBase():
             created_exam.append(exam_object)
     return created_exam
 
+def insertExamDataBase(sinav_adi,sinav_baslangic,sinav_bitis):
+    db=Database()
+    db = Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("INSERT INTO Sinav(sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi) VALUES (%s, %s,%s);",(sinav_adi,sinav_baslangic,sinav_bitis))     
+    db.commit()
+
+
+
 if args.command == "init":
     if path.exists("initialized.txt"):
         print("This project already initialized")

@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 exams = []
 createdexams = manage.getExamFromDataBase() # tıklandıktan sonra kaydedilmeleri için
-sinav_sayi=len(createdexams)+1
+sinav_sayi=len(createdexams)
 
 # db'den çekilecek
 
@@ -64,14 +64,12 @@ def show_exams():
         # created exams ve exam details parse edilip eklenecek
         exam_object=Exam(sinav_sayi,exams[-1][0], exams[-1][1], exams[-1][2])
         createdexams.append(exam_object)
-        sinav_sayi+=1
+        #sinav_sayi+=1
         #createdexams.append(exams[-1])
+        manage.insertExamDataBase(exam_object.exam_name,exam_object.exam_baslama_tarihi,exam_object.exam_bitis_tarihi)
         print(createdexams, sys.stdout.flush())
     # Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
-        db = Database()
-        with db.get_cursor() as cursor:
-            cursor.execute("INSERT INTO Sinav(sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi) VALUES (%s, %s,%s);",(exams[-1][0], exams[-1][1], exams[-1][2]))
-        db.commit()
+        
     return render_template("exams.html", user_type="Ogretmen", exam=createdexams)
 
 
