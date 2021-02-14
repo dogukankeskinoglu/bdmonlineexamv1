@@ -54,10 +54,9 @@ def request_loader(request):
         rows = cursor.fetchall()
         if name not in rows:
             return "bad request"
-
         user = User()
         user.username = name
-        user.is_authenticated = request.form['password'] == rows[2]
+        user.is_authenticated = request.form['password'] == str(rows[2])
 
     return user
 
