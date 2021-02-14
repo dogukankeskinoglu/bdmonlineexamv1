@@ -14,7 +14,7 @@ app = Flask(__name__)
 #users = {'sakiratsui': {'password': 'secret'}, 'dogukan': {'password': '1234'}}
 
 exams = []
-createdexams = manage.getExamFromDataBase()  # tıklandıktan sonra kaydedilmeleri için
+createdexams = manage.getExamFromDataBase() # tıklandıktan sonra kaydedilmeleri için
 sinav_sayi=len(createdexams)
 
 # db'den çekilecek
@@ -91,7 +91,7 @@ def exampagetwo():
 
 
 @app.route("/leaderboard")
-@login_required
+#@login_required
 def leaderboard():
     names = "dogukan", "muge"  # db.get öğrenci sınav tablosundaki kullanıcı adları
     points = 90, 95  # db.get öğrencisınav tablosundaki notlar

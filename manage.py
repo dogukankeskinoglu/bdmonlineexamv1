@@ -51,7 +51,7 @@ def drop_database():
 def getExamFromDataBase():
     db = Database()
     created_exam=[]
-    with db.get_cursor() as sinav_cursor:
+    with db.get_cursor() as cursor:
         cursor.execute("SELECT * FROM Sinav;")
         rows = cursor.fetchall()
         for row in rows:
