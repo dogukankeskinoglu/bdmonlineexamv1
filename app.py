@@ -66,28 +66,28 @@ def redirecthome():
     return redirect(url_for("login"))
 
 
-@app.route("/home")
+# userexists=current_user , user varsa tekrar login kısmını göstermesin!.
+
+
+@app.route("/home", methods=["POST","GET"])
 def login():
-    return render_template('home.html')  # userexists=current_user , user varsa tekrar login kısmını göstermesin!.
-
-
-@app.route("/home", methods=["POST"])
-def logon():
-    name = request.form.get("name")
-    db = Database()
-    with db.get_cursor() as cursor:
-        cursor.execute("SELECT * FROM Kullanici WHERE kullanici_adi= %s", (name,))
-        rows = cursor.fetchall()
-        for row in rows:
-            if request.form.get("password") == row[2]:
-                usr = User()
-                usr.username = name
-                usr.password = row[2]
-                usr.usertype = row[3]
-                flask_login.login_user(usr)
-                return render_template("exams.html", user_type=usr.usertype, exam=createdexams)
-            else:
-                return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
+    if request.method=="POST":
+        name = request.form.get("name")
+        db = Database()
+        with db.get_cursor() as cursor:
+            cursor.execute("SELECT * FROM Kullanici WHERE kullanici_adi= %s", (name,))
+            rows = cursor.fetchall()
+            for row in rows:
+                if request.form.get("password") == str(row[2]):
+                    usr = User()
+                    usr.username = name
+                    usr.password = str(row[2])
+                    usr.usertype = str(row[3])
+                    flask_login.login_user(usr)
+                    return render_template("exams.html", user_type=usr.usertype, exam=createdexams)
+                else:
+                    return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
+    return render_template("home.html")
     # bu değerler db'de bir veriyle eşleşirse home'a gidilir.
     # else return login again?
 
