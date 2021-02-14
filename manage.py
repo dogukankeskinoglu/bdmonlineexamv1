@@ -3,6 +3,7 @@ import os
 from os import path
 from database import Database
 from templates.exam import Exam
+from templates.question import Question
 parser = argparse.ArgumentParser(description='App manager.')
 parser.add_argument('command', metavar="cmd", type=str, help='command to manage the app')
 
@@ -81,6 +82,7 @@ def getExam(examname):
         rows = cursor.fetchall()
         for row in rows:
             return row[0]
+  
 
 
 if args.command == "init":
