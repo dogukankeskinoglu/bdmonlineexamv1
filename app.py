@@ -56,7 +56,7 @@ def request_loader(request):
             return "bad request"
         user = User()
         user.username = name
-        user.is_authenticated = request.form['password'] == str(rows[2])
+        user.is_authenticated = request.form['password'] == rows[2]
 
     return user
 
@@ -79,11 +79,11 @@ def logon():
         cursor.execute("SELECT * FROM Kullanici WHERE kullanici_adi= %s", (name,))
         rows = cursor.fetchall()
         for row in rows:
-            if request.form.get("password") == str(row[2]):
+            if request.form.get("password") == row[2]:
                 usr = User()
                 usr.username = name
-                usr.password = str(row[2])
-                usr.usertype = str(row[3])
+                usr.password = row[2]
+                usr.usertype = row[3]
                 flask_login.login_user(usr)
                 return render_template("exams.html", user_type=usr.usertype, exam=createdexams)
             else:
