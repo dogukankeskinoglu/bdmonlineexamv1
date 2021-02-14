@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 exams = []
 createdexams = manage.getExamFromDataBase() # tıklandıktan sonra kaydedilmeleri için
-sinav_sayi=len(createdexams)
+sinav_sayi=len(createdexams)+1
 
 # db'den çekilecek
 
@@ -58,12 +58,13 @@ def logon():
 @app.route("/exams", methods=["GET", "POST"])
 #@login_required
 def show_exams():
-
+    
     if request.method == "POST":
         examdetails = json.loads(request.data)
         # created exams ve exam details parse edilip eklenecek
         exam_object=Exam(sinav_sayi,exams[-1][0], exams[-1][1], exams[-1][2])
         createdexams.append(exam_object)
+        sinav_sayi+=1
         #createdexams.append(exams[-1])
         print(createdexams, sys.stdout.flush())
     # Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
