@@ -62,7 +62,6 @@ def show_exams():
     if request.method == "POST":
         examdetails = json.loads(request.data)
         # created exams ve exam details parse edilip eklenecek
-        sinav_sayi=sinav_sayi+1
         exam_object=Exam(sinav_sayi,exams[-1][0], exams[-1][1], exams[-1][2])
         createdexams.append(exam_object)
         #createdexams.append(exams[-1])
