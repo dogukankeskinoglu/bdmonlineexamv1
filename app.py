@@ -1,5 +1,6 @@
 import sys
 from templates.exam import Exam
+from templates.question import Question
 import flask_login
 import uuid
 from flask import Flask, request, render_template, redirect, url_for, jsonify, json
@@ -57,13 +58,38 @@ def logon():
 
 @app.route("/exams", methods=["GET", "POST"])
 #@login_required
+
 def show_exams():
     if request.method == "POST":
-        examdetails = json.loads(request.data)
+        #Exam
         exam_object=Exam(sinav_sayi,exams[-1][0], exams[-1][1], exams[-1][2])
         createdexams.append(exam_object)
         manage.insertExamDataBase(exam_object)
         print(createdexams, sys.stdout.flush())
+        #Question
+        """
+        question_id=0
+            question_exam_id=0
+            question_content=""
+            question_choices=""
+            correct_answer=""
+            question_point=""
+        """
+        examdetails = json.loads(request.data)
+        exam_id=manage.getExam(exam_object.exam_name)
+        for i in examdetails:
+            question=i["value"]["question"]
+            a_choice=i["value"]["a_choice"]
+            b_choice=i["value"]["b_choice"]
+            c_choice=i["value"]["c_choice"]
+            d_choice=i["value"]["d_choice"]
+            e_choice=i["value"]["e_choice"]
+            true_answer_choice=i["value"]["true_answer_choice"]
+            question_point=i["value"]["question_point"]
+            all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+e_choice+"*_*"+e_choice
+            question_object=Question(exam_id,question,all_choices,true_answer_choice,question_point)
+            manage.insertQuestionDataBase(question_object)
+        #print(examdetails,sys.stdout.flush())
     # Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
         
     return render_template("exams.html", user_type="Ogretmen", exam=createdexams)

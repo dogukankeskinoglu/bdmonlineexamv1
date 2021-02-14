@@ -8,10 +8,12 @@ parser.add_argument('command', metavar="cmd", type=str, help='command to manage 
 
 args = parser.parse_args()
 sinav_id_sayac=0
+
+import json
 #Kullanıcı(kullanici_id,kullanici_adi,sifre,kullanici_type)
 #Sınav(sınav_id,ogretmen_id,sinav_adi,sınav_baslama,sınav_bitis)
 #Ogrenci_Sınav(ogrenci_id,sinav_id,ogrenci_dogru_sayı,ogrenci_yanlis_sayı,ogrenci_puan)
-#Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puanı)
+#Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
 #Ogrenci_Soru(ogrenci_id,soru_id,verilen_cevap,aldigi_puan)
 
 def create_database():
@@ -60,12 +62,25 @@ def getExamFromDataBase():
     return created_exam
 
 def insertExamDataBase(exam:Exam):
-    db=Database()
     db = Database()
     with db.get_cursor() as cursor:
         cursor.execute("INSERT INTO Sinav(sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi) VALUES (%s, %s,%s);",(exam.exam_name,exam.exam_baslama_tarihi,exam.exam_bitis_tarihi))     
     db.commit()
 
+def insertQuestionDataBase(question:Question):
+    #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("INSERT INTO Soru(soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani) VALUES (%s, %s,%s,%s,%s);",(question.question_exam_id,question.question_content,question.question_choices,question.correct_answer,question.question_point))
+    db.commit()
+
+def getExam(examname):
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT * FROM Sinav WHERE sinav_adi= %s", (examname,))
+        rows = cursor.fetchall()
+        for row in rows:
+            return row[0]
 
 
 if args.command == "init":
