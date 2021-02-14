@@ -69,7 +69,7 @@ def redirecthome():
 
 
 @app.route("/home", methods=["POST","GET"])
-def logon():
+def login():
     if request.method == "POST":
         name = request.form.get("name")
         db = Database()
