@@ -72,7 +72,7 @@ def insertQuestionDataBase(question:Question):
     #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
     db=Database()
     with db.get_cursor() as cursor:
-        cursor.execute("INSERT INTO Soru(soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani) VALUES (%s, %s,%s,%s,%s);",(question.question_exam_id,question.question_content,question.question_choices,question.correct_answer,question.question_point))
+        cursor.execute("INSERT INTO Soru(soru_sinav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani) VALUES (%s, %s,%s,%s,%s);",(question.question_exam_id,question.question_content,question.question_choices,question.correct_answer,question.question_point))
     db.commit()
 
 def getExam(examname):

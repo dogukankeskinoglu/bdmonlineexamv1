@@ -78,14 +78,14 @@ def show_exams():
         examdetails = json.loads(request.data)
         exam_id=manage.getExam(exam_object.exam_name)
         for i in examdetails:
-            question=i["value"]["question"]
-            a_choice=i["value"]["a_choice"]
-            b_choice=i["value"]["b_choice"]
-            c_choice=i["value"]["c_choice"]
-            d_choice=i["value"]["d_choice"]
-            e_choice=i["value"]["e_choice"]
-            true_answer_choice=i["value"]["true_answer_choice"]
-            question_point=i["value"]["question_point"]
+            question=str(i["value"]["question"])
+            a_choice=str(i["value"]["a_choice"])
+            b_choice=str(i["value"]["b_choice"])
+            c_choice=str(i["value"]["c_choice"])
+            d_choice=str(i["value"]["d_choice"])
+            e_choice=str(i["value"]["e_choice"])
+            true_answer_choice=str(i["value"]["true_answer_choice"])
+            question_point=str(i["value"]["question_point"])
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+e_choice+"*_*"+e_choice
             question_object=Question(exam_id,question,all_choices,true_answer_choice,question_point)
             manage.insertQuestionDataBase(question_object)
