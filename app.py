@@ -67,12 +67,10 @@ def redirecthome():
 
 
 
-     # userexists=current_user , user varsa tekrar login kısmını göstermesin!.
-
 
 @app.route("/home", methods=["POST","GET"])
-def login():
-    if request.method=="POST"
+def logon():
+    if request.method == "POST":
         name = request.form.get("name")
         db = Database()
         with db.get_cursor() as cursor:
