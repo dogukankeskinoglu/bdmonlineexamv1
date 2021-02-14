@@ -58,15 +58,11 @@ def logon():
 @app.route("/exams", methods=["GET", "POST"])
 #@login_required
 def show_exams():
-    
     if request.method == "POST":
         examdetails = json.loads(request.data)
-        # created exams ve exam details parse edilip eklenecek
         exam_object=Exam(sinav_sayi,exams[-1][0], exams[-1][1], exams[-1][2])
         createdexams.append(exam_object)
-        #sinav_sayi+=1
-        #createdexams.append(exams[-1])
-        manage.insertExamDataBase(exam_object.exam_name,exam_object.exam_baslama_tarihi,exam_object.exam_bitis_tarihi)
+        manage.insertExamDataBase(exam_object)
         print(createdexams, sys.stdout.flush())
     # Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
         

@@ -59,11 +59,11 @@ def getExamFromDataBase():
             created_exam.append(exam_object)
     return created_exam
 
-def insertExamDataBase(sinav_adi,sinav_baslangic,sinav_bitis):
+def insertExamDataBase(exam:Exam):
     db=Database()
     db = Database()
     with db.get_cursor() as cursor:
-        cursor.execute("INSERT INTO Sinav(sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi) VALUES (%s, %s,%s);",(sinav_adi,sinav_baslangic,sinav_bitis))     
+        cursor.execute("INSERT INTO Sinav(sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi) VALUES (%s, %s,%s);",(exam.exam_name,exam.exam_baslama_tarihi,exam.exam_bitis_tarihi))     
     db.commit()
 
 
