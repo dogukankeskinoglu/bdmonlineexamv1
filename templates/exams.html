@@ -47,9 +47,10 @@
                 <p>
                     {% for e in exam %}
                     <button id="sinav">
-							{{e[0]}}
-							{{e[1]}}
-							{{e[2]}}
+                            {{e.exam_id}}
+							{{e.exam_name}}
+							{{e.exam_baslama_tarihi}}
+							{{e.exam_bitis_tarihi}}
 							</button>
                     <br> {% endfor %}
                     <!--
