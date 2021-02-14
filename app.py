@@ -60,7 +60,7 @@ def login():
                     usr.username = name
                     usr.password = str(row[2])
                     usr.usertype = str(row[3])
-                    flask_login.login_user(usr)
+                    #flask_login.login_user(usr)
                     return render_template("exams.html", user_type=usr.usertype, exam=createdexams)
                 else:
                     return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
