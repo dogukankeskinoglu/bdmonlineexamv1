@@ -74,10 +74,22 @@ def show_exams():
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
             manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
     return render_template("exams.html", user_type="Ogretmen", exam=createdexams,sorular=sorular)
+
+
+
+
 @app.route("/createexam")
 #@login_required
 def create_exam():
     return render_template("createexam.html")
+
+
+@app.route("/exam/<exam_id>")
+def nolr(exam_id):
+    return exam_id
+
+
+
 @app.route("/createexam/p=2")
 #@login_required
 def exampagetwo():

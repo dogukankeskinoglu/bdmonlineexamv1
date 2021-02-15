@@ -46,12 +46,14 @@
                 </header>
                 <p>
                     {% for e in exam %}
-                    <button id="sinav">
-                            {{e.exam_id}}
-							{{e.exam_name}}
-							{{e.exam_baslama_tarihi}}
-							{{e.exam_bitis_tarihi}}
-							</button>
+                    <form action="/exam/{{e.exam_id}}" method="get">
+                        <button id="sinav">
+                           {{e.exam_id}}
+                            {{e.exam_name}}
+                            {{e.exam_baslama_tarihi}}
+                            {{e.exam_bitis_tarihi}}
+                            </button>
+                    </form>
                     <br> {% endfor %}
                     <!--
 							!!!!!!LIST CURRENT EXAMS HERE !!!!!
