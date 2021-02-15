@@ -59,7 +59,7 @@ def show_exams():
             correct_answer=""
             question_point=""
         """
-        #examdetails = json.loads(request.data)
+        examdetails = json.loads(request.data)
         #exam_id=manage.getExam(exam_object.exam_name)
         """for i in examdetails:
             question=i["value"]["question"]
@@ -71,10 +71,10 @@ def show_exams():
             true_answer_choice=i["value"]["true_answer_choice"]
             question_point=int(i["value"]["question_point"])
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+e_choice+"*_*"+e_choice
-            question_object=Question(exam_id,question,all_choices,true_answer_choice,question_point)
+            question_object=Question(exam_id,question,all_choice,true_answer_choice,question_point)
             manage.insertQuestionDataBase(question_object)"""
-        all_choice="a_choice"+"*_*"+"b_choice"+"*_*"+"c_choice"+"*_*"+"d_choice"+"*_*"+"e_choice"
-        question_object=Question(3,"question1",all_choice,"b",5)
+        #all_choice="a_choice"+"*_*"+"b_choice"+"*_*"+"c_choice"+"*_*"+"d_choice"+"*_*"+"e_choice"
+        #question_object=Question(3,"question1",all_choice,"b",5)
         #manage.insertQuestionDataBase(question_object)
         #all_choice="a_choice"+"*_*"+"b_choice"+"*_*"+"c_choice"+"*_*"+"d_choice"+"*_*"+"e_choice"
         #question_object=Question()
