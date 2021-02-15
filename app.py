@@ -74,19 +74,19 @@ def create_exam():
 @app.route("/exam/<exam_id>")
 def nolr(exam_id):
     sorular=manage.getQuestion(exam_id)
-    soru_icerik=[]
-    soru_siklari=[]
-    soru_puani=[]
-    """for soru in sorular:
-        soru_icerik.append(soru[2])
-        soru_siklari.append(soru[3].split("*_*"))
-        soru_puani.append(soru[5])"""
+    sinav_soru_metinleri=[]
+    sinav_soru_siklari=[]
+    sinav_soru_puanlari=[]
+    for soru in sorular:
+        sinav_soru_metinleri.append(soru[2])
+        #soru_siklari.append(soru[3].split("*_*"))
+        sinav_soru_puanlari.append(soru[5])
     return render_template("showquestion.html",
                             exam_id=exam_id,
-                            sorular=sorular,
-                            #soru_icerik=soru_icerik,
+                            #sorular=sorular,
+                            sinav_soru_metinleri=sinav_soru_metinleri,
                             #soru_siklari=soru_siklari,
-                            #soru_puani=soru_puani
+                            sinav_soru_puanlari=sinav_soru_puanlari
                           )
 
 @app.route("/createexam/p=2")
