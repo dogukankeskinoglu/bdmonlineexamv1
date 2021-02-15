@@ -21,11 +21,11 @@
             <p>{{i[2]}}</p>
             {% for k in i[3].split("*_*") %}
             <input type="radio" id="question" +{{outer_loop.index}}>
-            <label for="question" +{{loop.index}}></label> label
+            <label for="question" +{{loop.index}}></label>
             <label id="questionlabel" +{{loop.index}}>{{k}}</label>
             <h3>{{k}}</h3>
             <h5>{{loop.index}}</h5>
-            <h2>{{outer_loop.index}}</h2>
+            <h2>****{{outer_loop.index}}</h2>
             {% endfor %}
         </form>
         <blockquote>Soru puanı:{{i[5]}}</blockquote>
