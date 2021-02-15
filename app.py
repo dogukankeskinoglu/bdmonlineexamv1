@@ -86,7 +86,7 @@ def show_exams():
         #print(examdetails,sys.stdout.flush())
     # Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
 
-    return render_template("exams.html", user_type="Ogretmen", exam=createdexams,sorular=sorular)
+    return render_template("exams.html", user_type="Ogretmen", exam=createdexams)
 @app.route("/createexam")
 #@login_required
 def create_exam():

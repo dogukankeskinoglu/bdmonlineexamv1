@@ -91,7 +91,7 @@ def getQuesiton(exam_id):
     db=Database()
     liste=[]
     with db.get_cursor() as cursor:
-        cursor.execute("SELECT * FROM Soru WHERE soru_sinav_id=%s",(exam_id,))
+        cursor.execute("SELECT * FROM Soru WHERE soru_sinav_id= %s",(exam_id,))
         rows=cursor.fetchall()
         for row in rows:
             soru_information=[row[0],row[1],row[2],row[3],row[4],row[5]]
