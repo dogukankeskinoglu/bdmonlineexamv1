@@ -18,6 +18,8 @@ class User(flask_login.UserMixin):
         self.username = username
         self.password = password
         self.usertype = usertype
+
+
 @app.route("/")
 def redirecthome():
     return redirect(url_for("login"))
@@ -37,6 +39,8 @@ def login():
                 else:
                     return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
     return render_template('home.html') 
+
+
 @app.route("/exams", methods=["GET", "POST"])
 #@login_required
 def show_exams():
@@ -60,6 +64,8 @@ def show_exams():
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
             manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
     return render_template("exams.html", user_type="Ogretmen", exam=createdexams)
+
+
 @app.route("/createexam")
 #@login_required
 def create_exam():
@@ -67,7 +73,8 @@ def create_exam():
 
 @app.route("/exam/<exam_id>")
 def nolr(exam_id):
-    return render_template("showquestion.html",exam_id=exam_id)
+    sorular=manage.getQuestion(exam_id)
+    return render_template("showquestion.html",exam_id=exam_id,sorular=sorular)
 
 @app.route("/createexam/p=2")
 #@login_required
@@ -77,6 +84,8 @@ def exampagetwo():
     end = request.args.get("examend")
     exams.append([examname, start, end])
     return render_template("pagetwo.html", examname=examname, start=start, end=end)
+
+
 @app.route("/leaderboard")
 #@login_required
 def leaderboard():
@@ -85,11 +94,14 @@ def leaderboard():
     point_info = zip(names, points)  # ikili tuple'lar haline getirdi.
     point_info = sorted(point_info, key=lambda tup: (-tup[1]))  # tuple'ı notlara göre yüksekten düşüğe sıralama
     return render_template("leaderboard.html", point=point_info)
+
+
 @app.route("/logout")
 #@login_required
 def logout():
     #flask_login.logout_user()
     return redirect(url_for("login"))
+
 if __name__ == '__main__':
     app.secret_key = 'j1i5ek0eeg+lb0uj^rvm)d1a@qvz^l&1(ep8f54n(oe+uc6s)4'
     app.run(debug=True)

@@ -6,9 +6,15 @@
 </head>
 
 <body>
-    <p>
-        {{exam_id}}
-    </p>
+    <div>
+        {% for e in sorular %}
+        <h1>Soru Metni{{e[2]}}</h1>
+        <ul>
+            <li>Soru Siklari {{e[3]}}</li>
+        </ul>
+        <h1>Soru Puani{{e[5]}}</h1>
+        {% endfor %}
+    </div>
 
 </body>
 
