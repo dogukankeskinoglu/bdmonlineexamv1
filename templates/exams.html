@@ -63,6 +63,18 @@
                 </ul>
 
                 {% endif %}
+                <p>
+                    {% for e in examdetails %}
+                    <button>
+                            {{e["value"]}
+							{{e["key"]}}
+							</button>
+                    <br> {% endfor %}
+                    <!--
+							!!!!!!LIST CURRENT EXAMS HERE !!!!!
+							-->
+                </p>
+
             </div>
         </div>
     </section>

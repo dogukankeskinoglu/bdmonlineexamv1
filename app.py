@@ -61,7 +61,7 @@ def show_exams():
         """
         examdetails = json.loads(request.data)
         exam_id=manage.getExam(exam_object.exam_name)
-        flash("Another message.")
+        #flash(message = "You successfully signed up!", category = "success")
         for i in examdetails:
             #question=i["value"]["question"]
             """a_choice=i["value"]["a_choice"]
@@ -83,7 +83,7 @@ def show_exams():
         #print(examdetails,sys.stdout.flush())
     # Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
 
-    return render_template("exams.html", user_type="Ogretmen", exam=createdexams)
+    return render_template("exams.html", user_type="Ogretmen", exam=createdexams,examdetails=examdetails)
 @app.route("/createexam")
 #@login_required
 def create_exam():
