@@ -3,7 +3,7 @@ from templates.exam import Exam
 from templates.question import Question
 import flask_login
 import uuid
-from flask import flash,Flask, request, render_template, redirect, url_for, jsonify, json
+from flask import Flask, request, render_template, redirect, url_for, jsonify, json
 from flask_login import login_required
 from psycopg2._psycopg import cursor
 import manage
@@ -44,6 +44,7 @@ def logon():
 @app.route("/exams", methods=["GET", "POST"])
 #@login_required
 def show_exams():
+    examdetails=[]
     if request.method == "POST":
         #Exam
         exam_object=Exam(sinav_sayi,exams[-1][0], exams[-1][1], exams[-1][2])
