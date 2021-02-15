@@ -14,7 +14,15 @@
 
 <body>
 
-    <h1>{{exam_id}}</h1>
+    {% for i in range(soru_sayisi) %}
+    <div class="content">
+        <form action="">
+            <h1>Soru</h1>
+            <p>{{soru_icerik[i]}}</p>
+        </form>
+        <blockquote>Soru puanı:{{soru_puani[i]}}</blockquote>
+    </div>
+    {% endfor %}
 
 </body>
 

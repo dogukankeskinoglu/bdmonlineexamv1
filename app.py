@@ -77,6 +77,7 @@ def nolr(exam_id):
     soru_icerik=[]
     soru_siklari=[]
     soru_puani=[]
+    soru_sayisi=len(sorular)
     for soru in sorular:
         soru_icerik.append(soru[2])
         soru_siklari.append(soru[3].split("*_*"))
@@ -86,6 +87,7 @@ def nolr(exam_id):
                             soru_icerik=soru_icerik,
                             soru_siklari=soru_siklari,
                             soru_puani=soru_puani
+                            soru_sayisi=soru_sayisi
                           )
 
 @app.route("/createexam/p=2")
