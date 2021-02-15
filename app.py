@@ -77,7 +77,7 @@ def show_exams():
         """
         examdetails = json.loads(request.data)
         exam_id=manage.getExam(exam_object.exam_name)
-        for i in examdetails:
+       """for i in examdetails:
             question=str(i["value"]["question"])
             a_choice=str(i["value"]["a_choice"])
             b_choice=str(i["value"]["b_choice"])
@@ -88,10 +88,10 @@ def show_exams():
             question_point=int(i["value"]["question_point"])
             all_choices=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
             #question_object=Question(exam_id,question,all_choices,true_answer_choice,question_point)
-            manage.insertQuestionDataBase(exam_id,question,all_choices,true_answer_choice,question_point)
-        #all_choice="a_choice"+"*_*"+"b_choice"+"*_*"+"c_choice"+"*_*"+"d_choice"+"*_*"+"e_choice"
+            manage.insertQuestionDataBase(exam_id,question,all_choices,true_answer_choice,question_point)"""
+        all_choices="a_choice"+"*_*"+"b_choice"+"*_*"+"c_choice"+"*_*"+"d_choice"+"*_*"+"e_choice"
         #question_object=Question()
-        #manage.insertQuestionDataBase(exam_id,"question1","ashshshhssh","b",5)
+        manage.insertQuestionDataBase(exam_id,"question1",all_choices,"b",5)
         #print(examdetails,sys.stdout.flush())
     # Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
         
