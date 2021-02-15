@@ -21,25 +21,22 @@ class User(flask_login.UserMixin):
 @app.route("/")
 def redirecthome():
     return redirect(url_for("login"))
-@app.route("/home")
+
+@app.route("/home", methods=["POST","GET"])
 def login():
-    return render_template('home.html')  # userexists=current_user , user varsa tekrar login kısmını göstermesin!.
-@app.route("/home", methods=["POST"])
-def logon():
-    name = request.form.get("name")
-    db = Database()
-    with db.get_cursor() as cursor:
-        cursor.execute("SELECT * FROM Kullanici WHERE kullanici_adi= %s", (name,))
-        rows = cursor.fetchall()
-        for row in rows:
-            if request.form.get("password") == str(row[2]):
-                #usrnm = name
-                usertype = str(row[3])
-                return render_template("exams.html", user_type=usertype, exam=createdexams)
-            else:
-                return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
-    # bu değerler db'de bir veriyle eşleşirse home'a gidilir.
-    # else return login again?
+    if request.method == "POST":
+        name = request.form.get("name")
+        db = Database()
+        with db.get_cursor() as cursor:
+            cursor.execute("SELECT * FROM Kullanici WHERE kullanici_adi= %s", (name,))
+            rows = cursor.fetchall()
+            for row in rows:
+                if request.form.get("password") == str(row[2]):
+                    usertype = str(row[3])
+                    return render_template("exams.html", user_type=usertype, exam=createdexams)
+                else:
+                    return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
+    return render_template('home.html') 
 @app.route("/exams", methods=["GET", "POST"])
 #@login_required
 def show_exams():
