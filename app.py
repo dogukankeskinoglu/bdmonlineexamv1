@@ -77,10 +77,10 @@ def nolr(exam_id):
     soru_icerik=[]
     soru_siklari=[]
     soru_puani=[]
-    for soru in sorular:
+    """for soru in sorular:
         soru_icerik.append(soru[2])
         soru_siklari.append(soru[3].split("*_*"))
-        soru_puani.append(soru[5])
+        soru_puani.append(soru[5])"""
     return render_template("showquestion.html",
                             exam_id=exam_id,
                             sorular=sorular,
