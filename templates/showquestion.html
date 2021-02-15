@@ -20,7 +20,7 @@
             <h3>Soru</h3>
             <p>{{i[2]}}</p>
             <div>
-                {% for item in siklar %}
+                {% for item in range(len(siklar)) %}
                 <h3>{{item}}</h3>
                 {% endfor %}
             </div>
