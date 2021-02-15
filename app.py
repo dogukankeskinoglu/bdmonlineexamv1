@@ -72,11 +72,10 @@ def show_exams():
             e_choice=i["value"]["e_choice"]
             true_answer_choice=i["value"]["true_answer_choice"]
             question_point=int(i["value"]["question_point"])
-            all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+e_choice+"*_*"+e_choice
-            #question_object=Question(exam_id,question,all_choice,true_answer_choice,question_point)
-            #manage.insertQuestionDataBase(question_object)
-            manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
-        
+            all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
+            question_object=Question(exam_id,question,all_choice,true_answer_choice,question_point)
+            manage.insertQuestionDataBase(question_object)
+            #manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
         #all_choice="a_choice"+"*_*"+"b_choice"+"*_*"+"c_choice"+"*_*"+"d_choice"+"*_*"+"e_choice"
         #question_object=Question(3,"question1",all_choice,"b",5)
         #manage.insertQuestionDataBase(question_object)
@@ -84,7 +83,6 @@ def show_exams():
         #manage.insertQuestionDataBase(exam_id,"question1","ashshshhssh","b",5)
         #print(examdetails,sys.stdout.flush())
     # Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
-
     return render_template("exams.html", user_type="Ogretmen", exam=createdexams,sorular=sorular)
 @app.route("/createexam")
 #@login_required
