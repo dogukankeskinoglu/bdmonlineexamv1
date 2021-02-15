@@ -3,7 +3,7 @@ from templates.exam import Exam
 from templates.question import Question
 import flask_login
 import uuid
-from flask import flush,Flask, request, render_template, redirect, url_for, jsonify, json
+from flask import flash,Flask, request, render_template, redirect, url_for, jsonify, json
 from flask_login import login_required
 from psycopg2._psycopg import cursor
 import manage
