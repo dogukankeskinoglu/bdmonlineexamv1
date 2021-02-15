@@ -1,11 +1,5 @@
 #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puanı)
 class Question:
-    #question_id=0
-    question_exam_id=0
-    question_content=""
-    question_choices=''
-    correct_answer=""
-    question_point=0
 
     def __init__(self,q_exam_id,q_content,q_choices,correct_answer,q_point): 
         #self.question_id=q_id
