@@ -6,15 +6,20 @@
 </head>
 
 <body>
-    <div>
-        {% for e in sorular %}
-        <h1>Soru Metni{{e[2]}}</h1>
-        <ul>
-            <li>Soru Siklari {{e[3]}}</li>
-        </ul>
-        <h1>Soru Puani{{e[5]}}</h1>
-        {% endfor %}
+
+    {% for e in sorular %}
+    <div id="questioncontent">
+        <form action="">
+            <h1>Soru</h1>
+            <p>{{e[2]}}</p>
+            <input type="radio" id="question">
+            <label for="question"></label>
+            <label id="questionlabelquestionno">{{e[3]}}</label>
+        </form>
+        <blockquote>Soru puanı:{{e[5]}}</blockquote>
     </div>
+
+    {% endfor %}
 
 </body>
 
