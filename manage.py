@@ -43,11 +43,15 @@ def fill_database():
 def drop_database():
     db = Database()
     with db.get_cursor() as cursor:
-        cursor.execute("DROP TABLE IF EXISTS Kullanici;")
-        cursor.execute("DROP TABLE IF EXISTS Sinav;")
-        cursor.execute("DROP TABLE IF EXISTS Soru;")
-        cursor.execute("DROP TABLE IF EXISTS Ogrenci_Soru;")
         cursor.execute("DROP TABLE IF EXISTS Ogrenci_Sinav;")
+        cursor.execute("DROP TABLE IF EXISTS Ogrenci_Soru;")
+        cursor.execute("DROP TABLE IF EXISTS Soru;")
+        cursor.execute("DROP TABLE IF EXISTS Sinav;")
+        cursor.execute("DROP TABLE IF EXISTS Kullanici;")
+        
+        
+        
+        
     db.commit()
     print("Finished dropping tables")
 
