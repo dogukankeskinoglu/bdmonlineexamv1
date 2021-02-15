@@ -73,6 +73,7 @@ def create_exam():
 
 @app.route("/exam/<exam_id>")
 def nolr(exam_id):
+    sorular=manage.getQuestion(exam_id)
     soru_icerik=[]
     soru_siklari=[]
     soru_puani=[]
