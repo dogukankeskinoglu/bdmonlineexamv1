@@ -72,13 +72,20 @@ def insertExamDataBase(exam:Exam):
         cursor.execute("INSERT INTO Sinav(sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi) VALUES (%s, %s,%s);",(exam.exam_name,exam.exam_baslama_tarihi,exam.exam_bitis_tarihi))     
     db.commit()
 
+def insertQuestionDataBase(sinav_id,soru_icerik,soru_siklari,dogru_cevap,puan):
+    #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("INSERT INTO Soru(soru_sinav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani) VALUES (%s, %s,%s,%s,%s);",(sinav_id,soru_icerik,soru_siklari,dogru_cevap,puan))
+    db.commit()
+"""
 def insertQuestionDataBase(q:Question):
     #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
     db=Database()
     with db.get_cursor() as cursor:
         cursor.execute("INSERT INTO Soru(soru_sinav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani) VALUES (%s, %s,%s,%s,%s);",(q.question_exam_id,q.question_content,q.question_choices,q.correct_answer,q.question_point))
     db.commit()
-
+"""
 def getExam(examname):
     db=Database()
     with db.get_cursor() as cursor:
@@ -91,7 +98,7 @@ def getQuesiton(exam_id):
     db=Database()
     liste=[]
     with db.get_cursor() as cursor:
-        cursor.execute("SELECT * FROM Soru WHERE soru_sinav_id= %s",(exam_id,))
+        cursor.execute("SELECT * FROM Soru WHERE soru_sinav_id=%s",(exam_id,))
         rows=cursor.fetchall()
         for row in rows:
             soru_information=[row[0],row[1],row[2],row[3],row[4],row[5]]
