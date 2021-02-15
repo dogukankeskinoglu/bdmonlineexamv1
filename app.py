@@ -62,8 +62,8 @@ def show_exams():
         examdetails = json.loads(request.data)
         exam_id=manage.getExam(exam_object.exam_name)
         for i in examdetails:
-            """question=i["value"]["question"]
-            a_choice=i["value"]["a_choice"]
+            question=i["value"]["question"]
+            """a_choice=i["value"]["a_choice"]
             b_choice=i["value"]["b_choice"]
             c_choice=i["value"]["c_choice"]
             d_choice=i["value"]["d_choice"]
