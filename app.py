@@ -75,7 +75,7 @@ def show_exams():
             manage.insertQuestionDataBase(question_object)"""
         all_choice="a_choice"+"*_*"+"b_choice"+"*_*"+"c_choice"+"*_*"+"d_choice"+"*_*"+"e_choice"
         question_object=Question(3,"question1",all_choice,"b",5)
-        manage.insertQuestionDataBase(question_object)
+        #manage.insertQuestionDataBase(question_object)
         #all_choice="a_choice"+"*_*"+"b_choice"+"*_*"+"c_choice"+"*_*"+"d_choice"+"*_*"+"e_choice"
         #question_object=Question()
         manage.insertQuestionDataBase(3,"question1","ashshshhssh","b",5)
