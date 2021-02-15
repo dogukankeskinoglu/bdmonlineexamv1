@@ -22,44 +22,34 @@ class User(flask_login.UserMixin):
 @app.route("/")
 def redirecthome():
     return redirect(url_for("login"))
-@app.route("/home")
-def login():
-    return render_template('home.html')  # userexists=current_user , user varsa tekrar login kısmını göstermesin!.
-@app.route("/home", methods=["POST"])
+
+
+@app.route("/home", methods=["POST","GET"])
 def logon():
-    name = request.form.get("name")
-    db = Database()
-    with db.get_cursor() as cursor:
-        cursor.execute("SELECT * FROM Kullanici WHERE kullanici_adi= %s", (name,))
-        rows = cursor.fetchall()
-        for row in rows:
-            if request.form.get("password") == str(row[2]):
-                #usrnm = name
-                usertype = str(row[3])
-                return render_template("exams.html", user_type=usertype, exam=createdexams)
-            else:
-                return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
-    # bu değerler db'de bir veriyle eşleşirse home'a gidilir.
-    # else return login again?
+    if request.method=="POST":
+        name = request.form.get("name")
+        db = Database()
+        with db.get_cursor() as cursor:
+            cursor.execute("SELECT * FROM Kullanici WHERE kullanici_adi= %s", (name,))
+            rows = cursor.fetchall()
+            for row in rows:
+                if request.form.get("password") == str(row[2]):
+                    
+                    usertype = str(row[3])
+                    return render_template("exams.html", user_type=usertype, exam=createdexams)
+                else:
+                    return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
+    return render_template('home.html')
+
 @app.route("/exams", methods=["GET", "POST"])
 #@login_required
 def show_exams():
     if request.method == "POST":
-        #Exam
         exam_number=Exam.exam_count+1
         exam_object=Exam(exam_number,exams[-1][0], exams[-1][1], exams[-1][2])
         createdexams.append(exam_object)
         manage.insertExamDataBase(exam_object)
         print(createdexams, sys.stdout.flush())
-        #Question
-        """
-        question_id=0
-            question_exam_id=0
-            question_content=""
-            question_choices=""
-            correct_answer=""
-            question_point=""
-        """
         examdetails = json.loads(request.data)
         exam_id=manage.getExam(exam_object.exam_name)
         for i in examdetails["data"]:
@@ -73,10 +63,7 @@ def show_exams():
             question_point=int(i["value"]["question_point"])
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
             manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
-    return render_template("exams.html", user_type="Ogretmen", exam=createdexams,sorular=sorular)
-
-
-
+    return render_template("exams.html", user_type="Ogretmen", exam=createdexams)
 
 @app.route("/createexam")
 #@login_required
