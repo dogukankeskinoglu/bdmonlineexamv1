@@ -14,13 +14,13 @@
 
 <body>
     <h1>{{exam_id}}</h1>
-    {% for i in range(len(sinav_soru_metinleri)) %}
+    {% for i in sorular %}
     <div class="content">
         <form action="">
             <h3>Soru</h3>
-            <p>{{sinav_soru_metinleri[i]}}</p>
+            <p>{{i[2]}}</p>
         </form>
-        <blockquote>Soru puanı:{{sinav_soru_puanlari[i]}}</blockquote>
+        <blockquote>Soru puanı:{{i[5]}}</blockquote>
     </div>
 
     {% endfor %}
