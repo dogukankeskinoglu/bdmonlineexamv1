@@ -87,7 +87,7 @@ def getExam(examname):
         for row in rows:
             return row[0]
   
-def getQuesiton(exam_id):
+def getQuestion(exam_id):
     db=Database()
     liste=[]
     with db.get_cursor() as cursor:

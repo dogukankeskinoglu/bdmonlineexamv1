@@ -12,7 +12,7 @@ app = Flask(__name__)
 #users = {'sakiratsui': {'password': 'secret'}, 'dogukan': {'password': '1234'}}
 exams = []
 createdexams = manage.getExamFromDataBase() # tıklandıktan sonra kaydedilmeleri için
-sorular=manage.getQuesiton(30) 
+sorular=manage.getQuestion(30) 
 # db'den çekilecek
 class User(flask_login.UserMixin):
     def __init__(self, username, password, usertype):
@@ -72,8 +72,9 @@ def create_exam():
 
 
 @app.route("/exam/<exam_id>")
-def nolr(exam_id):
-    return exam_id
+def ogrenci_sinav(exam_id):
+    soru_sayisi=len(manage.getQuestion(exam_id))
+    return render_template("showquestion.html",exam_question_size=soru_sayisi)
 
 
 
