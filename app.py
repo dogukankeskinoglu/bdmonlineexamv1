@@ -73,9 +73,9 @@ def show_exams():
             true_answer_choice=i["value"]["true_answer_choice"]
             question_point=int(i["value"]["question_point"])
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
-            question_object=Question(int(exam_id),question,all_choice,true_answer_choice,question_point)
-            manage.insertQuestionDataBase(question_object)
-            #manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
+            #question_object=Question(int(exam_id),question,all_choice,true_answer_choice,question_point)
+            #manage.insertQuestionDataBase(question_object)
+            manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
         #all_choice="a_choice"+"*_*"+"b_choice"+"*_*"+"c_choice"+"*_*"+"d_choice"+"*_*"+"e_choice"
         #question_object=Question(3,"question1",all_choice,"b",5)
         #manage.insertQuestionDataBase(question_object)
