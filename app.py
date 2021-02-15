@@ -75,8 +75,8 @@ def show_exams():
             correct_answer=""
             question_point=""
         """
-        examdetails = json.loads(request.data)
-        exam_id=manage.getExam(exam_object.exam_name)
+        #examdetails = json.loads(request.data)
+        #exam_id=manage.getExam(exam_object.exam_name)
         """for i in examdetails:
             question=i["value"]["question"]
             a_choice=i["value"]["a_choice"]
@@ -91,7 +91,7 @@ def show_exams():
             manage.insertQuestionDataBase(question_object)"""
         all_choice="a_choice"+"*_*"+"b_choice"+"*_*"+"c_choice"+"*_*"+"d_choice"+"*_*"+"e_choice"
         question_object=Question(exam_id,"question1",all_choice,"b",5)
-        manage.insertQuestionDataBase(question_object)
+        #manage.insertQuestionDataBase(question_object)
         #print(examdetails,sys.stdout.flush())
     # Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
         
