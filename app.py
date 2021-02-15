@@ -21,24 +21,25 @@ class User(flask_login.UserMixin):
 @app.route("/")
 def redirecthome():
     return redirect(url_for("login"))
-
-
-@app.route("/home", methods=["POST","GET"])
+@app.route("/home")
 def login():
-    if request.method=="POST":
-        name = request.form.get("name")
-        db = Database()
-        with db.get_cursor() as cursor:
-            cursor.execute("SELECT * FROM Kullanici WHERE kullanici_adi= %s", (name,))
-            rows = cursor.fetchall()
-            for row in rows:
-                if request.form.get("password") == str(row[2]):
-                    usertype = str(row[3])
-                    return render_template("exams.html", user_type=usertype, exam=createdexams)
-                else:
-                    return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
-    return render_template('home.html')
-
+    return render_template('home.html')  # userexists=current_user , user varsa tekrar login kısmını göstermesin!.
+@app.route("/home", methods=["POST"])
+def logon():
+    name = request.form.get("name")
+    db = Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT * FROM Kullanici WHERE kullanici_adi= %s", (name,))
+        rows = cursor.fetchall()
+        for row in rows:
+            if request.form.get("password") == str(row[2]):
+                #usrnm = name
+                usertype = str(row[3])
+                return render_template("exams.html", user_type=usertype, exam=createdexams)
+            else:
+                return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
+    # bu değerler db'de bir veriyle eşleşirse home'a gidilir.
+    # else return login again?
 @app.route("/exams", methods=["GET", "POST"])
 #@login_required
 def show_exams():
@@ -62,19 +63,14 @@ def show_exams():
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
             manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
     return render_template("exams.html", user_type="Ogretmen", exam=createdexams)
-
 @app.route("/createexam")
 #@login_required
 def create_exam():
     return render_template("createexam.html")
 
-
 @app.route("/exam/<exam_id>")
-def ogrenci_sinav(exam_id):
-    soru_sayisi=len(manage.getQuestion(exam_id))
-    return render_template("showquestion.html",exam_question_size=soru_sayisi)
-
-
+def nolr(exam_id):
+    return render_template("showquestion.html",exam_id=exam_id)
 
 @app.route("/createexam/p=2")
 #@login_required
