@@ -19,10 +19,6 @@
         <form action="">
             <h1>Soru</h1>
             <p>{{soru_icerik[i]}}</p>
-            {% for k in range(len(soru_siklari[i])) % }
-            <input type="radio" id="questionno" +i+ "choice"+k>
-            <label for="questionno" +i+ "choice"+k></label>
-            <label id="questionlabelquestionno">{{soru_siklari[k]}}</label> {% endfor %}
         </form>
         <blockquote>Soru puanı:{{soru_puani[i]}}</blockquote>
     </div>
