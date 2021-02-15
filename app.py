@@ -13,7 +13,6 @@ app = Flask(__name__)
 exams = []
 createdexams = manage.getExamFromDataBase() # tıklandıktan sonra kaydedilmeleri için
 sorular=manage.getQuesiton(30) 
-sinav_sayi=Exam.exam_count+1
 # db'den çekilecek
 class User(flask_login.UserMixin):
     def __init__(self, username, password, usertype):
@@ -47,7 +46,8 @@ def logon():
 def show_exams():
     if request.method == "POST":
         #Exam
-        exam_object=Exam(sinav_sayi,exams[-1][0], exams[-1][1], exams[-1][2])
+        exam_number=Exam.exam_count+1
+        exam_object=Exam(exam_number,exams[-1][0], exams[-1][1], exams[-1][2])
         createdexams.append(exam_object)
         manage.insertExamDataBase(exam_object)
         print(createdexams, sys.stdout.flush())
