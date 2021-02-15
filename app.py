@@ -12,7 +12,7 @@ app = Flask(__name__)
 #users = {'sakiratsui': {'password': 'secret'}, 'dogukan': {'password': '1234'}}
 exams = []
 createdexams = manage.getExamFromDataBase() # tıklandıktan sonra kaydedilmeleri için
-sayac=0
+sorular=[]
 sinav_sayi=len(createdexams)
 # db'den çekilecek
 class User(flask_login.UserMixin):
@@ -77,6 +77,7 @@ def show_exams():
             #question_object=Question(exam_id,question,all_choice,true_answer_choice,question_point)
             #manage.insertQuestionDataBase(question_object)
             manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
+        sorular=manage.getQuesiton(exam_id) 
         #all_choice="a_choice"+"*_*"+"b_choice"+"*_*"+"c_choice"+"*_*"+"d_choice"+"*_*"+"e_choice"
         #question_object=Question(3,"question1",all_choice,"b",5)
         #manage.insertQuestionDataBase(question_object)
@@ -85,7 +86,7 @@ def show_exams():
         #print(examdetails,sys.stdout.flush())
     # Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
 
-    return render_template("exams.html", user_type="Ogretmen", exam=createdexams,sayac=sayac)
+    return render_template("exams.html", user_type="Ogretmen", exam=createdexams,sorular=sorular)
 @app.route("/createexam")
 #@login_required
 def create_exam():
