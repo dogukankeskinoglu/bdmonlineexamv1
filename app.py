@@ -62,12 +62,10 @@ def show_exams():
             question_point=""
         """
         examdetails = json.loads(request.data)
-        
         exam_id=manage.getExam(exam_object.exam_name)
-        #flash(message = "You successfully signed up!", category = "success")
-        for i in examdetails:
+        for i in examdetails["data"]:
             #sayac+=1
-            #question=i["value"]["question"]
+            question=i["value"]["question"]
             """a_choice=i["value"]["a_choice"]
             b_choice=i["value"]["b_choice"]
             c_choice=i["value"]["c_choice"]
