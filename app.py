@@ -13,7 +13,7 @@ app = Flask(__name__)
 exams = []
 createdexams = manage.getExamFromDataBase() # tıklandıktan sonra kaydedilmeleri için
 sorular=manage.getQuesiton(30) 
-sinav_sayi=len(createdexams)
+sinav_sayi=Exam.exam_count+1
 # db'den çekilecek
 class User(flask_login.UserMixin):
     def __init__(self, username, password, usertype):
