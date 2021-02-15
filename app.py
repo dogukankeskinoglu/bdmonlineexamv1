@@ -89,8 +89,8 @@ def show_exams():
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+e_choice+"*_*"+e_choice
             question_object=Question(exam_id,question,all_choices,true_answer_choice,question_point)
             manage.insertQuestionDataBase(question_object)"""
-        #all_choice="a_choice"+"*_*"+"b_choice"+"*_*"+"c_choice"+"*_*"+"d_choice"+"*_*"+"e_choice"
-        #question_object=Question(exam_id,"question1",all_choice,"b",5)
+        all_choice="a_choice"+"*_*"+"b_choice"+"*_*"+"c_choice"+"*_*"+"d_choice"+"*_*"+"e_choice"
+        question_object=Question(3,"question1",all_choice,"b",5)
         #manage.insertQuestionDataBase(question_object)
         #print(examdetails,sys.stdout.flush())
     # Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
