@@ -12,7 +12,7 @@ app = Flask(__name__)
 #users = {'sakiratsui': {'password': 'secret'}, 'dogukan': {'password': '1234'}}
 exams = []
 createdexams = manage.getExamFromDataBase() # tıklandıktan sonra kaydedilmeleri için
-sorular=manage.getQuesiton(25) 
+sorular=manage.getQuesiton(30) 
 sinav_sayi=len(createdexams)
 # db'den çekilecek
 class User(flask_login.UserMixin):
@@ -45,7 +45,6 @@ def logon():
 @app.route("/exams", methods=["GET", "POST"])
 #@login_required
 def show_exams():
-    
     if request.method == "POST":
         #Exam
         exam_object=Exam(sinav_sayi,exams[-1][0], exams[-1][1], exams[-1][2])
