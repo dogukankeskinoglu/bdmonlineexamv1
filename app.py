@@ -66,7 +66,7 @@ def show_exams():
         exam_id=manage.getExam(exam_object.exam_name)
         #flash(message = "You successfully signed up!", category = "success")
         for i in examdetails:
-            sayac+=1
+            #sayac+=1
             #question=i["value"]["question"]
             """a_choice=i["value"]["a_choice"]
             b_choice=i["value"]["b_choice"]
