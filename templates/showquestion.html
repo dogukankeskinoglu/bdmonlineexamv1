@@ -14,16 +14,14 @@
 
 <body>
     <h1>{{exam_id}}</h1>
-    {% for i in sorular %} {% siklar=i[3].split("*_*") %}
+    {% for i in sorular %} {% set siklar=i[3].split("*_*") %}
     <div class="content">
         <form action="">
             <h3>Soru</h3>
             <p>{{i[2]}}</p>
-            <div>
-                {% for index in range(len(siklar)) %}
-                <h3>{{siklar[index]}}</h3>
-                {% endfor %}
-            </div>
+            {% for item in siklar %}
+            <h3>{{item}}</h3>
+            {% endfor %}
         </form>
         <blockquote>Soru puanı:{{i[5]}}</blockquote>
     </div>
