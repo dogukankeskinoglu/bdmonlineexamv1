@@ -3,7 +3,7 @@ from templates.exam import Exam
 from templates.question import Question
 import flask_login
 import uuid
-from flask import Flask, request, render_template, redirect, url_for, jsonify, json
+from flask import flush,Flask, request, render_template, redirect, url_for, jsonify, json
 from flask_login import login_required
 from psycopg2._psycopg import cursor
 import manage
@@ -61,8 +61,9 @@ def show_exams():
         """
         examdetails = json.loads(request.data)
         exam_id=manage.getExam(exam_object.exam_name)
+        flash("Another message.")
         for i in examdetails:
-            question=i["value"]["question"]
+            #question=i["value"]["question"]
             """a_choice=i["value"]["a_choice"]
             b_choice=i["value"]["b_choice"]
             c_choice=i["value"]["c_choice"]
