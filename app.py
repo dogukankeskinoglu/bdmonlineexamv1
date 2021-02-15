@@ -12,6 +12,8 @@ app = Flask(__name__)
 #users = {'sakiratsui': {'password': 'secret'}, 'dogukan': {'password': '1234'}}
 exams = []
 createdexams = manage.getExamFromDataBase() # tıklandıktan sonra kaydedilmeleri için
+sorular=manage.getQuesiton(30) 
+sinav_sayi=len(createdexams)
 # db'den çekilecek
 class User(flask_login.UserMixin):
     def __init__(self, username, password, usertype):
@@ -38,16 +40,26 @@ def logon():
                 return render_template("exams.html", user_type=usertype, exam=createdexams)
             else:
                 return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
+    # bu değerler db'de bir veriyle eşleşirse home'a gidilir.
+    # else return login again?
 @app.route("/exams", methods=["GET", "POST"])
 #@login_required
 def show_exams():
     if request.method == "POST":
         #Exam
-        exam_object=Exam(exams[-1][0], exams[-1][1], exams[-1][2])
+        exam_object=Exam(sinav_sayi,exams[-1][0], exams[-1][1], exams[-1][2])
         createdexams.append(exam_object)
         manage.insertExamDataBase(exam_object)
         print(createdexams, sys.stdout.flush())
         #Question
+        """
+        question_id=0
+            question_exam_id=0
+            question_content=""
+            question_choices=""
+            correct_answer=""
+            question_point=""
+        """
         examdetails = json.loads(request.data)
         exam_id=manage.getExam(exam_object.exam_name)
         for i in examdetails["data"]:
@@ -61,20 +73,11 @@ def show_exams():
             question_point=int(i["value"]["question_point"])
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
             manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
-    return render_template("exams.html", user_type="Ogretmen", exam=createdexams)
-
-
-@app.route("/exam/<exam_id>")
-def nolr(exam_id):
-    return "oluyo mu?"
-
-
+    return render_template("exams.html", user_type="Ogretmen", exam=createdexams,sorular=sorular)
 @app.route("/createexam")
 #@login_required
 def create_exam():
     return render_template("createexam.html")
-
-
 @app.route("/createexam/p=2")
 #@login_required
 def exampagetwo():
@@ -83,9 +86,6 @@ def exampagetwo():
     end = request.args.get("examend")
     exams.append([examname, start, end])
     return render_template("pagetwo.html", examname=examname, start=start, end=end)
-
-
-
 @app.route("/leaderboard")
 #@login_required
 def leaderboard():
@@ -94,9 +94,6 @@ def leaderboard():
     point_info = zip(names, points)  # ikili tuple'lar haline getirdi.
     point_info = sorted(point_info, key=lambda tup: (-tup[1]))  # tuple'ı notlara göre yüksekten düşüğe sıralama
     return render_template("leaderboard.html", point=point_info)
-
-
-
 @app.route("/logout")
 #@login_required
 def logout():
