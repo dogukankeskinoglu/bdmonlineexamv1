@@ -12,7 +12,6 @@ app = Flask(__name__)
 #users = {'sakiratsui': {'password': 'secret'}, 'dogukan': {'password': '1234'}}
 exams = []
 createdexams = manage.getExamFromDataBase() # tıklandıktan sonra kaydedilmeleri için
-sorular=manage.getQuestion(30) 
 # db'den çekilecek
 class User(flask_login.UserMixin):
     def __init__(self, username, password, usertype):
@@ -25,7 +24,7 @@ def redirecthome():
 
 
 @app.route("/home", methods=["POST","GET"])
-def logon():
+def login():
     if request.method=="POST":
         name = request.form.get("name")
         db = Database()
@@ -34,7 +33,6 @@ def logon():
             rows = cursor.fetchall()
             for row in rows:
                 if request.form.get("password") == str(row[2]):
-                    
                     usertype = str(row[3])
                     return render_template("exams.html", user_type=usertype, exam=createdexams)
                 else:
