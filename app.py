@@ -94,8 +94,8 @@ def nolr(exam_id):
 @app.route("/exam/examresult", methods=["POST","GET"])
 def exam_result():
     if request.method=="POST":
-        resultdetails = json.loads(request.data)
-    return render_template("show_exam_result.html",result=resultdetails)
+        resultdetails = request.json
+    return render_template("show_exam_result.html",result=json.dumps(resultdetails))
 
 
 @app.route("/createexam/p=2")
@@ -127,3 +127,5 @@ def logout():
 if __name__ == '__main__':
     app.secret_key = 'j1i5ek0eeg+lb0uj^rvm)d1a@qvz^l&1(ep8f54n(oe+uc6s)4'
     app.run(debug=True)
+
+
