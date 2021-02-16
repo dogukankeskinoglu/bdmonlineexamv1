@@ -146,7 +146,7 @@ def insertStudentExamDatabase(ogrenci_id,sinav_id,sinav_bitiris_tarihi,dogru_cev
 def getStudentExamResult(ogrenci_id,sinav_id):
     db=Database()
     with db.get_cursor() as cursor:
-        cursor.execute("SELECT * FROM Ogrenci_Sinav WHERE ogrenci_id= %s",(ogrenci_id,))
+        cursor.execute("SELECT * FROM Ogrenci_Sinav WHERE ogrenci_id= %s and sinav_id= %s",(ogrenci_id,sinav_id))
         row=cursor.fetchone()
     return [row[0],row[1],row[2],row[3],row[4],row[5]]
 
