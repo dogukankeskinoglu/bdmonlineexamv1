@@ -85,7 +85,7 @@
             exam_questions.forEach(element => alert(element));
             $.ajax({
                 contentType: 'application/json;charset=UTF-8',
-                url: "{{url_for('exam_result')}} ",
+                url: "{{url_for('exam_result')}}",
                 type: 'POST',
                 data: JSON.stringify({
                     'data': exam_questions
