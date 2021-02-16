@@ -115,10 +115,10 @@ def exam_result():
            if dogru_cevap==isaretlenen_:
                liste[index]=1
                sorudan_aldigi_puan=soru_puan
-           """else:
+           else:
                 soru_agirlik[index]=(soru_puan/sinav_toplam_puan)*penalty
            toplam_ceza=sum(soru_agirlik)
-           ogrenci_puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)"""
+           ogrenci_puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)
            dogru_cevap=liste.count(1)
            yanlis_cevap=liste.count(0)
            manage.insertStudentQuestionDataBase(1,soru_id,isaretlenen_,sorudan_aldigi_puan)
