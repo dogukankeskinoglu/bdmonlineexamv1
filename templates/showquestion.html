@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <div id="exam" class="content">
+    <div id="examContent" class="content">
         <h1>{{exam_id}}</h1>
         {% for i in sorular %} {% set outer_loop = loop.index-1 %} {% set question_no=loop.index %}
         <div class="soruicerik">
@@ -40,15 +40,11 @@
         <button type="button" onclick="showExamSize()">Show Exam Size</button>
     </div>
     <script>
-        //Ogrenci_Soru(ogrenci_id INTEGER,soru_id INTEGER ,verilen_cevap CHAR(1) NOT NULL,aldigi_puan INTEGER NOT NULL")
-
-        var exam_content = document.getElementById("exam")
         var exam_length = '{{sorusayisi}}'
-
-        var exam = []
+        var exam_questions = []
         var dogru_cevap_sık = "z";
         var soru_key = "";
-        alert("yüklendi")
+
 
         function showExamSize() {
             alert(exam_length)
@@ -56,7 +52,7 @@
 
         function finishExam() {
             for (var i = 0; i < exam_length; i++) {
-                alert("index" + (i + 1))
+                //alert("index" + (i + 1))
                 soru_key = "question" + (i + 1);
                 alert("soru key" + soru_key)
                 for (var k = 1; k < 6; k++) {
@@ -81,7 +77,28 @@
                     }
                 }
                 alert("dogru cevap" + dogru_cevap_sık)
-
+                exam_questions.push({
+                    key: soru_key,
+                    value: dogru_cevap_sık
+                })
+                for (var k in exam_questions) {
+                    alert(exam_questions[k])
+                }
+                /*$.ajax({
+                    contentType: 'application/json;charset=UTF-8',
+                    url: "{{url_for('exam_result')}}",
+                    type: 'POST',
+                    data: JSON.stringify({
+                        'data': exam_questions
+                    }),
+                    success: function(response) {
+                        alert("İşlem başarılı!");
+                        window.location.href = "/exam/examresult";
+                    },
+                    error: function(error) {
+                        alert("error");
+                    }
+                });*/
             }
         }
     </script>

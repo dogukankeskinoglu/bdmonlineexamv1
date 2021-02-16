@@ -76,12 +76,22 @@ def create_exam():
 def nolr(exam_id):
     sorular=manage.getQuestion(exam_id)
     soru_sayisi=len(sorular)
+    soru_id=[]
+    soru_dogru_cevap=[]
+    soru_puan=[]
+    for i in sorular:
+        soru_id.append(i[0])
+        soru_dogru_cevap.append(i[4])
+        soru_puan.append(i[5])
     return render_template("showquestion.html",
                             examid=exam_id,
                             sorular=sorular,
                             sorusayisi=soru_sayisi
                           )
-
+@app.route("/exam/examresult", methods=["POST","GET"])
+def exam_result():
+    
+    resultdetails = json.loads(request.data)
 @app.route("/createexam/p=2")
 #@login_required
 def exampagetwo():
