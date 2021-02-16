@@ -23,13 +23,13 @@
         <form action="">
             <h3>Soru</h3>
             <p>{{i[2]}}</p>
-            {% for k in i[3].split("*_*") %} {% set question_id="question"+outer_loop.index+"choice"+loop.index}
+            {% for k in i[3].split("*_*") %} {% set question_id="question"+outer_loop.index+"choice"+loop.index %}
             <input type="radio" id="question" +{{outer_loop.index}}>
             <label for="question" +{{loop.index}}></label>
             <label id="questionlabel" +{{loop.index}}>{{k}}</label>
             <h5>{{question_id}}</h5>
             {% endfor %}
-            <button type="submit"> Sınavı bitir</button>
+            <button type="submit"> sinavi bitir bitir</button>
         </form>
         <blockquote>Soru puanı:{{i[5]}}</blockquote>
     </div>
