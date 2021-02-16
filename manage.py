@@ -165,7 +165,7 @@ def getExamId(soru_id):
         row=cursor.fetchone()
     return row[0]
 
-#Ogrenci_Sınav(ogrenci_id,sinav_id,ogrenci_sinav_bitis_tarihi,dogru_sayi,yanlis_cevap,puan)
+#Ogrenci_Sinav(ogrenci_id,sinav_id,ogrenci_sinav_bitis_tarihi,dogru_sayi,yanlis_cevap,puan)
 def insertStudentExamDatabase(ogrenci_id,sinav_id,sinav_bitiris_tarihi,dogru_cevap,yanlis_cevap,puan):
     db=Database()
     with db.get_cursor() as cursor:
