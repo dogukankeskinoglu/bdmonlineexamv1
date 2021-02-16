@@ -71,27 +71,28 @@
                     key: soru_key,
                     value: soru_val
                 })
-                for (var key in exam) {
-                    var value = exam[key];
-                    alert(value)
-                }
-
-                /*$.ajax({
-                    contentType: 'application/json;charset=UTF-8',
-                    url: "{{url_for('show_exams')}}",
-                    type: 'POST',
-                    data: JSON.stringify({
-                        'data': exam
-                    }),
-                    success: function(response) {
-                        alert("İşlem başarılı!");
-                        window.location.href = "/exams";
-                    },
-                    error: function(error) {
-                        alert("error");
-                    }
-                }); */
             }
+            for (var key in exam) {
+                var value = exam[key];
+                alert(value)
+            }
+
+            /*$.ajax({
+                contentType: 'application/json;charset=UTF-8',
+                url: "{{url_for('show_exams')}}",
+                type: 'POST',
+                data: JSON.stringify({
+                    'data': exam
+                }),
+                success: function(response) {
+                    alert("İşlem başarılı!");
+                    window.location.href = "/exams";
+                },
+                error: function(error) {
+                    alert("error");
+                }
+            }); */
+
         }
     </script>
 
