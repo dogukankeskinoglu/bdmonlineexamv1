@@ -18,10 +18,10 @@
     </style>
 </head>
 
+
 <body>
     <div id="examContent" class="content">
         <h1>{{examid}}</h1>
-
         {% for i in sorular %} {% set outer_loop = loop.index-1 %} {% set question_no=loop.index %}
         <div class="soruicerik">
             <blockquote style="font-style: normal;">Soru {{question_no}}</blockquote>
@@ -33,13 +33,9 @@
             <h3>Soru puanı:{{i[5]}}</h3>
         </div>
         {% endfor %}
-        <button type="submit" onclick="finishStudentExam()">Finish Exam</button>
-
-
-
-
         <!--<button type="button" onclick="showExamSize()">Show Exam Size</button>-->
     </div>
+    <button type="submit" onclick="finishStudentExam()">Finish Exam</button>
 
 
     <script>
@@ -93,7 +89,7 @@
                 }),
                 success: function(response) {
                     alert("İşlem başarılı!");
-                    alert(exam_questions)
+                    alert(exam_questions["data"])
                     window.location.href = "/exam/examresult";
                 },
                 error: function(error) {
