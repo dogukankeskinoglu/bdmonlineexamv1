@@ -90,11 +90,11 @@ def nolr(exam_id):
                           )
 
                         
-@app.route("/exam/examresult", methods=["POST","GET"])
+@app.route("/exam/examresult", methods=["GET","POST"])
 def exam_result():
     resultdetails=[]
     post="girmedi"
-    if request.method=="POST":
+    if request.method == "POST":
         post="girdi"
         resultdetails = json.loads(request.data)
         return render_template("show_exam_result.html",result=resultdetails,postgelen=post)
