@@ -23,14 +23,12 @@
         <h1>{{exam_id}}</h1>
         {% for i in sorular %} {% set outer_loop = loop.index-1 %} {% set question_no=loop.index %}
         <div class="soruicerik">
-            <form action="">
-                <blockquote style="font-style: normal;">Soru {{question_no}}</blockquote>
-                <p>{{i[2]}}</p>
-                {% for k in i[3].split("*_*") %} {% set question_var = ['question', question_no, 'choice', loop.index]|join('_') %}
-                <input type="radio" id={{question_var}} name={{question_no}}>
-                <label for={{question_var}}></label>
-                <label id=" questionlabel " +{{question_var}}>{{k}} </label> {% endfor %}
-            </form>
+            <blockquote style="font-style: normal;">Soru {{question_no}}</blockquote>
+            <p>{{i[2]}}</p>
+            {% for k in i[3].split("*_*") %} {% set question_var = ['question', question_no, 'choice', loop.index]|join('_') %}
+            <input type="radio" id={{question_var}} name={{question_no}}>
+            <label for={{question_var}}></label>
+            <label id=" questionlabel " +{{question_var}}>{{k}} </label> {% endfor %}
             <h3>Soru puanı:{{i[5]}}</h3>
         </div>
         {% endfor %}
@@ -53,7 +51,6 @@
             for (var i = 0; i < exam_length; i++) {
                 //alert("index" + (i + 1))
                 soru_key = "question" + (i + 1);
-                alert("soru key" + soru_key)
                 for (var k = 1; k < 6; k++) {
                     if (document.getElementById("question_" + (i + 1) + "_choice_" + k).checked) {
                         switch (k) {
@@ -75,7 +72,6 @@
                         }
                     }
                 }
-                alert("dogru cevap" + dogru_cevap_sık)
                 exam_questions.push(dogru_cevap_sık)
 
             }
