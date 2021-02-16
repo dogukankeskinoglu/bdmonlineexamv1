@@ -90,14 +90,13 @@ def nolr(exam_id):
                           )
 
                         
-@app.route("/exam/examresult", methods=["POST"])
+@app.route("/exam/examresult", methods=["POST","GET"])
 def exam_result():
-    resultdetails = json.loads(request.data)
+    resultdetails=[]
+    if request.method=="POST":
+       resultdetails = json.loads(request.form.get('data'))
+       return render_template("show_exam_result.html",result=resultdetails)
     return render_template("show_exam_result.html",result=resultdetails)
-
-@app.route("/exam/examresultget", methods=["GET"])
-def exam_result():
-    return render_template("show_exam_result2.html")
 
 @app.route("/createexam/p=2")
 #@login_required

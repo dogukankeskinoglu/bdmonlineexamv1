@@ -12,7 +12,7 @@ sinav_id_sayac=0
 
 import json
 #Kullanıcı(kullanici_id,kullanici_adi,sifre,kullanici_type)
-#Sınav(sınav_id,ogretmen_id,sinav_adi,sınav_baslama,sınav_bitis)
+#Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
 #Ogrenci_Sınav(ogrenci_id,sinav_id,ogrenci_dogru_sayı,ogrenci_yanlis_sayı,ogrenci_puan)
 #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
 #Ogrenci_Soru(ogrenci_id,soru_id,verilen_cevap,aldigi_puan)
@@ -112,3 +112,11 @@ if args.command == "init":
 elif args.command == "destroy":
     drop_database()
     os.remove("initialized.txt")
+
+elif args.command== "sorgu":
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT * FROM Sinav;")
+        rows = cursor.fetchall()
+        for row in rows:
+            print("Öğretmen:"+row[0]+row[1]+row[2]+row[3])
