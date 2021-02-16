@@ -43,7 +43,7 @@
         var exam_length = '{{sorusayisi}}'
         var soru_idler = '{{soruid}}'
         var exam_questions = []
-        var isaretlenen = "z";
+        var isaretlenen_ = "z";
         var soru_key = "";
         console.log(soru_idler)
 
@@ -55,36 +55,37 @@
             tiklama_zamani = Date.now()
             for (var i = 0; i < exam_length; i++) {
                 //alert("index" + (i + 1))
-                soru_key = "question" + (i + 1);
-                //alert("soru key" + soru_key)
+                soru_key = soru_idler[i]
+                    //alert("soru key" + soru_key)
                 for (var k = 1; k < 6; k++) {
                     if (document.getElementById("question_" + (i + 1) + "_choice_" + k).checked) {
                         switch (k) {
                             case 1:
-                                isaretlenen = "a";
+                                isaretlenen_ = "a";
                                 break;
                             case 2:
-                                isaretlenen = "b";
+                                isaretlenen_ = "b";
                                 break;
                             case 3:
-                                isaretlenen = "c";
+                                isaretlenen_ = "c";
                                 break;
                             case 4:
-                                isaretlenen = "d";
+                                isaretlenen_ = "d";
                                 break;
                             case 5:
-                                isaretlenen = "e";
+                                isaretlenen_ = "e";
                                 break;
                         }
                     }
                 }
-
-                //alert("dogru cevap" + isaretlenen)
+                var soru_val = {
+                    isaretlenen: isaretlenen_,
+                    bitis_zamani: tiklama_zamani
+                }
                 exam_questions.push({
                     key: soru_key,
-                    isaretlenen: soru_val,
+                    isaretlenen: soru_val
                 })
-
             }
             //exam_questions.forEach(element => alert(element));
             $.ajax({
