@@ -100,7 +100,7 @@ def exam_result():
        penalty=1.25
        ogrenci_puan=0
        sinav_id=manage.getExamId(resultdetails["data"][0]["key"])
-       #sinav_bitiris_tarihi=resultdetails["data"][0]["value"]["bitis_zamani"]
+       sinav_bitiris_tarihi=resultdetails["data"][0]["value"]["bitis_zamani"]
        #sinav_toplam_puan=manage.getExamTotalPoint(sinav_id)
        sinav_soru_sayisi=len(resultdetails["data"])
        soru_agirlik=[0]*sinav_soru_sayisi
@@ -121,7 +121,7 @@ def exam_result():
            ogrenci_puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)"""
            dogru_cevap=liste.count(1)
            yanlis_cevap=liste.count(0)
-           manage.insertStudentQuestionDataBase(2,soru_id,isaretlenen_,sorudan_aldigi_puan)
+           #manage.insertStudentQuestionDataBase(2,soru_id,isaretlenen_,sorudan_aldigi_puan)
        #manage.insertStudentExamDatabase(3,sinav_id,sinav_bitiris_tarihi,dogru_cevap,yanlis_cevap,ogrenci_puan)
        
     return render_template("show_exam_result.html",result=resultdetails)
