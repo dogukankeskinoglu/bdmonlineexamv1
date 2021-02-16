@@ -21,54 +21,58 @@
 
 <body>
     <div id="examContent" class="content">
-        <h1>{{examid}}</h1>
-        {% for i in sorular %} {% set outer_loop = loop.index-1 %} {% set question_no=loop.index %}
-        <div class="soruicerik">
-            <blockquote style="font-style: normal;">Soru {{question_no}}</blockquote>
-            <p>{{i[2]}}</p>
-            {% for k in i[3].split("*_*") %} {% set question_var = ['question', question_no, 'choice', loop.index]|join('_') %}
-            <input type="radio" id={{question_var}} name={{question_no}}>
-            <label for={{question_var}}></label>
-            <label id=" questionlabel " +{{question_var}}>{{k}} </label> {% endfor %}
-            <h3>Soru puanı:{{i[5]}}</h3>
-        </div>
-        {% endfor %}
-        <!--<button type="button" onclick="showExamSize()">Show Exam Size</button>-->
+        <form action="/exam/examresult" method="POST" id="studentExamForm" onsubmit="finishStudentExam()">
+            <h1>{{examid}}</h1>
+            {% for i in sorular %} {% set outer_loop = loop.index-1 %} {% set question_no=loop.index %}
+            <div class=" soruicerik ">
+                <blockquote style="font-style: normal; ">Soru {{question_no}}</blockquote>
+                <p>{{i[2]}}</p>
+                {% for k in i[3].split("*_* ") %} {% set question_var = ['question', question_no, 'choice', loop.index]|join('_') %}
+                <input type="radio " id={{question_var}} name={{question_no}}>
+                <label for={{question_var}}></label>
+                <label id=" questionlabel " +{{question_var}}>{{k}} </label> {% endfor %}
+                <h3>Soru puanı:{{i[5]}}</h3>
+            </div>
+            {% endfor %}
+            <button type="submit" form="studentExamForm ">Finish Exam</button>
+        </form>
+
+        <!--<button type="button " onclick="showExamSize() ">Show Exam Size</button>-->
     </div>
-    <button type="submit" onclick="finishStudentExam()">Finish Exam</button>
+
 
 
     <script>
         var exam_length = '{{sorusayisi}}'
-        var dogru_cevap_sık = "z";
+        var dogru_cevap_sık = "z ";
 
         function showExamSize() {
             alert(exam_length)
         }
 
         function finishStudentExam() {
-            var soru_key = "";
+            var soru_key = " ";
             var exam_questions = []
             for (var i = 0; i < exam_length; i++) {
-                //alert("index" + (i + 1))
-                soru_key = "question" + (i + 1);
+                //alert("index " + (i + 1))
+                soru_key = "question " + (i + 1);
                 for (var k = 1; k < 6; k++) {
-                    if (document.getElementById("question_" + (i + 1) + "_choice_" + k).checked) {
+                    if (document.getElementById("question_ " + (i + 1) + "_choice_ " + k).checked) {
                         switch (k) {
                             case 1:
-                                dogru_cevap_sık = "a";
+                                dogru_cevap_sık = "a ";
                                 break;
                             case 2:
-                                dogru_cevap_sık = "b";
+                                dogru_cevap_sık = "b ";
                                 break;
                             case 3:
-                                dogru_cevap_sık = "c";
+                                dogru_cevap_sık = "c ";
                                 break;
                             case 4:
-                                dogru_cevap_sık = "d";
+                                dogru_cevap_sık = "d ";
                                 break;
                             case 5:
-                                dogru_cevap_sık = "e";
+                                dogru_cevap_sık = "e ";
                                 break;
                         }
                     }
@@ -82,18 +86,17 @@
             exam_questions.forEach(element => alert(element));
             $.ajax({
                 contentType: 'application/json;charset=UTF-8',
-                url: "{{url_for('exam_result')}}",
+                url: "{{url_for( 'exam_result')}} ",
                 type: 'POST',
                 data: JSON.stringify({
                     'data': exam_questions
                 }),
                 success: function(response) {
-                    alert("İşlem başarılı!");
-                    alert(exam_questions["data"])
-                    window.location.href = "/exam/examresult";
+                    alert("İşlem başarılı! ");
+                    window.location.href = "/exam/examresult ";
                 },
                 error: function(error) {
-                    alert("Veriyi gönderirken hata oluştu");
+                    alert("Veriyi gönderirken hata oluştu ");
                 }
             });
         }

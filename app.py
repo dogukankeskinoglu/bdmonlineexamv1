@@ -92,7 +92,6 @@ def nolr(exam_id):
                         
 @app.route("/exam/examresult", methods=["GET","POST"])
 def exam_result():
-    resultdetails=[]
     post="girmedi"
     if request.method == "POST":
         post="girdi"
