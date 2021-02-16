@@ -96,7 +96,7 @@ def exam_result():
     post="girmedi"
     if request.method == "POST":
         post="girdi"
-        resultdetails = json.loads(request.data)
+        resultdetails = request.form.get('data')
         return render_template("show_exam_result.html",result=resultdetails,postgelen=post)
     return render_template("show_exam_result.html",result=resultdetails,postgelen=post)
 
