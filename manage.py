@@ -169,7 +169,7 @@ def getExamId(soru_id):
 def insertStudentExamDatabase(ogrenci_id,sinav_id,sinav_bitiris_tarihi,dogru_cevap,yanlis_cevap,puan):
     db=Database()
     with db.get_cursor() as cursor:
-        cursor.execute("INSERT INTO Ogrenci_Sinav(ogrenci_id,sinav_id,ogrenci_sinav_bitis_tarihi,dogru_sayi,yanlis_cevap,puan) VALUES (%s, %s,%s,%s);",(ogrenci_id,sinav_id,sinav_bitiris_tarihi,dogru_cevap,yanlis_cevap,puan))
+        cursor.execute("INSERT INTO Ogrenci_Sinav(ogrenci_id,sinav_id,ogrenci_sinav_bitis_tarihi,dogru_sayi,yanlis_cevap,puan) VALUES (%s, %s,%s,%s,%s);",(ogrenci_id,sinav_id,sinav_bitiris_tarihi,dogru_cevap,yanlis_cevap,puan))
     db.commit()
 
 
