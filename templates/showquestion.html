@@ -21,16 +21,16 @@
 <body>
     <div id="exam" class="content">
         <h1>{{exam_id}}</h1>
-        {% for i in sorular %} {% set outer_loop = loop.index %}
+        {% for i in sorular %} {% set outer_loop = loop %}
         <div class="soruicerik">
             <form action="">
-                <h3>Soru {{outer_loop}}</h3>
-                <p>{{soruicerik[outer_loop]}}</p>
+                <h3>Soru {{outer_loop.index}}</h3>
+                <p>{{soruicerik[outer_loop.index]}}</p>
                 {% for k in sorusiklari[outer_loop] %} {% set question_var = ['question', outer_loop.index, 'choice', loop.index]|join(' ') %}
                 <input type="radio" id="question" +{{loop.index}}>
                 <label for="question" +{{loop.index}}></label>
                 <label id="questionlabel" +{{loop.index}}>{{k}}</label>
-                <h3>question {{outer_loop}} choice {{loop.index}}</h3>
+                <h3>question {{outer_loop.index}} choice {{loop.index}}</h3>
                 <h3>{{question_var}}</h3>
                 {% endfor %}
             </form>
