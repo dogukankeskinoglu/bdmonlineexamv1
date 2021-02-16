@@ -25,7 +25,7 @@
         <div class="soruicerik">
             <form action="">
                 <h3>Soru {{outer_loop}}</h3>
-                <p>{{i[2]}}</p>
+                <p>{{soruicerik[outer_loop]}}</p>
                 {% for k in i[3].split("*_*") %} {% set question_var = ['question', outer_loop.index, 'choice', loop.index]|join(' ') %}
                 <input type="radio" id="question" +{{loop.index}}>
                 <label for="question" +{{loop.index}}></label>

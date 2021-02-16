@@ -83,11 +83,11 @@ def nolr(exam_id):
         soru_puani.append(soru[5])
         
     return render_template("showquestion.html",
-                            exam_id=exam_id,
+                            examid=exam_id,
                             sorular=sorular,
-                            soru_icerik=soru_icerik,
-                            soru_siklari=soru_siklari,
-                            soru_puani=soru_puani
+                            soruicerik=soru_icerik,
+                            sorusiklari=soru_siklari,
+                            sorupuani=soru_puani
                           )
 
 @app.route("/createexam/p=2")
