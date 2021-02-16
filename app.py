@@ -122,7 +122,7 @@ def exam_result():
        dogru_cevap_sayisi=liste.count(1)
        yanlis_cevap_sayisi=liste.count(0)
        manage.insertStudentExamDatabase(3,sinav_id,sinav_bitiris_tarihi,dogru_cevap_sayisi,yanlis_cevap_sayisi,ogrenci_puan)
-       ogrenci_result=[4,5,6,7,8,9]
+    ogrenci_result=[4,5,6,7,8,9]
     return render_template("show_exam_result.html",
     ogrenci_id=ogrenci_result[0],
     sinav_id=ogrenci_result[1],
