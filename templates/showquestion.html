@@ -42,7 +42,7 @@
     <script>
         var exam_length = '{{sorusayisi}}'
         var exam_questions = []
-        var dogru_cevap_sık = "z";
+        var isaretlenen = "z";
         var soru_key = "";
 
         function showExamSize() {
@@ -50,8 +50,7 @@
         }
 
         function finishExam() {
-            var tiklamazamani = Date.now()
-            console.log(tiklamazamani)
+            tiklama_zamani = Date.now()
             for (var i = 0; i < exam_length; i++) {
                 //alert("index" + (i + 1))
                 soru_key = "question" + (i + 1);
@@ -60,31 +59,35 @@
                     if (document.getElementById("question_" + (i + 1) + "_choice_" + k).checked) {
                         switch (k) {
                             case 1:
-                                dogru_cevap_sık = "a";
+                                isaretlenen = "a";
                                 break;
                             case 2:
-                                dogru_cevap_sık = "b";
+                                isaretlenen = "b";
                                 break;
                             case 3:
-                                dogru_cevap_sık = "c";
+                                isaretlenen = "c";
                                 break;
                             case 4:
-                                dogru_cevap_sık = "d";
+                                isaretlenen = "d";
                                 break;
                             case 5:
-                                dogru_cevap_sık = "e";
+                                isaretlenen = "e";
                                 break;
                         }
                     }
                 }
-                //alert("dogru cevap" + dogru_cevap_sık)
+                var soru_val = {
+                        bitirme_zamani: tiklama_zamani,
+                        isaretlenen: isaretlenen
+                    }
+                    //alert("dogru cevap" + isaretlenen)
                 exam_questions.push({
                     key: soru_key,
-                    value: dogru_cevap_sık
+                    value: soru_val
                 })
 
             }
-            exam_questions.forEach(element => alert(element));
+            //exam_questions.forEach(element => alert(element));
             $.ajax({
                 contentType: 'application/json;charset=UTF-8',
                 url: "{{url_for('exam_result')}}",
