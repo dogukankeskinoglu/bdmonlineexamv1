@@ -124,12 +124,12 @@ def exam_result():
        manage.insertStudentExamDatabase(3,sinav_id,sinav_bitiris_tarihi,dogru_cevap_sayisi,yanlis_cevap_sayisi,ogrenci_puan)
        
     return render_template("show_exam_result.html",
-    sinav_id=sinav_id,
-    sinav_bitiris_tarihi=sinav_bitiris_tarihi,
-    dogru_cevap=dogru_cevap_sayisi,
-    yanlis_cevap=yanlis_cevap_sayisi,
-    ogrenci_puan=ogrenci_puan,
-    sinav_toplam_puan=sinav_toplam_puan
+    sinav_id=15,
+    sinav_bitiris_tarihi=10,
+    dogru_cevap=20,
+    yanlis_cevap=30,
+    ogrenci_puan=40,
+    sinav_toplam_puan=60
     )
 
 @app.route("/createexam/p=2")
