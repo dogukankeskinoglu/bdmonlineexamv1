@@ -86,7 +86,7 @@ def nolr(exam_id):
     return render_template("showquestion.html",
                             examid=exam_id,
                             sorular=sorular,
-                            sorusayisi=soru_sayisi
+                            sorusayisi=soru_sayisi,
                             soruid=soru_id
                           )
 
