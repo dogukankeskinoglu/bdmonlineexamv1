@@ -197,7 +197,7 @@ elif args.command=="ss":
         row=cursor.fetchone()
         print(row[0])
 
-elif args.command=="ogrencisinav:
+elif args.command=="ogrencisinav":
     db=Database()
     with db.get_cursor() as cursor:
         cursor.execute("SELECT * FROM Ogrenci_Sinav;")
