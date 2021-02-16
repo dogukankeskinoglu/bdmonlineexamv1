@@ -60,7 +60,24 @@
                 alert("soru key" + soru_key)
                 for (var k = 1; k < 6; k++) {
                     if (document.getElementById("question_" + (i + 1) + "_choice_" + k).checked) {
-                        dogru_cevap_sık = k;
+                        switch (k) {
+                            case 1:
+                                dogru_cevap_sık = "a";
+                                break;
+                            case 2:
+                                dogru_cevap_sık = "b";
+                                break;
+                            case 3:
+                                dogru_cevap_sık = "c";
+                                break;
+                            case 4:
+                                dogru_cevap_sık = "d";
+                                break;
+                            case 5:
+                                dogru_cevap_sık = "e";
+                                break;
+
+                        }
                         alert("dogru cevap" + dogru_cevap_sık)
                     }
                 }
