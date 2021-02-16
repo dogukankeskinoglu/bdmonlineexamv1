@@ -99,8 +99,8 @@ def exam_result():
        resultdetails = json.loads(request.data)
        penalty=1.25
        ogrenci_puan=0
-       sinav_id=manage.getExamId(resultdetails["data"]["key"])
-       sinav_bitiris_tarihi=resultdetails["data"]["value"]["bitis_zamani"]
+       sinav_id=manage.getExamId(resultdetails["data"][0]["key"])
+       sinav_bitiris_tarihi=resultdetails["data"][0]["value"]["bitis_zamani"]
        sinav_toplam_puan=manage.getExamTotalPoint(sinav_id)
        sinav_soru_sayisi=len(resultdetails["data"])
        soru_agirlik=[0]*sinav_soru_sayisi
