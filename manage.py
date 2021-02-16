@@ -103,7 +103,7 @@ def getExamTotalPoint(examid):
     with db.get_cursor() as cursor:
         cursor.execute("SELECT * FROM Soru WHERE soru_sinav_id= %s",(exam_id,))
         for row in rows:
-            sinav_toplam_puan+=row[5]
+            sinav_toplam_puan+=int(row[5])
     return sinav_toplam_puan;
 
 def getQuestion(exam_id):
