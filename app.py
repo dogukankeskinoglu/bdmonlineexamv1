@@ -94,7 +94,7 @@ def nolr(exam_id):
 def exam_result():
     resultdetails=[]
     if request.method=="POST":
-        resultdetails = json.loads(request.data)
+        resultdetails = json.loads(request.data)["data"]
         return render_template("show_exam_result.html",result=resultdetails)
     return render_template("show_exam_result.html",result=resultdetails)
 
