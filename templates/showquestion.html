@@ -44,15 +44,13 @@
 
         var exam_content = document.getElementById("exam")
         var exam_length = '{{sorusayisi}}'
-        var tum_sorular = '{{sorular}}'
+
         var exam = []
-        var dogru_cevap_sık = 0;
+        var dogru_cevap_sık = "z";
         var soru_key = "";
 
         function showExamSize() {
-            for (var a in tum_sorular) {
-                alert(a[0] + " " + a[1] + " " + a[2] + " ")
-            }
+            alert(exam_length)
         }
 
         function finishExam() {
@@ -73,6 +71,10 @@
                     key: soru_key,
                     value: soru_val
                 })
+                for (var key in exam) {
+                    var value = exam[key];
+                    alert(value)
+                }
 
                 /*$.ajax({
                     contentType: 'application/json;charset=UTF-8',
