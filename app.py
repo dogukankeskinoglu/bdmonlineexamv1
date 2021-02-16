@@ -66,6 +66,7 @@ def show_exams():
     return render_template("exams.html", user_type="Ogretmen", exam=createdexams)
 
 
+
 @app.route("/createexam")
 #@login_required
 def create_exam():
@@ -74,9 +75,11 @@ def create_exam():
 @app.route("/exam/<exam_id>")
 def nolr(exam_id):
     sorular=manage.getQuestion(exam_id)
+    soru_sayisi=len(sorular)
     return render_template("showquestion.html",
                             examid=exam_id,
                             sorular=sorular,
+                            sorusayisi=soru_sayisi
                           )
 
 @app.route("/createexam/p=2")
