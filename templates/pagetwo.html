@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -47,12 +47,10 @@
             <!--SORULARIN OLUŞTURULACAĞI BİR CONTENT CLASSI DAHA EKLE!!!! -->
             <blockquote>Please Select The Right Answers of Each Question. </blockquote>
             <div id="exams">
-
             </div>
         </div>
         <div style="width:500px;">
             <div style="float: left; width: 130px"><button type="button" onClick="addQuestion()">Create Question</button></div>
-
             <div style="float: right; width: 130px"><button type="submit" onClick="finishExam()">Complete Exam</button></div>
 
         </div>
@@ -148,7 +146,6 @@
 
         function finishExam() {
             console.log("girdi");
-            var exam_content = document.getElementById("exams")
             var exam = []
             var dogru_cevap_sık = 0;
             var question_content = "";
