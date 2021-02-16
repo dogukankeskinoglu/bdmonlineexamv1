@@ -26,9 +26,9 @@
             <form action="">
                 <h3>Soru {{question_no}}</h3>
                 <p>{{i[2]}}</p>
-                {% for k in i[3].split("*_*") %} {% set question_var = ["exam", exam_id, 'question', question_no, 'choice', loop.index]|join('_') %}
-                <input type="radio" id="exam" +{{question_var}}>
-                <label for="exam" +{{question_var}}></label>
+                {% for k in i[3].split("*_*") %} {% set question_var = ['question', question_no, 'choice', loop.index]|join('_') %}
+                <input type="radio" id={{question_var}}>
+                <label for={{question_var}}></label>
                 <label id="questionlabel" +{{question_var}}>{{k}} </label>
                 <p>{{question_var}}</p>
                 {% endfor %}
