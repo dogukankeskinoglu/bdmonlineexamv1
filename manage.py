@@ -148,3 +148,11 @@ elif args.command== "ogrencisoru":
         rows = cursor.fetchall()
         for row in rows:
             print("Soru:",row[0],row[1],row[2],row[3])
+
+elif args.command== "sorusorgu":
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT * FROM Soru;")
+        rows = cursor.fetchall()
+        for row in rows:
+            print("Soru:",row[0],row[1],row[2],row[3],row[4],row[5])
