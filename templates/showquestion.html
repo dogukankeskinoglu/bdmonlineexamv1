@@ -33,7 +33,7 @@
             <h3>Soru puanı:{{i[5]}}</h3>
         </div>
         {% endfor %}
-        <button type="submit" onclick="finishExam()">Finish Exam</button>
+        <button type="submit" onclick="finishStudentExam()">Finish Exam</button>
 
 
 
@@ -44,15 +44,15 @@
 
     <script>
         var exam_length = '{{sorusayisi}}'
-        var exam_questions = []
         var dogru_cevap_sık = "z";
-        var soru_key = "";
 
         function showExamSize() {
             alert(exam_length)
         }
 
-        function finishExam() {
+        function finishStudentExam() {
+            var soru_key = "";
+            var exam_questions = []
             for (var i = 0; i < exam_length; i++) {
                 //alert("index" + (i + 1))
                 soru_key = "question" + (i + 1);
@@ -93,6 +93,7 @@
                 }),
                 success: function(response) {
                     alert("İşlem başarılı!");
+                    alert(exam_questions)
                     window.location.href = "/exam/examresult";
                 },
                 error: function(error) {
