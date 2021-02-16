@@ -49,7 +49,7 @@
         var isaretlenen_ = "z";
         var soru_key = "";
         for (var i in soru_idler) {
-            console.log(i)
+            console.log(soru_idler[i])
         }
 
         function showExamSize() {
@@ -89,7 +89,7 @@
                 }
                 exam_questions.push({
                     key: soru_key,
-                    isaretlenen: soru_val
+                    value: soru_val
                 })
             }
             //exam_questions.forEach(element => alert(element));

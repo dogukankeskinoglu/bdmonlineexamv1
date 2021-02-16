@@ -104,6 +104,19 @@ def getQuestion(exam_id):
             soru_information=[row[0],row[1],row[2],row[3],row[4],row[5]]
             liste.append(soru_information) 
     return liste
+
+def getQuestionPoint(soru_id):
+    #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
+    db=Database()
+    liste=[]
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT * FROM Soru WHERE soru_id= %s",(soru_id,))
+        rows=cursor.fetchall()
+        for row in rows:
+            liste=[row[4],row[5]]
+    return liste
+
+
 if args.command == "init":
     if path.exists("initialized.txt"):
         print("This project already initialized")
@@ -127,3 +140,11 @@ elif args.command== "sorgu":
         rows = cursor.fetchall()
         for row in rows:
             print("Öğretmen:",row[0],row[1],row[2],row[3])
+
+elif args.command== "ogrencisoru":
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT * FROM Ogrenci_Soru;")
+        rows = cursor.fetchall()
+        for row in rows:
+            print("Soru:",row[0],row[1],row[2],row[3])

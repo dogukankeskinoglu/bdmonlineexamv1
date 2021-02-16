@@ -103,8 +103,7 @@ for i in examdetails["data"]:
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
             manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
 
-for i in resultdetails["data"]:
-           isaretlenen_=i["value"]["isaretlenen"]
+
 """
 #def insertStudentQuestionDataBase(ogrenci_id,soru_id,verilen_cevap,aldigi_puan):                  
 @app.route("/exam/examresult", methods=["POST","GET"])
@@ -112,7 +111,17 @@ def exam_result():
     resultdetails=[]
     if request.method=="POST":
        resultdetails = json.loads(request.data)
-       return render_template("show_exam_result.html",result=resultdetails)
+       for i in resultdetails["data"]:
+           aldigi_puan=0
+           isaretlenen_=i["value"]["isaretlenen"]
+           soru_id=i["key"]
+           soru_bilgiler=manage.getQuestionPoint(soru_id)
+           dogru_cevap=soru_bilgiler[0]
+           soru_puan=soru_bilgiler[1]
+           if dogru_cevap==isaretlenen_:
+               aldigi_puan=soru_puan
+           manage.insertStudentQuestionDataBase(1,soru_id,isaretlenen_,aldigi_puan)
+       
     return render_template("show_exam_result.html",result=resultdetails)
 
 @app.route("/createexam/p=2")
