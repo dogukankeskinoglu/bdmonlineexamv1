@@ -90,21 +90,6 @@ def nolr(exam_id):
                             soruid=soru_id
                           )
 
-"""
-for i in examdetails["data"]:
-            question=i["value"]["question"]
-            a_choice=i["value"]["a_choice"]
-            b_choice=i["value"]["b_choice"]
-            c_choice=i["value"]["c_choice"]
-            d_choice=i["value"]["d_choice"]
-            e_choice=i["value"]["e_choice"]
-            true_answer_choice=i["value"]["true_answer_choice"]
-            question_point=int(i["value"]["question_point"])
-            all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
-            manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
-
-
-"""
 #def insertStudentQuestionDataBase(ogrenci_id,soru_id,verilen_cevap,aldigi_puan):  
 #Ogrenci_Sınav(ogrenci_id,sinav_id,ogrenci_dogru_sayı,ogrenci_yanlis_sayı,ogrenci_puan)                
 @app.route("/exam/examresult", methods=["POST","GET"])
@@ -112,13 +97,13 @@ def exam_result():
     resultdetails=[]
     if request.method=="POST":
        resultdetails = json.loads(request.data)
-       penalty=1.25
+       """penalty=1.25
        puan=0
        sinav_id=manage.getExamId(resultdetails["data"]["key"])
        sinav_bitiris_tarihi=resultdetails["data"]["value"]["bitis_zamani"]
        sinav_toplam_puan=manage.getExamTotalPoint(sinav_id)
        sinav_soru_sayisi=len(resultdetails["data"])
-       soru_agirlik=[0]*sinav_soru_sayisi
+       soru_agirlik=[0]*sinav_soru_sayisi"""
        for index,i in enumerate(resultdetails["data"]):
            aldigi_puan=0
            isaretlenen_=i["value"]["isaretlenen"]
@@ -128,10 +113,10 @@ def exam_result():
            if dogru_cevap==isaretlenen_:
                liste[index]=1
                aldigi_puan=soru_puan
-           else:
-                soru_agirlik[index]=(soru_puan/sinav_toplam_puan)*penalty
-           toplam_ceza=sum(soru_agirlik)
-           puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)
+           """else:
+                soru_agirlik[index]=(soru_puan/sinav_toplam_puan)*penalty"""
+           """toplam_ceza=sum(soru_agirlik)
+           puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)"""
            dogru_cevap=liste.count(1)
            yanlis_cevap=liste.count(0)
            manage.insertStudentQuestionDataBase(3,soru_id,isaretlenen_,aldigi_puan)
