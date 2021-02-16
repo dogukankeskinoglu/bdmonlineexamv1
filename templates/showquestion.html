@@ -42,10 +42,15 @@
     <script>
         var exam_length = '{{sorusayisi}}'
         var soru_idler = '{{soruid}}'
+        var soru_idler = soru_idler.replace("[", "");
+        var soru_idler = soru_idler.replace("]", "");
+        var soru_idler = soru_idler.split(", ")
         var exam_questions = []
         var isaretlenen_ = "z";
         var soru_key = "";
-        console.log(soru_idler)
+        for (var i in soru_idler) {
+            console.log(i)
+        }
 
         function showExamSize() {
             alert(exam_length)
