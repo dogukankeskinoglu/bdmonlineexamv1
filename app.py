@@ -93,7 +93,7 @@ def nolr(exam_id):
 @app.route("/exam/examresult", methods=["POST","GET"])
 def exam_result():
     if request.method=="POST":
-       resultdetails = json.loads(request.form.get('data'))
+        resultdetails = json.loads(request.data)
     return resultdetails["data"]
 
 
