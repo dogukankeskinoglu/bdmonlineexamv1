@@ -11,7 +11,6 @@ from database import Database
 app = Flask(__name__)
 #users = {'sakiratsui': {'password': 'secret'}, 'dogukan': {'password': '1234'}}
 exams = []
-resultdetails=[]
 createdexams = manage.getExamFromDataBase() # tıklandıktan sonra kaydedilmeleri için
 # db'den çekilecek
 class User(flask_login.UserMixin):
@@ -19,8 +18,8 @@ class User(flask_login.UserMixin):
         self.username = username
         self.password = password
         self.usertype = usertype
-
-
+postgelen="girmedi"
+resultdetails=[]
 @app.route("/")
 def redirecthome():
     return redirect(url_for("login"))
@@ -91,13 +90,13 @@ def nolr(exam_id):
                           )
 
                         
-@app.route("/exam/examresult", methods=["GET","POST"])
+@app.route("/exam/examresult", methods=["POST","GET"])
 def exam_result():
-    post="girmedi"
-    if request.method == "POST":
-        post="girdi"
+    if request.method=="POST":
+        postgelen="girdi"
         resultdetails = json.loads(request.data)
-    return render_template("show_exam_result.html",result=resultdetails,postgelen=post)
+        return render_template("show_exam_result.html",result=resultdetails,postgelen=postgelen)
+    return render_template("show_exam_result.html",result=resultdetails,postgelen=postgelen)
 
 
 @app.route("/createexam/p=2")
