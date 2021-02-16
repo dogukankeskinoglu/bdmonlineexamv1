@@ -122,7 +122,7 @@ def exam_result():
            dogru_cevap=liste.count(1)
            yanlis_cevap=liste.count(0)
            manage.insertStudentQuestionDataBase(1,soru_id,isaretlenen_,sorudan_aldigi_puan)
-       #manage.insertStudentExamDatabase(1,sinav_id,'2020-10-19 10:23:54',dogru_cevap,yanlis_cevap,ogrenci_puan)
+       manage.insertStudentExamDatabase(1,sinav_id,'2020-10-19 10:23:54',dogru_cevap,yanlis_cevap,ogrenci_puan)
        
     return render_template("show_exam_result.html",result=resultdetails)
 
