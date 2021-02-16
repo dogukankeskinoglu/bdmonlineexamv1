@@ -105,6 +105,7 @@ def exam_result():
        sinav_soru_sayisi=len(resultdetails["data"])
        soru_agirlik=[0]*sinav_soru_sayisi"""
        for index,i in enumerate(resultdetails["data"]):
+           liste=[0]*len(resultdetails["data"])
            aldigi_puan=0
            isaretlenen_=i["value"]["isaretlenen"]
            soru_id=i["key"]
