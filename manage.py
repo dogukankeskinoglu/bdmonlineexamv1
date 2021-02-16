@@ -204,3 +204,11 @@ elif args.command=="ogrencisinav":
         rows = cursor.fetchall()
         for row in rows:
             print("OgrenciSınav:",row[0],row[1],row[2],row[3],row[4],row[5])
+
+elif args.command=="bilgiler":
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT * FROM Kullanici;")
+        rows = cursor.fetchall()
+        for row in rows:
+            print("OgrenciSınav:",row[0],row[1],row[2],row[3])
