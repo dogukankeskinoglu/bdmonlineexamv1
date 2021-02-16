@@ -77,7 +77,10 @@
                         }
                     }
                 }
-                exam_questions.push(dogru_cevap_sık)
+                exam_questions.push({
+                    key: soru_key,
+                    value: dogru_cevap_sık
+                })
                 console.log(exam_questions)
             }
             exam_questions.forEach(element => alert(element));
@@ -86,9 +89,7 @@
                 url: "{{url_for('exam_result')}}",
                 type: 'POST',
                 data: JSON.stringify({
-                    'data': {
-                        exam_questions
-                    }
+                    'data': exam_questions
                 }),
                 success: function(response) {
                     alert("İşlem başarılı!");
