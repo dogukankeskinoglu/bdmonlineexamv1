@@ -97,16 +97,16 @@ def exam_result():
     resultdetails=[]
     if request.method=="POST":
        resultdetails = json.loads(request.data)
-       """penalty=1.25
-       puan=0
+       penalty=1.25
+       ogrenci_puan=0
        sinav_id=manage.getExamId(resultdetails["data"]["key"])
        sinav_bitiris_tarihi=resultdetails["data"]["value"]["bitis_zamani"]
        sinav_toplam_puan=manage.getExamTotalPoint(sinav_id)
        sinav_soru_sayisi=len(resultdetails["data"])
-       soru_agirlik=[0]*sinav_soru_sayisi"""
+       soru_agirlik=[0]*sinav_soru_sayisi
+       liste=[0]*sinav_soru_sayisi
        for index,i in enumerate(resultdetails["data"]):
-           liste=[0]*len(resultdetails["data"])
-           aldigi_puan=0
+           sorudan_aldigi_puan=0
            isaretlenen_=i["value"]["isaretlenen"]
            soru_id=i["key"]
            soru_bilgiler=manage.getQuestionPoint(soru_id)
@@ -114,15 +114,15 @@ def exam_result():
            soru_puan=soru_bilgiler[1]
            if dogru_cevap==isaretlenen_:
                liste[index]=1
-               aldigi_puan=soru_puan
-           """else:
-                soru_agirlik[index]=(soru_puan/sinav_toplam_puan)*penalty"""
-           """toplam_ceza=sum(soru_agirlik)
-           puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)"""
+               sorudan_aldigi_puan=soru_puan
+           else:
+                soru_agirlik[index]=(soru_puan/sinav_toplam_puan)*penalty
+           toplam_ceza=sum(soru_agirlik)
+           ogrenci_puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)
            dogru_cevap=liste.count(1)
            yanlis_cevap=liste.count(0)
-           manage.insertStudentQuestionDataBase(3,soru_id,isaretlenen_,aldigi_puan)
-           #manage.insertStudentExamDatabase(3,sinav_id,sinav_bitiris_tarihi,dogru_cevap,yanlis_cevap,puan)
+           manage.insertStudentQuestionDataBase(3,soru_id,isaretlenen_,sorudan_aldigi_puan)
+           manage.insertStudentExamDatabase(3,sinav_id,sinav_bitiris_tarihi,dogru_cevap,yanlis_cevap,ogrenci_puan)
        
     return render_template("show_exam_result.html",result=resultdetails)
 
