@@ -53,7 +53,7 @@
             for (var i = 0; i < exam_length; i++) {
                 //alert("index" + (i + 1))
                 soru_key = "question" + (i + 1);
-                alert("soru key" + soru_key)
+                //alert("soru key" + soru_key)
                 for (var k = 1; k < 6; k++) {
                     if (document.getElementById("question_" + (i + 1) + "_choice_" + k).checked) {
                         switch (k) {
@@ -75,7 +75,7 @@
                         }
                     }
                 }
-                alert("dogru cevap" + dogru_cevap_sık)
+                //alert("dogru cevap" + dogru_cevap_sık)
                 exam_questions.push(dogru_cevap_sık)
 
             }
