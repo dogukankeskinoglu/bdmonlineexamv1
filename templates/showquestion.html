@@ -24,7 +24,7 @@
         {% for i in sorular %} {% set outer_loop = loop.index-1 %} {% set question_no=loop.index %}
         <div class="soruicerik">
             <form action="">
-                <h3>Soru {{question_no}}</h3>
+                <blockquote style="font-style: normal;">Soru {{question_no}}</blockquote>
                 <p>{{i[2]}}</p>
                 {% for k in i[3].split("*_*") %} {% set question_var = ['question', question_no, 'choice', loop.index]|join('_') %}
                 <input type="radio" id={{question_var}} name={{question_no}}>
@@ -33,7 +33,7 @@
                 <p>{{question_var}}</p>
                 {% endfor %}
             </form>
-            <blockquote>Soru puanı:{{i[5]}}</blockquote>
+            <h3>Soru puanı:{{i[5]}}</h3>
         </div>
         {% endfor %}
         <button type="submit">Finish Exam</button>
