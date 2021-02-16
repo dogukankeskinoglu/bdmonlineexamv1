@@ -32,16 +32,55 @@
                 <label id=" questionlabel " +{{question_var}}>{{k}} </label>
                 <p>{{question_var}}</p>
                 {% endfor %}
-
             </form>
             <blockquote>Soru puanı:{{i[5]}}</blockquote>
         </div>
-
         {% endfor %}
 
 
     </div>
+    <script>
+        //Ogrenci_Soru(ogrenci_id INTEGER,soru_id INTEGER ,verilen_cevap CHAR(1) NOT NULL,aldigi_puan INTEGER NOT NULL")
+        var exam_content = document.getElementById("exam")
+        var exam = []
+        var dogru_cevap_sık = 0;
+        var soru_key = "";
+        for (var i = 1; i < question_no; i++) {
+            soru_key = "soru" + i;
+            for (var k = 1; k < 6; k++) {
+                if (document.getElementById("question" + i + "choice" + k).checked) {
+                    dogru_cevap_sık = k;
+                }
+            }
+            console.log(dogru_cevap_sık);
+            console.log(soru_puan)
+            console.log("**")
+            var soru_val = {
+                soru_id: question_content,
+                verilen_cevap: dogru_cevap_sık,
+            };
+            exam.push({
+                key: soru_key,
+                value: soru_val
+            })
 
+            $.ajax({
+                contentType: 'application/json;charset=UTF-8',
+                url: "{{url_for('show_exams')}}",
+                type: 'POST',
+                data: JSON.stringify({
+                    'data': exam
+                }),
+                success: function(response) {
+                    alert("İşlem başarılı!");
+                    window.location.href = "/exams";
+                },
+                error: function(error) {
+                    alert("error");
+                }
+            });
+        }
+    </script>
 
 </body>
 
