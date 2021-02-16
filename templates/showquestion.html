@@ -48,6 +48,7 @@
         var exam = []
         var dogru_cevap_sık = "z";
         var soru_key = "";
+        alert("yüklendi")
 
         function showExamSize() {
             alert(exam_length)
@@ -76,20 +77,11 @@
                             case 5:
                                 dogru_cevap_sık = "e";
                                 break;
-
                         }
-                        alert("dogru cevap" + dogru_cevap_sık)
                     }
                 }
+                alert("dogru cevap" + dogru_cevap_sık)
 
-                /*var soru_val = {
-                    soru_id: question_content,
-                    verilen_cevap: dogru_cevap_sık,
-                };
-                exam.push({
-                    key: soru_key,
-                    value: soru_val
-                })*/
             }
         }
     </script>
