@@ -79,6 +79,13 @@ def insertQuestionDataBase(sinav_id,soru_icerik,soru_siklari,dogru_cevap,puan):
         cursor.execute("INSERT INTO Soru(soru_sinav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani) VALUES (%s, %s,%s,%s,%s);",(sinav_id,soru_icerik,soru_siklari,dogru_cevap,puan))
     db.commit()
 
+def insertStudentQuestionDataBase(ogrenci_id,soru_id,verilen_cevap,aldigi_puan):
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("INSERT INTO Ogrenci_Soru(ogrenci_id,soru_id,verilen_cevap,aldigi_puan) VALUES (%s, %s,%s,%s);",(ogrenci_id,soru_id,verilen_cevap,aldigi_puan))
+    db.commit()
+
+
 def getExam(examname):
     db=Database()
     with db.get_cursor() as cursor:

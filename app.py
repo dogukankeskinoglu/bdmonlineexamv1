@@ -87,9 +87,26 @@ def nolr(exam_id):
                             examid=exam_id,
                             sorular=sorular,
                             sorusayisi=soru_sayisi
+                            soruid=soru_id
                           )
 
-                        
+"""
+for i in examdetails["data"]:
+            question=i["value"]["question"]
+            a_choice=i["value"]["a_choice"]
+            b_choice=i["value"]["b_choice"]
+            c_choice=i["value"]["c_choice"]
+            d_choice=i["value"]["d_choice"]
+            e_choice=i["value"]["e_choice"]
+            true_answer_choice=i["value"]["true_answer_choice"]
+            question_point=int(i["value"]["question_point"])
+            all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
+            manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
+
+for i in resultdetails["data"]:
+           isaretlenen_=i["value"]["isaretlenen"]
+"""
+#def insertStudentQuestionDataBase(ogrenci_id,soru_id,verilen_cevap,aldigi_puan):                  
 @app.route("/exam/examresult", methods=["POST","GET"])
 def exam_result():
     resultdetails=[]

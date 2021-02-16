@@ -41,9 +41,11 @@
 
     <script>
         var exam_length = '{{sorusayisi}}'
+        var soru_idler = '{{soruid}}'
         var exam_questions = []
         var isaretlenen = "z";
         var soru_key = "";
+        console.log(soru_idler)
 
         function showExamSize() {
             alert(exam_length)
@@ -76,14 +78,11 @@
                         }
                     }
                 }
-                var soru_val = {
-                        bitirme_zamani: tiklama_zamani,
-                        isaretlenen: isaretlenen
-                    }
-                    //alert("dogru cevap" + isaretlenen)
+
+                //alert("dogru cevap" + isaretlenen)
                 exam_questions.push({
                     key: soru_key,
-                    value: soru_val
+                    isaretlenen: soru_val,
                 })
 
             }
