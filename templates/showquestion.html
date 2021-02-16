@@ -36,7 +36,7 @@
             <h3>Soru puanı:{{i[5]}}</h3>
         </div>
         {% endfor %}
-        <button type="submit">Finish Exam</button>
+        <button type="button" onclick="finishExam()">Finish Exam</button>
         <button type="button" onclick="showExamSize()">Show Exam Size</button>
     </div>
     <script>
@@ -44,19 +44,22 @@
 
         var exam_content = document.getElementById("exam")
         var exam_length = '{{sorusayisi}}'
+        var tum_sorular = '{{sorular}}'
         var exam = []
         var dogru_cevap_sık = 0;
         var soru_key = "";
 
         function showExamSize() {
-            alert(exam_length)
+            for (var a in tum_sorular) {
+                alert(a[0])
+            }
         }
 
         function finishExam() {
             for (var i = 1; i < exam_length; i++) {
-                soru_key = "soru" + i;
+                soru_key = "question" + i;
                 for (var k = 1; k < 6; k++) {
-                    if (document.getElementById("question" + i + "choice" + k).checked) {
+                    if (document.getElementById("question_" + i + "_choice_" + k).checked) {
                         dogru_cevap_sık = k;
                     }
                 }
@@ -71,7 +74,7 @@
                     value: soru_val
                 })
 
-                $.ajax({
+                /*$.ajax({
                     contentType: 'application/json;charset=UTF-8',
                     url: "{{url_for('show_exams')}}",
                     type: 'POST',
@@ -85,7 +88,7 @@
                     error: function(error) {
                         alert("error");
                     }
-                });
+                }); */
             }
         }
     </script>
