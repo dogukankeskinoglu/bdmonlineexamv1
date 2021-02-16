@@ -119,4 +119,4 @@ elif args.command== "sorgu":
         cursor.execute("SELECT * FROM Sinav;")
         rows = cursor.fetchall()
         for row in rows:
-            print("Öğretmen:"+row[0]+row[1]+row[2]+row[3])
+            print("Öğretmen:",row[0],row[1],row[2],row[3])
