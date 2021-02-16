@@ -96,7 +96,6 @@ def exam_result():
     resultdetails=[]
     if request.method=="POST":
         resultdetails = json.loads(request.data)
-        return render_template("show_exam_result.html",result="lol")
     return render_template("show_exam_result.html",result=resultdetails)
 
 
