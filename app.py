@@ -9,7 +9,6 @@ from psycopg2._psycopg import cursor
 import manage
 from database import Database
 app = Flask(__name__)
-#users = {'sakiratsui': {'password': 'secret'}, 'dogukan': {'password': '1234'}}
 exams = []
 createdexams = manage.getExamFromDataBase() # tıklandıktan sonra kaydedilmeleri için
 # db'den çekilecek

@@ -57,7 +57,10 @@
         }
 
         function finishExam() {
-            tiklama_zamani = Date.now()
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var dateTime = date + ' ' + time;
             for (var i = 0; i < exam_length; i++) {
                 //alert("index" + (i + 1))
                 soru_key = soru_idler[i]
@@ -85,7 +88,7 @@
                 }
                 var soru_val = {
                     isaretlenen: isaretlenen_,
-                    bitis_zamani: tiklama_zamani
+                    bitis_zamani: dateTime
                 }
                 exam_questions.push({
                     key: soru_key,
