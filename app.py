@@ -116,14 +116,21 @@ def exam_result():
                sorudan_aldigi_puan=soru_puan
            else:
                 soru_agirlik[index]=(soru_puan/sinav_toplam_puan)*penalty
-           toplam_ceza=sum(soru_agirlik)
-           ogrenci_puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)
-           dogru_cevap=liste.count(1)
-           yanlis_cevap=liste.count(0)
-           manage.insertStudentQuestionDataBase(2,soru_id,isaretlenen_,sorudan_aldigi_puan)
-       manage.insertStudentExamDatabase(2,sinav_id,sinav_bitiris_tarihi,dogru_cevap,yanlis_cevap,ogrenci_puan)
+           manage.insertStudentQuestionDataBase(3,soru_id,isaretlenen_,sorudan_aldigi_puan)
+       toplam_ceza=sum(soru_agirlik)
+       ogrenci_puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)
+       dogru_cevap_sayisi=liste.count(1)
+       yanlis_cevap_sayisi=liste.count(0)
+       manage.insertStudentExamDatabase(3,sinav_id,sinav_bitiris_tarihi,dogru_cevap_sayisi,yanlis_cevap_sayisi,ogrenci_puan)
        
-    return render_template("show_exam_result.html",result=resultdetails)
+    return render_template("show_exam_result.html",
+    sinav_id=sinav_id,
+    sinav_bitiris_tarihi=sinav_bitiris_tarihi,
+    dogru_cevap=dogru_cevap_sayisi,
+    yanlis_cevap=yanlis_cevap_sayisi,
+    ogrenci_puan=ogrenci_puan,
+    sinav_toplam_puan=sinav_toplam_puan
+    )
 
 @app.route("/createexam/p=2")
 #@login_required

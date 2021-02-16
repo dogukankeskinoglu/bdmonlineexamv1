@@ -1,15 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Leaderboard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
 </head>
 
-<body>
-    {{result}}
+<body class="is-preload">
+
+    <!-- Header -->
+    <header id="header">
+        <a class="logo" href="home">Online Exam System</a>
+        <nav>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
+
+    <!-- Nav -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="home">Home</a></li>
+            <li><a href="exams">Exams</a></li>
+            <li><a href="leaderboard">Leaderboard</a></li>
+            <li><a href="logout">Logout</a> </li>
+        </ul>
+    </nav>
+
+    <!-- Heading -->
+    <div id="heading">
+        <h1>EXAM RESULT</h1>
+    </div>
+
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <div class="content">
+                <header>
+                    <h2>Your Result</h2>
+                </header>
+                <div class="content">
+                    <h3>Sınav id'si: {{sinav_id}}</h3>
+                    <h3>Sınav bitiriş tarihiniz: {{sinav_bitiris_tarihi}}</h3>
+                    <h3>Doğru cevap sayınız: {{dogru_cevap}}</h3>
+                    <h3>Yanlış cevap sayınız: {{yanlis_cevap}}</h3>
+                    <h3>Sınav puanınız: {{ogrenci_puan}}/ {{sinav_toplam_puan}}</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="static/assets/js/jquery.min.js"></script>
+    <script src="static/assets/js/browser.min.js"></script>
+    <script src="static/assets/js/breakpoints.min.js"></script>
+    <script src="static/assets/js/util.js"></script>
+    <script src="static/assets/js/main.js"></script>
+
 </body>
 
 </html>
