@@ -94,8 +94,8 @@ def nolr(exam_id):
 @app.route("/exam/examresult", methods=["POST","GET"])
 def exam_result():
     if request.method=="POST":
-        resultdetails = request.json
-    return render_template("show_exam_result.html",result=json.dumps(resultdetails))
+        resultdetails = request.json(request.data)
+    return render_template("show_exam_result.html",result=resultdetails)
 
 
 @app.route("/createexam/p=2")
