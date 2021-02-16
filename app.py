@@ -99,9 +99,9 @@ def exam_result():
        resultdetails = json.loads(request.data)
        penalty=1.25
        ogrenci_puan=0
-       sinav_id=manage.getExamId(resultdetails["data"][0]["key"])
-       sinav_bitiris_tarihi=resultdetails["data"][0]["value"]["bitis_zamani"]
-       sinav_toplam_puan=manage.getExamTotalPoint(sinav_id)
+       #sinav_id=manage.getExamId(resultdetails["data"][0]["key"])
+       #sinav_bitiris_tarihi=resultdetails["data"][0]["value"]["bitis_zamani"]
+       #sinav_toplam_puan=manage.getExamTotalPoint(sinav_id)
        sinav_soru_sayisi=len(resultdetails["data"])
        soru_agirlik=[0]*sinav_soru_sayisi
        liste=[0]*sinav_soru_sayisi
@@ -115,10 +115,10 @@ def exam_result():
            if dogru_cevap==isaretlenen_:
                liste[index]=1
                sorudan_aldigi_puan=soru_puan
-           else:
+           """else:
                 soru_agirlik[index]=(soru_puan/sinav_toplam_puan)*penalty
            toplam_ceza=sum(soru_agirlik)
-           ogrenci_puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)
+           ogrenci_puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)"""
            dogru_cevap=liste.count(1)
            yanlis_cevap=liste.count(0)
            manage.insertStudentQuestionDataBase(3,soru_id,isaretlenen_,sorudan_aldigi_puan)
