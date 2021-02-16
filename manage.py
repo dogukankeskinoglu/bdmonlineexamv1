@@ -95,22 +95,6 @@ def getExam(examname):
         for row in rows:
             return row[0]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def getExamTotalPoint(examid):
     #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
     db=Database()
@@ -121,19 +105,6 @@ def getExamTotalPoint(examid):
         for row in rows:
             sinav_toplam_puan+=int(row[5])
     return sinav_toplam_puan
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def getQuestion(exam_id):
@@ -172,14 +143,12 @@ def insertStudentExamDatabase(ogrenci_id,sinav_id,sinav_bitiris_tarihi,dogru_cev
         cursor.execute("INSERT INTO Ogrenci_Sinav(ogrenci_id,sinav_id,ogrenci_sinav_bitis_tarihi,dogru_sayi,yanlis_cevap,puan) VALUES (%s, %s,%s,%s,%s,%s);",(ogrenci_id,sinav_id,sinav_bitiris_tarihi,dogru_cevap,yanlis_cevap,puan))
     db.commit()
     
-
-
-
-
-
-
-
-
+def getStudentExamResult(ogrenci_id,sinav_id):
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT * FROM Ogrenci_Sinav WHERE ogrenci_id= %s",(ogrenci_id,))
+        row=cursor.fetchone()
+    return [row[0],row[1],row[2],row[3],row[4],row[5]]
 
 if args.command == "init":
     if path.exists("initialized.txt"):
@@ -237,3 +206,11 @@ elif args.command=="kullanicitablosu":
         rows = cursor.fetchall()
         for row in rows:
             print("Kullanici:",row[0],row[1],row[2],row[3])
+#Ogrenci_Sinav(ogrenci_id,sinav_id,ogrenci_sinav_bitis_tarihi,dogru_sayi,yanlis_cevap,puan)
+elif args.command=="ogrenciresult":
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT * FROM Ogrenci_Sinav WHERE ogrenci_id= %s and sinav_id= %s",(3,10))
+        rows = cursor.fetchall()
+        for row in rows:
+            print("OgrenciSınavResult:",row[0],row[1],row[2],row[3],row[4],row[5])
