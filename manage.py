@@ -96,9 +96,24 @@ def getExam(examname):
             return row[0]
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def getExamTotalPoint(examid):
     #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
-    df=Database()
+    db=Database()
     sinav_toplam_puan=0
     with db.get_cursor() as cursor:
         cursor.execute("SELECT * FROM Soru WHERE soru_sinav_id= %s",(examid,))
@@ -106,6 +121,20 @@ def getExamTotalPoint(examid):
         for row in rows:
             sinav_toplam_puan+=int(row[5])
     return sinav_toplam_puan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def getQuestion(exam_id):
     db=Database()
