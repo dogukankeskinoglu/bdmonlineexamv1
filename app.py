@@ -11,7 +11,7 @@ from database import Database
 app = Flask(__name__)
 #users = {'sakiratsui': {'password': 'secret'}, 'dogukan': {'password': '1234'}}
 exams = []
-resultdetails=[]
+
 createdexams = manage.getExamFromDataBase() # tıklandıktan sonra kaydedilmeleri için
 # db'den çekilecek
 class User(flask_login.UserMixin):
@@ -93,6 +93,7 @@ def nolr(exam_id):
                         
 @app.route("/exam/examresult", methods=["POST","GET"])
 def exam_result():
+    resultdetails=[]
     if request.method=="POST":
         resultdetails = json.loads(request.data)
         return render_template("show_exam_result.html",result=resultdetails)
