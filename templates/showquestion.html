@@ -29,9 +29,7 @@
                 {% for k in i[3].split("*_*") %} {% set question_var = ['question', question_no, 'choice', loop.index]|join('_') %}
                 <input type="radio" id={{question_var}} name={{question_no}}>
                 <label for={{question_var}}></label>
-                <label id=" questionlabel " +{{question_var}}>{{k}} </label>
-                <p>{{question_var}}</p>
-                {% endfor %}
+                <label id=" questionlabel " +{{question_var}}>{{k}} </label> {% endfor %}
             </form>
             <h3>Soru puanı:{{i[5]}}</h3>
         </div>
@@ -39,6 +37,8 @@
         <button type="button" onclick="finishExam()">Finish Exam</button>
         <button type="button" onclick="showExamSize()">Show Exam Size</button>
     </div>
+
+
     <script>
         var exam_length = '{{sorusayisi}}'
         var exam_questions = []
@@ -79,9 +79,7 @@
                 exam_questions.push(dogru_cevap_sık)
 
             }
-            for (var k in exam_questions) {
-                alert(k)
-            }
+            exam_questions.forEach(element => alert(element));
             /*$.ajax({
                 contentType: 'application/json;charset=UTF-8',
                 url: "{{url_for('exam_result')}}",
