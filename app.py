@@ -88,10 +88,14 @@ def nolr(exam_id):
                             sorular=sorular,
                             sorusayisi=soru_sayisi
                           )
+
+                        
 @app.route("/exam/examresult", methods=["POST","GET"])
 def exam_result():
-    
     resultdetails = json.loads(request.data)
+    return render_template("shos_exam_result.html",result=resultdetails)
+
+
 @app.route("/createexam/p=2")
 #@login_required
 def exampagetwo():
