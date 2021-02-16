@@ -55,44 +55,25 @@
 
         function finishExam() {
             for (var i = 1; i < exam_length; i++) {
+                alert(i)
                 soru_key = "question" + i;
+                alert("soru key" + soru_key)
                 for (var k = 1; k < 6; k++) {
                     if (document.getElementById("question_" + i + "_choice_" + k).checked) {
                         dogru_cevap_sık = k;
+                        alert("dogru cevap" + dogru_cevap_sık)
                     }
                 }
-                console.log(dogru_cevap_sık);
-                console.log(soru_puan)
-                var soru_val = {
+
+                /*var soru_val = {
                     soru_id: question_content,
                     verilen_cevap: dogru_cevap_sık,
                 };
                 exam.push({
                     key: soru_key,
                     value: soru_val
-                })
+                })*/
             }
-            for (var key in exam) {
-                var value = exam[key];
-                alert(value)
-            }
-
-            /*$.ajax({
-                contentType: 'application/json;charset=UTF-8',
-                url: "{{url_for('show_exams')}}",
-                type: 'POST',
-                data: JSON.stringify({
-                    'data': exam
-                }),
-                success: function(response) {
-                    alert("İşlem başarılı!");
-                    window.location.href = "/exams";
-                },
-                error: function(error) {
-                    alert("error");
-                }
-            }); */
-
         }
     </script>
 
