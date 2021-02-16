@@ -120,7 +120,7 @@ def exam_result():
            soru_puan=soru_bilgiler[1]
            if dogru_cevap==isaretlenen_:
                aldigi_puan=soru_puan
-           manage.insertStudentQuestionDataBase(1,soru_id,isaretlenen_,aldigi_puan)
+           manage.insertStudentQuestionDataBase(2,soru_id,isaretlenen_,aldigi_puan)
        
     return render_template("show_exam_result.html",result=resultdetails)
 
