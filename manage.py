@@ -132,7 +132,22 @@ def getExamId(soru_id):
     with db.get_cursor() as cursor:
         cursor.execute("SELECT (soru_sinav_id) FROM Soru WHERE soru_id= %s",(soru_id,))
         row=cursor.fetchone()
-        return row
+    return row[0]
+
+#Ogrenci_Sinav(ogrenci_id INTEGER,sinav_id INTEGER,ogrenci_sinav_bitis_tarihi timestamp NOT NULL,dogru_sayi INTEGER NOT NULL ,yanlis_cevap INTEGER NOT NULL ,puan INTEGER NOT NULL,PRIMARY KEY(ogrenci_id,sinav_id)
+def insertStudentExamDatabase(ogrenci_id,sinav_id,sinav_bitiris_tarihi,dogru_cevap,yanlis_cevap,puan):
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("INSERT INTO Ogrenci_Sinav(ogrenci_id,sinav_id,ogrenci_sinav_bitis_tarihi,dogru_sayi,yanlis_cevap,puan) VALUES (%s, %s,%s,%s);",(ogrenci_id,sinav_id,sinav_bitiris_tarihi,dogru_cevap,yanlis_cevap,puan))
+    db.commit()
+
+
+
+
+
+
+
+
 
 
 if args.command == "init":
@@ -181,3 +196,11 @@ elif args.command=="ss":
         cursor.execute("SELECT (soru_sinav_id) FROM Soru WHERE soru_id= %s",(8,))
         row=cursor.fetchone()
         print(row[0])
+
+elif args.command=="ogrencisinav:
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT * FROM Ogrenci_Sinav;")
+        rows = cursor.fetchall()
+        for row in rows:
+            print("OgrenciSınav:",row[0],row[1],row[2],row[3],row[4],row[5])
