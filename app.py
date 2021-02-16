@@ -111,7 +111,9 @@ def exam_result():
     resultdetails=[]
     if request.method=="POST":
        resultdetails = json.loads(request.data)
-       for i in resultdetails["data"]:
+       penalty=1.25
+       for index,i in enumerate(resultdetails["data"]):
+           #liste=[0]*len(resultdetails["data"])
            aldigi_puan=0
            isaretlenen_=i["value"]["isaretlenen"]
            soru_id=i["key"]
@@ -119,7 +121,10 @@ def exam_result():
            dogru_cevap=soru_bilgiler[0]
            soru_puan=soru_bilgiler[1]
            if dogru_cevap==isaretlenen_:
+               liste[index]=1
                aldigi_puan=soru_puan
+           dogru_cevap=liste.count(1)
+           yanlis_cevap=liste.count(0)
            manage.insertStudentQuestionDataBase(2,soru_id,isaretlenen_,aldigi_puan)
        
     return render_template("show_exam_result.html",result=resultdetails)

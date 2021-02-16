@@ -93,7 +93,18 @@ def getExam(examname):
         rows = cursor.fetchall()
         for row in rows:
             return row[0]
-  
+
+
+def getExamTotalPoint(examid):
+    #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
+    df=Database()
+    sinav_toplam_puan=0
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT * FROM Soru WHERE soru_sinav_id= %s",(exam_id,))
+        for row in rows:
+            sinav_toplam_puan+=row[5]
+    return sinav_toplam_puan;
+
 def getQuestion(exam_id):
     db=Database()
     liste=[]
@@ -115,6 +126,13 @@ def getQuestionPoint(soru_id):
         for row in rows:
             liste=[row[4],row[5]]
     return liste
+
+def getExamId(soru_id):
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT (soru_sinav_id) FROM Soru WHERE soru_id= %s",(soru_id,))
+        row=cursor.fetchone()
+        return row
 
 
 if args.command == "init":
@@ -156,3 +174,10 @@ elif args.command== "sorusorgu":
         rows = cursor.fetchall()
         for row in rows:
             print("Soru:",row[0],row[1],row[2],row[3],row[4],row[5])
+
+elif args.commend=="ss":
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT (soru_sinav_id) FROM Soru WHERE soru_id= %s",(8,))
+        row=cursor.fetchone()
+        print(row)
