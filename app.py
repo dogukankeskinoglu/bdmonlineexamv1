@@ -109,6 +109,7 @@ def exam_result():
            aldigi_puan=0
            isaretlenen_=i["value"]["isaretlenen"]
            soru_id=i["key"]
+           soru_bilgiler=manage.getQuestionPoint(soru_id)
            dogru_cevap=soru_bilgiler[0]
            soru_puan=soru_bilgiler[1]
            if dogru_cevap==isaretlenen_:
