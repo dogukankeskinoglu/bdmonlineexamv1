@@ -179,5 +179,5 @@ elif args.command=="ss":
     db=Database()
     with db.get_cursor() as cursor:
         cursor.execute("SELECT (soru_sinav_id) FROM Soru WHERE soru_id= %s",(8,))
-        row=cursor.fetchone()
-        print(row)
+        row=cursor.fetchall()
+        print(row[0])
