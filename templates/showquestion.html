@@ -21,21 +21,21 @@
 
 <body>
     <div id="examContent" class="content">
-        <form action="/exam/examresult" method="POST" id="studentExamForm" onsubmit="finishStudentExam()">
-            <h1>{{examid}}</h1>
-            {% for i in sorular %} {% set outer_loop = loop.index-1 %} {% set question_no=loop.index %}
-            <div class=" soruicerik ">
-                <blockquote style="font-style: normal; ">Soru {{question_no}}</blockquote>
-                <p>{{i[2]}}</p>
-                {% for k in i[3].split("*_* ") %} {% set question_var = ['question', question_no, 'choice', loop.index]|join('_') %}
-                <input type="radio " id={{question_var}} name={{question_no}}>
-                <label for={{question_var}}></label>
-                <label id=" questionlabel " +{{question_var}}>{{k}} </label> {% endfor %}
-                <h3>Soru puanı:{{i[5]}}</h3>
-            </div>
-            {% endfor %}
-            <button type="submit" form="studentExamForm ">Finish Exam</button>
-        </form>
+
+        <h1>{{examid}}</h1>
+        {% for i in sorular %} {% set outer_loop = loop.index-1 %} {% set question_no=loop.index %}
+        <div class=" soruicerik ">
+            <blockquote style="font-style: normal; ">Soru {{question_no}}</blockquote>
+            <p>{{i[2]}}</p>
+            {% for k in i[3].split("*_* ") %} {% set question_var = ['question', question_no, 'choice', loop.index]|join('_') %}
+            <input type="radio " id={{question_var}} name={{question_no}}>
+            <label for={{question_var}}></label>
+            <label id=" questionlabel " +{{question_var}}>{{k}} </label> {% endfor %}
+            <h3>Soru puanı:{{i[5]}}</h3>
+        </div>
+        {% endfor %}
+        <button type="submit" onclick="finishStudentExam()">Finish Exam</button>
+
 
         <!--<button type="button " onclick="showExamSize() ">Show Exam Size</button>-->
     </div>
@@ -81,7 +81,7 @@
                     key: soru_key,
                     value: dogru_cevap_sık
                 })
-                console.log(exam_questions)
+
             }
             exam_questions.forEach(element => alert(element));
             $.ajax({
