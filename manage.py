@@ -11,10 +11,10 @@ args = parser.parse_args()
 sinav_id_sayac=0
 
 import json
-#Kullanıcı(kullanici_id,kullanici_adi,sifre,kullanici_type)
-#Sınav(sınav_id,sinav_adi,sınav_baslama,sınav_bitis)
-#Ogrenci_Sınav(ogrenci_id,sinav_id,ogrenci_dogru_sayı,ogrenci_yanlis_sayı,ogrenci_puan)
-#Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
+#Kullanıcı(kullanici_id,kullanici_adi,kullanici_sifre,kullanici_tipi)
+#Sınav(sinav_id,sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi)
+#Ogrenci_Sınav(ogrenci_id,sinav_id,ogrenci_sinav_bitis_tarihi,dogru_sayi,yanlis_cevap,puan)
+#Soru(soru_id,soru_sinav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
 #Ogrenci_Soru(ogrenci_id,soru_id,verilen_cevap,aldigi_puan)
 
 def create_database():
@@ -79,6 +79,7 @@ def insertQuestionDataBase(sinav_id,soru_icerik,soru_siklari,dogru_cevap,puan):
         cursor.execute("INSERT INTO Soru(soru_sinav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani) VALUES (%s, %s,%s,%s,%s);",(sinav_id,soru_icerik,soru_siklari,dogru_cevap,puan))
     db.commit()
 
+#Ogrenci_Soru(ogrenci_id,soru_id,verilen_cevap,aldigi_puan)
 def insertStudentQuestionDataBase(ogrenci_id,soru_id,verilen_cevap,aldigi_puan):
     db=Database()
     with db.get_cursor() as cursor:
@@ -134,7 +135,7 @@ def getExamId(soru_id):
         row=cursor.fetchone()
     return row[0]
 
-#Ogrenci_Sinav(ogrenci_id INTEGER,sinav_id INTEGER,ogrenci_sinav_bitis_tarihi timestamp NOT NULL,dogru_sayi INTEGER NOT NULL ,yanlis_cevap INTEGER NOT NULL ,puan INTEGER NOT NULL,PRIMARY KEY(ogrenci_id,sinav_id)
+#Ogrenci_Sınav(ogrenci_id,sinav_id,ogrenci_sinav_bitis_tarihi,dogru_sayi,yanlis_cevap,puan)
 def insertStudentExamDatabase(ogrenci_id,sinav_id,sinav_bitiris_tarihi,dogru_cevap,yanlis_cevap,puan):
     db=Database()
     with db.get_cursor() as cursor:
@@ -166,7 +167,7 @@ elif args.command == "destroy":
     drop_database()
     os.remove("initialized.txt")
 
-elif args.command== "sorgu":
+elif args.command== "sinavtablosu":
     db=Database()
     with db.get_cursor() as cursor:
         cursor.execute("SELECT * FROM Sinav;")
@@ -174,7 +175,7 @@ elif args.command== "sorgu":
         for row in rows:
             print("Öğretmen:",row[0],row[1],row[2],row[3])
 
-elif args.command== "ogrencisoru":
+elif args.command== "ogrencisorutablosu":
     db=Database()
     with db.get_cursor() as cursor:
         cursor.execute("SELECT * FROM Ogrenci_Soru;")
@@ -182,7 +183,7 @@ elif args.command== "ogrencisoru":
         for row in rows:
             print("Soru:",row[0],row[1],row[2],row[3])
 
-elif args.command== "sorusorgu":
+elif args.command== "sorutablosu":
     db=Database()
     with db.get_cursor() as cursor:
         cursor.execute("SELECT * FROM Soru;")
@@ -190,14 +191,8 @@ elif args.command== "sorusorgu":
         for row in rows:
             print("Soru:",row[0],row[1],row[2],row[3],row[4],row[5])
 
-elif args.command=="ss":
-    db=Database()
-    with db.get_cursor() as cursor:
-        cursor.execute("SELECT (soru_sinav_id) FROM Soru WHERE soru_id= %s",(8,))
-        row=cursor.fetchone()
-        print(row[0])
 
-elif args.command=="ogrencisinav":
+elif args.command=="ogrencisinavtablosu":
     db=Database()
     with db.get_cursor() as cursor:
         cursor.execute("SELECT * FROM Ogrenci_Sinav;")
@@ -205,10 +200,10 @@ elif args.command=="ogrencisinav":
         for row in rows:
             print("OgrenciSınav:",row[0],row[1],row[2],row[3],row[4],row[5])
 
-elif args.command=="bilgiler":
+elif args.command=="kullanicitablosu":
     db=Database()
     with db.get_cursor() as cursor:
         cursor.execute("SELECT * FROM Kullanici;")
         rows = cursor.fetchall()
         for row in rows:
-            print("OgrenciSınav:",row[0],row[1],row[2],row[3])
+            print("Kullanici:",row[0],row[1],row[2],row[3])
