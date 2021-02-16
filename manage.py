@@ -175,7 +175,7 @@ elif args.command== "sorusorgu":
         for row in rows:
             print("Soru:",row[0],row[1],row[2],row[3],row[4],row[5])
 
-elif args.commend=="ss":
+elif args.command=="ss":
     db=Database()
     with db.get_cursor() as cursor:
         cursor.execute("SELECT (soru_sinav_id) FROM Soru WHERE soru_id= %s",(8,))
