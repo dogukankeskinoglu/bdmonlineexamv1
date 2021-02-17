@@ -32,6 +32,7 @@ def login():
             rows = cursor.fetchall()
             for row in rows:
                 if request.form.get("password") == str(row[2]):
+                    global usertype
                     usertype = str(row[3])
                     return redirect(url_for("show_exams"))
                 else:
