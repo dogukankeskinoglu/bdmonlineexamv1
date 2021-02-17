@@ -97,10 +97,11 @@
                 })
             }
             //exam_questions.forEach(element => alert(element));
-            $.ajax({
+            $.post({
                 contentType: 'application/json;charset=UTF-8',
                 url: "{{url_for('exam_result')}}",
                 type: 'POST',
+                async: false,
                 data: JSON.stringify({
                     'data': exam_questions
                 }),
