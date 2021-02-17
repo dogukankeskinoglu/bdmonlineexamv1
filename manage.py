@@ -36,6 +36,7 @@ def fill_database():
         cursor.execute("INSERT INTO Kullanici (kullanici_adi,kullanici_sifre,kullanici_tipi) VALUES (%s, %s, %s);", ("batuayyildiz","static","Ogrenci"))
         cursor.execute("INSERT INTO Kullanici (kullanici_adi,kullanici_sifre,kullanici_tipi) VALUES (%s, %s, %s);", ("hasanbulut","bulutbilisim","Ogretmen"))
         cursor.execute("INSERT INTO Kullanici (kullanici_adi,kullanici_sifre,kullanici_tipi) VALUES (%s, %s, %s);", ("vecdiaytac","12345","Ogretmen"))
+        cursor.execute("INSERT INTO Kullanici (kullanici_adi,kullanici_sifre,kullanici_tipi) VALUES (%s, %s, %s);", ("ali","123","Ogrenci"))
     db.commit()
     print("Inserted 4 rows of data")
 
@@ -70,7 +71,6 @@ def insertExamDataBase(exam:Exam):
     db.commit()
 
 def insertQuestionDataBase(sinav_id,soru_icerik,soru_siklari,dogru_cevap,puan):
-    #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
     db=Database()
     with db.get_cursor() as cursor:
         cursor.execute("INSERT INTO Soru(soru_sinav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani) VALUES (%s, %s,%s,%s,%s);",(sinav_id,soru_icerik,soru_siklari,dogru_cevap,puan))
@@ -84,13 +84,13 @@ def insertStudentQuestionDataBase(ogrenci_id,soru_id,verilen_cevap,aldigi_puan):
     db.commit()
 
 
-def getExam(examname):
+"""def getExam(examname):
     db=Database()
     with db.get_cursor() as cursor:
         cursor.execute("SELECT * FROM Sinav WHERE sinav_adi= %s", (examname,))
         rows = cursor.fetchall()
         for row in rows:
-            return row[0]
+            return row[0]"""
 
 def getExamTotalPoint(examid):
     #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)

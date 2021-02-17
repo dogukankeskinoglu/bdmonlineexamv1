@@ -55,9 +55,7 @@ def show_exams():
         exam_object=Exam(exam_number,current_user_id,exams[-1][0], exams[-1][1], exams[-1][2])
         createdexams.append(exam_object)
         manage.insertExamDataBase(exam_object)
-        print(createdexams, sys.stdout.flush())
         examdetails = json.loads(request.data)
-        exam_id=manage.getExam(exam_object.exam_name)
         for i in examdetails["data"]:
             question=i["value"]["question"]
             a_choice=i["value"]["a_choice"]
@@ -68,7 +66,7 @@ def show_exams():
             true_answer_choice=i["value"]["true_answer_choice"]
             question_point=int(i["value"]["question_point"])
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
-            manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
+            manage.insertQuestionDataBase(exam_number,question,all_choice,true_answer_choice,question_point)
     return render_template("exams.html", user_type=current_usertype, exam=createdexams)
 
 @app.route("/createexam")
@@ -126,6 +124,8 @@ def exam_result():
            manage.insertStudentQuestionDataBase(current_user_id,soru_id,isaretlenen_,sorudan_aldigi_puan)
        toplam_ceza=sum(soru_agirlik)
        ogrenci_puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)
+       if (ogrenci_puan<0):
+           ogrenci_puan=0
        dogru_cevap_sayisi=liste.count(1)
        yanlis_cevap_sayisi=liste.count(0)
        manage.insertStudentExamDatabase(current_user_id,sinav_id,sinav_bitiris_tarihi,dogru_cevap_sayisi,yanlis_cevap_sayisi,ogrenci_puan)
