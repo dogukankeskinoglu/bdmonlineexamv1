@@ -13,25 +13,10 @@
 
 <body class="is-preload">
 
-    <header id="header">
-        <a class="logo" href="home">Online Exam System</a>
-        <nav>
-            <a href="#menu">Menu</a>
-        </nav>
-    </header>
-
-    <nav id="menu">
-        <ul class="links">
-            <li><a href="home">Home</a></li>
-            <li><a href="exams">Exams</a></li>
-            <li><a href="leaderboard">Leaderboard</a></li>
-            <li><a href="logout">Logout</a> </li>
-        </ul>
-    </nav>
 
 
     <div id="heading">
-        <h1>Exams</h1>
+        <h1>Leaderboard</h1>
     </div>
 
     <section id="main" class="wrapper">
@@ -40,20 +25,24 @@
                 <header>
                     <h2>Top Scored Students</h2>
                 </header>
-                <div class="table-wrapper">
-                    <table border="1">
-                        <tr>
-                            <th>Username</th>
-                            <th>Point</th>
-                        </tr>
-                        {% for i in leadorboard %}
-                        <tr>
-                            <td>{{ i[0] }}</td>
-                            <td>{{ i[1] }}</td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                </div>
+                <form action="/exams">
+                    <div class="table-wrapper">
+                        <table border="1">
+                            <tr>
+                                <th>Username</th>
+                                <th>Point</th>
+                            </tr>
+                            {% for i in leadorboard %}
+                            <tr>
+                                <td>{{ i[0] }}</td>
+                                <td>{{ i[1] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <button type="submit">Sınavlar sayfasına gidebilirsiniz</button>
+                </form>
+
             </div>
         </div>
     </section>
