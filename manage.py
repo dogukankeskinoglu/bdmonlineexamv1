@@ -163,10 +163,10 @@ def getStudentExam(ogrenci_id):
     db=Database()
     created_exam=[]
     with db.get_cursor() as cursor:
-        cursor.execute("SELECT k.kullanici_adi, s.sinav_adi FROM Kullanici AS k JOIN Ogrenci_Sinav AS o ON  k.kullanici_id = o.ogrenci_id JOIN Sinav AS s ON s.sinav_id = o.sinav_id WHERE o.ogrenci_id = %s;", (ogrenci_id,))
+        cursor.execute("SELECT o.sinav_id,k.kullanici_adi,s.sinav_adi  FROM Kullanici AS k JOIN Ogrenci_Sinav AS o ON  k.kullanici_id = o.ogrenci_id JOIN Sinav AS s ON s.sinav_id = o.sinav_id WHERE o.ogrenci_id = %s;", (ogrenci_id,))
         rows = cursor.fetchall()
         for row in rows:
-            a=[row[0],row[1]]
+            a=[row[0],row[1],row[2]]
             created_exam.append(a)
     return created_exam
 
