@@ -42,7 +42,7 @@
         <div class="inner">
             <div class="content">
                 <header>
-                    <h2>Current Exams</h2>
+                    <h2>Exams</h2>
                 </header>
                 <p>
                     {% if tip == "Ogrenci" %} {% for e in sinav %}
@@ -60,7 +60,8 @@
                            {{e[3]}} 
                            {{e[4]}} 
                            </button>
-                    </form>{% endif %}
+                    </form>
+                    {% endfor %} {% endif %}
                 </p>
 
             </div>
