@@ -106,9 +106,8 @@
                     'data': exam_questions
                 }),
                 success: function(response) {
-
                     alert("İşlem başarılı!");
-                    window.location.href = "/exam/examresult2";
+                    window.location = "show_exam_result.html";
                 },
                 error: function(error) {
                     alert("Veriyi gönderirken hata oluştu");
