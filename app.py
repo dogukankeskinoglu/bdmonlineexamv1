@@ -10,7 +10,7 @@ import manage
 from database import Database
 app = Flask(__name__)
 exams = []
-current_usertype="ogrenci"
+current_usertype="Ogrenci"
 current_user_id=0
 sinav_id=0
 sinav_toplam_puan=0
@@ -96,8 +96,7 @@ def nolr(exam_id):
                             soruid=soru_id
                           )
 
-#def insertStudentQuestionDataBase(ogrenci_id,soru_id,verilen_cevap,aldigi_puan):  
-#Ogrenci_Sınav(ogrenci_id,sinav_id,ogrenci_dogru_sayı,ogrenci_yanlis_sayı,ogrenci_puan)                
+          
 @app.route("/exam/examresult", methods=["POST","GET"])
 def exam_result():
     if request.method=="POST":
@@ -143,9 +142,7 @@ def exam_result():
                         sinav_ham_puan=sinav_ham_puan)
     #return render_template("show_exam_result.html",ogrenci_id=5,sinav_id=10,sinav_bitiris_tarihi=15,dogru_cevap=20,yanlis_cevap=30,ogrenci_puan=40)
     #sinav_toplam_puan=ogrenci_result[0]
-@app.route("/exam/examresult2")
-def deneme():
-    return "sa"
+
 
 @app.route("/createexam/p=2")
 #@login_required
@@ -158,9 +155,15 @@ def exampagetwo():
 
 
 @app.route("/leaderboard")
+def exam_leaderboard():
+    if current_usertype=="Ogretmen":
+        ogretmen_sinavlari=manage.getTeacherExam(current_user_id)
+    else:
+        sorular=manage.getQuestion(exam_id)
+@app.route("/leaderboard/<exam_id>")
 #@login_required
-def leaderboard():
-    liste=manage.getLeaderBoardExam(2)
+def leaderboard(exam_id):
+    liste=manage.getLeaderBoardExam(exam_id)
     return render_template("leaderboard.html",leadorboard=liste)
 
 
