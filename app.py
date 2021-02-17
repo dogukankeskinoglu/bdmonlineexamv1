@@ -68,7 +68,7 @@ def show_exams():
             question_point=int(i["value"]["question_point"])
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
             manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
-    return render_template("exams.html", user_type=current_usertype, exam=createdexams)
+    return render_template("currentexams.html", user_type=current_usertype, exam=createdexams)
 
 @app.route("/createexam")
 #@login_required
@@ -86,7 +86,7 @@ def nolr(exam_id):
         soru_id.append(i[0])
         soru_dogru_cevap.append(i[4])
         soru_puan.append(i[5])
-    return render_template("showquestion.html",
+    return render_template("solvequestion.html",
                             examid=exam_id,
                             sorular=sorular,
                             sorusayisi=soru_sayisi,
@@ -131,7 +131,7 @@ def exam_result():
        yanlis_cevap_sayisi=liste.count(0)
        manage.insertStudentExamDatabase(current_user_id,sinav_id,sinav_bitiris_tarihi,dogru_cevap_sayisi,yanlis_cevap_sayisi,ogrenci_puan)
     ogrenci_result=manage.getStudentExamResult(current_user_id,sinav_id)
-    return render_template("show_exam_result.html",ogrenci_id=ogrenci_result[0],
+    return render_template("afterexamresult.html",ogrenci_id=ogrenci_result[0],
                         sinav_id=ogrenci_result[1],
                         sinav_bitiris_tarihi=ogrenci_result[2],
                         dogru_cevap=ogrenci_result[3],
@@ -149,24 +149,24 @@ def exampagetwo():
     start = request.args.get("examstart")
     end = request.args.get("examend")
     exams.append([examname, start, end])
-    return render_template("pagetwo.html", examname=examname, start=start, end=end)
+    return render_template("createexamp2.html", examname=examname, start=start, end=end)
 
 
 @app.route("/leaderboard")
 def exam_leaderboard():
     if current_usertype=="Ogretmen":
         ogretmen_sinavlari=manage.getTeacherExam(current_user_id)
-        return render_template("sinavleaderboard.html",sinav=ogretmen_sinavlari,tip=current_usertype)
+        return render_template("leaderboardp1.html",sinav=ogretmen_sinavlari,tip=current_usertype)
     else:
         ogrenci_sinavlari=manage.getStudentExam(current_user_id)
-        return render_template("sinavleaderboard.html",sinav=ogrenci_sinavlari,tip=current_usertype)
+        return render_template("leaderboardp1.html",sinav=ogrenci_sinavlari,tip=current_usertype)
     
 
 @app.route("/leaderboard/<exam_id>")
 #@login_required
 def leaderboard(exam_id):
     liste=manage.getLeaderBoardExam(exam_id)
-    return render_template("leaderboard.html",leadorboard=liste)
+    return render_template("leaderboardp2.html",leadorboard=liste)
 
 
 @app.route("/logout")
