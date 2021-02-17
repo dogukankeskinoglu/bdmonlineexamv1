@@ -245,5 +245,5 @@ elif args.command=="leadorboard":
             print(row[0],row[1])
 
 elif args.command=="ogretmengetir":
-    for i in getTeacherExam(2):
+    for i in getTeacherExam(5):
         print(i)
