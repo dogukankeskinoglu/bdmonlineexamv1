@@ -46,14 +46,14 @@
                 </header>
                 <p>
                     {% if tip == "Ogrenci" %} {% for e in sinav %}
-                    <form action="/exam/{{e[0]}}" method="get">
+                    <form action="/leaderboard/{{e[0]}}" method="get">
                         <button id="sinav">
                            {{e[1]}}
                            {{e[2]}} 
                            </button>
                     </form>
                     <br> {% endfor %} {% else %} {% for e in sinav %}
-                    <form action="/exam/{{e[0]}}" method="get">
+                    <form action="/leaderboard/{{e[0]}}" method="get">
                         <button id="sinav">
                            {{e[1]}}
                            {{e[2]}} 
@@ -62,12 +62,7 @@
                            </button>
                     </form>{% endif %}
                 </p>
-                {% if user_type == "Ogretmen" %}
-                <ul class="actions fit">
-                    <li><a href="createexam" class="button primary fit">Create an exam!</a></li>
-                </ul>
 
-                {% endif %}
             </div>
         </div>
     </section>
