@@ -35,7 +35,6 @@
         </div>
         {% endfor %}
         <button type="submit" onclick="finishExam()">Finish Exam</button>
-        <button type="button" onclick="showExamSize()">Show Exam Size</button>
     </div>
 
 
@@ -45,16 +44,8 @@
         var soru_idler = soru_idler.replace("[", "");
         var soru_idler = soru_idler.replace("]", "");
         var soru_idler = soru_idler.split(", ")
-
         var isaretlenen_ = "z";
         var soru_key = "";
-        for (var i in soru_idler) {
-            console.log(soru_idler[i])
-        }
-
-        function showExamSize() {
-            alert(exam_length)
-        }
 
         function finishExam() {
             var exam_questions = []
