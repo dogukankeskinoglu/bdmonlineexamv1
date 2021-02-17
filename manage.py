@@ -63,7 +63,7 @@ def getExamFromDataBase():
         cursor.execute("SELECT * FROM Sinav;")
         rows = cursor.fetchall()
         for row in rows:
-            exam_object=Exam(row[0],row[1],row[2],row[3])
+            exam_object=Exam(row[0],row[1],row[2],row[3],row[5])
             created_exam.append(exam_object)
     return created_exam
 
