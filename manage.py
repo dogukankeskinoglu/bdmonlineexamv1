@@ -219,3 +219,11 @@ elif args.command=="ogrenciresult":
         rows = cursor.fetchall()
         for row in rows:
             print("OgrenciSınavResult:",row[0],row[1],row[2],row[3],row[4],row[5])
+
+elif args.command=="leadorboard":
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT k.kullanici_adi, o.puan FROM Kullanici AS k JOIN Ogrenci_Sinav AS o ON k.kullanici_id = o.ogrenci_id WHERE o.sinav_id = %s ORDER BY o.puan DESC;",(2,))
+        rows=cursor.fetchall()
+        for row in rows:
+            print(row[0],row[1])

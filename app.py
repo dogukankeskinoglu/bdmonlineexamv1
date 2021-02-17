@@ -160,11 +160,8 @@ def exampagetwo():
 @app.route("/leaderboard")
 #@login_required
 def leaderboard():
-    names = "dogukan", "muge"  # db.get öğrenci sınav tablosundaki kullanıcı adları
-    points = 90, 95  # db.get öğrencisınav tablosundaki notlar
-    point_info = zip(names, points)  # ikili tuple'lar haline getirdi.
-    point_info = sorted(point_info, key=lambda tup: (-tup[1]))  # tuple'ı notlara göre yüksekten düşüğe sıralama
-    return render_template("leaderboard.html", point=point_info)
+    
+    return render_template("leaderboard.html")
 
 
 @app.route("/logout")
