@@ -10,7 +10,7 @@ import manage
 from database import Database
 app = Flask(__name__)
 exams = []
-createdexams = manage.getExamFromDataBase() # tıklandıktan sonra kaydedilmeleri için
+ # tıklandıktan sonra kaydedilmeleri için
 # db'den çekilecek
 class User(flask_login.UserMixin):
     def __init__(self, username, password, usertype):
@@ -43,6 +43,7 @@ def login():
 @app.route("/exams", methods=["GET", "POST"])
 #@login_required
 def show_exams():
+    createdexams = manage.getExamFromDataBase()
     if request.method == "POST":
         exam_number=Exam.exam_count+1
         exam_object=Exam(exam_number,exams[-1][0], exams[-1][1], exams[-1][2])
@@ -121,8 +122,8 @@ def exam_result():
        ogrenci_puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)
        dogru_cevap_sayisi=liste.count(1)
        yanlis_cevap_sayisi=liste.count(0)
-       manage.insertStudentExamDatabase(3,sinav_id,sinav_bitiris_tarihi,dogru_cevap_sayisi,yanlis_cevap_sayisi,ogrenci_puan)
-    ogrenci_result=manage.getStudentExamResult(3,10)
+       manage.insertStudentExamDatabase(1,sinav_id,sinav_bitiris_tarihi,dogru_cevap_sayisi,yanlis_cevap_sayisi,ogrenci_puan)
+    ogrenci_result=manage.getStudentExamResult(1,1)
     return render_template("show_exam_result.html",
     ogrenci_id=ogrenci_result[0],
     sinav_id=ogrenci_result[1],
