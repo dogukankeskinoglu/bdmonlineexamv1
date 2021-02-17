@@ -10,8 +10,10 @@ import manage
 from database import Database
 app = Flask(__name__)
 exams = []
-usertype="ogrenci"
+current_usertype="ogrenci"
+current_user_id=0
 sinav_id=0
+sinav_toplam_puan=0
 class User(flask_login.UserMixin):
     def __init__(self, username, password, usertype):
         self.username = username
@@ -33,8 +35,10 @@ def login():
             rows = cursor.fetchall()
             for row in rows:
                 if request.form.get("password") == str(row[2]):
-                    global usertype
-                    usertype = str(row[3])
+                    global current_usertype
+                    global current_user_id
+                    current_user_id=row[0]
+                    current_usertype = str(row[3])
                     return redirect(url_for("show_exams"))
                 else:
                     return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
@@ -64,7 +68,7 @@ def show_exams():
             question_point=int(i["value"]["question_point"])
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
             manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
-    return render_template("exams.html", user_type=usertype, exam=createdexams)
+    return render_template("exams.html", user_type=current_usertype, exam=createdexams)
 
 
 
@@ -97,6 +101,7 @@ def nolr(exam_id):
 def exam_result():
     if request.method=="POST":
        global sinav_id
+       global sinav_toplam_puan
        resultdetails = json.loads(request.data)
        penalty=1.25
        ogrenci_puan=0
@@ -118,15 +123,15 @@ def exam_result():
                sorudan_aldigi_puan=soru_puan
            else:
                 soru_agirlik[index]=(soru_puan/sinav_toplam_puan)*penalty
-           manage.insertStudentQuestionDataBase(2,soru_id,isaretlenen_,sorudan_aldigi_puan)
+           manage.insertStudentQuestionDataBase(current_user_id,soru_id,isaretlenen_,sorudan_aldigi_puan)
        toplam_ceza=sum(soru_agirlik)
        ogrenci_puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)
        dogru_cevap_sayisi=liste.count(1)
        yanlis_cevap_sayisi=liste.count(0)
-       manage.insertStudentExamDatabase(2,sinav_id,sinav_bitiris_tarihi,dogru_cevap_sayisi,yanlis_cevap_sayisi,ogrenci_puan)
-    ogrenci_result=manage.getStudentExamResult(2,sinav_id)
+       manage.insertStudentExamDatabase(current_user_id,sinav_id,sinav_bitiris_tarihi,dogru_cevap_sayisi,yanlis_cevap_sayisi,ogrenci_puan)
+    ogrenci_result=manage.getStudentExamResult(current_user_id,sinav_id)
     return render_template("show_exam_result.html",ogrenci_id=ogrenci_result[0],sinav_id=ogrenci_result[1],sinav_bitiris_tarihi=ogrenci_result[2],
-                               dogru_cevap=ogrenci_result[3],yanlis_cevap=ogrenci_result[4],ogrenci_puan=ogrenci_result[5])
+                               dogru_cevap=ogrenci_result[3],yanlis_cevap=ogrenci_result[4],ogrenci_puan=ogrenci_result[5],sinav_toplam_puan=sinav_toplam_puan)
     #return render_template("show_exam_result.html",ogrenci_id=5,sinav_id=10,sinav_bitiris_tarihi=15,dogru_cevap=20,yanlis_cevap=30,ogrenci_puan=40)
     #sinav_toplam_puan=ogrenci_result[0]
 @app.route("/exam/examresult2")
