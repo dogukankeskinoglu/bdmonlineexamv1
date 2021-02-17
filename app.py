@@ -51,8 +51,7 @@ def login():
 def show_exams():
     createdexams = manage.getExamFromDataBase()
     if request.method == "POST":
-        exam_number=Exam.exam_count+1
-        exam_object=Exam(exam_number,current_user_id,exams[-1][0], exams[-1][1], exams[-1][2])
+        exam_object=Exam(current_user_id,exams[-1][0], exams[-1][1], exams[-1][2])
         createdexams.append(exam_object)
         manage.insertExamDataBase(exam_object)
         examdetails = json.loads(request.data)
@@ -66,7 +65,7 @@ def show_exams():
             true_answer_choice=i["value"]["true_answer_choice"]
             question_point=int(i["value"]["question_point"])
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
-            manage.insertQuestionDataBase(exam_number,question,all_choice,true_answer_choice,question_point)
+            manage.insertQuestionDataBase(exam_object.exam_id,question,all_choice,true_answer_choice,question_point)
     return render_template("exams.html", user_type=current_usertype, exam=createdexams)
 
 @app.route("/createexam")
