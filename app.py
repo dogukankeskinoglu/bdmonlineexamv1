@@ -128,7 +128,7 @@ def exam_result():
                                dogru_cevap=ogrenci_result[3],yanlis_cevap=ogrenci_result[4],ogrenci_puan=ogrenci_result[5])
     return render_template("show_exam_result.html",ogrenci_id=5,sinav_id=10,sinav_bitiris_tarihi=15,dogru_cevap=20,yanlis_cevap=30,ogrenci_puan=40)
     #sinav_toplam_puan=ogrenci_result[0]
-@app.route("/exam/examresult2"):
+@app.route("/exam/examresult2")
 def deneme():
     return "sa"
 
