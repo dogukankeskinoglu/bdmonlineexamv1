@@ -52,7 +52,7 @@ def show_exams():
     createdexams = manage.getExamFromDataBase()
     if request.method == "POST":
         exam_number=Exam.exam_count+1
-        exam_object=Exam(exam_number,exams[-1][0], exams[-1][1], exams[-1][2])
+        exam_object=Exam(exam_number,current_user_id,exams[-1][0], exams[-1][1], exams[-1][2])
         createdexams.append(exam_object)
         manage.insertExamDataBase(exam_object)
         print(createdexams, sys.stdout.flush())
