@@ -34,7 +34,7 @@ def login():
             for row in rows:
                 if request.form.get("password") == str(row[2]):
                     usertype = str(row[3])
-                    return render_template("exams.html", user_type=usertype, exam=createdexams)
+                    return redirect(url_for("show_exams"))
                 else:
                     return "<script> alert('Wrong username or password!'); </script>" + render_template("home.html")
     return render_template('home.html') 
