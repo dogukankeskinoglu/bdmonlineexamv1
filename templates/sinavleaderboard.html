@@ -45,16 +45,20 @@
                     <h2>Exams</h2>
                 </header>
                 <p>
-                    {% if tip == "Ogrenci" %} {% for e in sinav %}
+                    <h4>Taslak</h4>
+                    {% if tip == "Ogrenci" %}
+                    <h3>Ogrenci</h3>
+                    {% for e in sinav %}
                     <form action="/leaderboard/{{e[0]}}" method="get">
-                        <button id="sinav">
+                        <button id="leaderboardexamogrenci">
                            {{e[1]}}
                            {{e[2]}} 
                            </button>
                     </form>
-                    <br> {% endfor %} {% else %} {% for e in sinav %}
+                    <br> {% endfor %} {% else %}
+                    <h3>Ogretmen</h3>{% for e in sinav %}
                     <form action="/leaderboard/{{e[0]}}" method="get">
-                        <button id="sinav2">
+                        <button id="leaderboardexamogretmen">
                            {{e[1]}}
                            {{e[2]}} 
                            {{e[3]}} 
