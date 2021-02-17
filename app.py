@@ -117,7 +117,7 @@ def exam_result():
                sorudan_aldigi_puan=soru_puan
            else:
                 soru_agirlik[index]=(soru_puan/sinav_toplam_puan)*penalty
-           manage.insertStudentQuestionDataBase(3,soru_id,isaretlenen_,sorudan_aldigi_puan)
+           manage.insertStudentQuestionDataBase(1,soru_id,isaretlenen_,sorudan_aldigi_puan)
        toplam_ceza=sum(soru_agirlik)
        ogrenci_puan=sinav_toplam_puan-(toplam_ceza*sinav_toplam_puan)
        dogru_cevap_sayisi=liste.count(1)
