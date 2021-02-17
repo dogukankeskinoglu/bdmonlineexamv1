@@ -156,13 +156,13 @@ def exampagetwo():
 
 @app.route("/leaderboard")
 def exam_leaderboard():
-    """if current_usertype=="Ogretmen":
+    if current_usertype=="Ogretmen":
         ogretmen_sinavlari=manage.getTeacherExam(current_user_id)
         return render_template("sinavleaderboard.html",sinav=ogretmen_sinavlari,tip=current_usertype)
     else:
         ogrenci_sinavlari=manage.getStudentExam(current_user_id)
-        return render_template("sinavleaderboard.html",sinav=ogrenci_sinavlari,tip=current_usertype)"""
-    return "sa"
+        return render_template("sinavleaderboard.html",sinav=ogrenci_sinavlari,tip=current_usertype)
+    
 
 @app.route("/leaderboard/<exam_id>")
 #@login_required
