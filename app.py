@@ -51,10 +51,12 @@ def login():
 def show_exams():
     createdexams = manage.getExamFromDataBase()
     if request.method == "POST":
-        exam_object=Exam(current_user_id,exams[-1][0], exams[-1][1], exams[-1][2])
+        exam_number=Exam.exam_count+1
+        exam_object=Exam(exam_number,current_user_id,exams[-1][0], exams[-1][1], exams[-1][2])
         createdexams.append(exam_object)
         manage.insertExamDataBase(exam_object)
         examdetails = json.loads(request.data)
+        exam_id=manage.getExam(exam_object.exam_name)
         for i in examdetails["data"]:
             question=i["value"]["question"]
             a_choice=i["value"]["a_choice"]
@@ -65,7 +67,7 @@ def show_exams():
             true_answer_choice=i["value"]["true_answer_choice"]
             question_point=int(i["value"]["question_point"])
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
-            manage.insertQuestionDataBase(exam_object.exam_id,question,all_choice,true_answer_choice,question_point)
+            manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
     return render_template("exams.html", user_type=current_usertype, exam=createdexams)
 
 @app.route("/createexam")
@@ -137,8 +139,7 @@ def exam_result():
                         ogrenci_puan=ogrenci_result[5],
                         sinav_toplam_puan=sinav_toplam_puan,
                         sinav_ham_puan=sinav_ham_puan)
-    #return render_template("show_exam_result.html",ogrenci_id=5,sinav_id=10,sinav_bitiris_tarihi=15,dogru_cevap=20,yanlis_cevap=30,ogrenci_puan=40)
-    #sinav_toplam_puan=ogrenci_result[0]
+    
 
 
 @app.route("/createexam/p=2")

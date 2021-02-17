@@ -60,7 +60,7 @@ def getExamFromDataBase():
         cursor.execute("SELECT * FROM Sinav;")
         rows = cursor.fetchall()
         for row in rows:
-            exam_object=Exam(row[1],row[2],row[3],row[4])
+            exam_object=Exam(row[0],row[1],row[2],row[3],row[4])
             created_exam.append(exam_object)
     return created_exam
 
@@ -84,13 +84,13 @@ def insertStudentQuestionDataBase(ogrenci_id,soru_id,verilen_cevap,aldigi_puan):
     db.commit()
 
 
-"""def getExam(examname):
+def getExam(examname):
     db=Database()
     with db.get_cursor() as cursor:
         cursor.execute("SELECT * FROM Sinav WHERE sinav_adi= %s", (examname,))
         rows = cursor.fetchall()
         for row in rows:
-            return row[0]"""
+            return row[0]
 
 def getExamTotalPoint(examid):
     #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
