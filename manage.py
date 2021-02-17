@@ -59,14 +59,14 @@ def getExamFromDataBase():
         cursor.execute("SELECT * FROM Sinav;")
         rows = cursor.fetchall()
         for row in rows:
-            exam_object=Exam(row[0],row[1],row[2],row[3])
+            exam_object=Exam(row[0],row[1],row[2],row[3],row[4])
             created_exam.append(exam_object)
     return created_exam
 
 def insertExamDataBase(exam:Exam):
     db = Database()
     with db.get_cursor() as cursor:
-        cursor.execute("INSERT INTO Sinav(sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi) VALUES (%s, %s,%s);",(exam.exam_name,exam.exam_baslama_tarihi,exam.exam_bitis_tarihi))     
+        cursor.execute("INSERT INTO Sinav(ogretmen_id,sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi) VALUES (%s,%s,%s,%s);",(exam.exam_ogretmen_id,exam.exam_name,exam.exam_baslama_tarihi,exam.exam_bitis_tarihi))     
     db.commit()
 
 def insertQuestionDataBase(sinav_id,soru_icerik,soru_siklari,dogru_cevap,puan):
