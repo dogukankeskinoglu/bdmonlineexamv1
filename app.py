@@ -143,7 +143,6 @@ def exam_result():
 
 
 @app.route("/createexam/p=2")
-#@login_required
 def exampagetwo():
     examname = request.args.get("examname")
     start = request.args.get("examstart")
@@ -163,14 +162,12 @@ def exam_leaderboard():
     
 
 @app.route("/leaderboard/<exam_id>")
-#@login_required
 def leaderboard(exam_id):
     liste=manage.getLeaderBoardExam(exam_id)
     return render_template("leaderboardp2.html",leadorboard=liste)
 
 
 @app.route("/logout")
-#@login_required
 def logout():
     #flask_login.logout_user()
     return redirect(url_for("login"))
