@@ -126,6 +126,7 @@ def exam_result():
        ogrenci_result=manage.getStudentExamResult(1,sinav_id)
        return render_template("show_exam_result.html",ogrenci_id=ogrenci_result[0],sinav_id=ogrenci_result[1],
        sinav_bitiris_tarihi=ogrenci_result[2],dogru_cevap=ogrenci_result[3],yanlis_cevap=ogrenci_result[4],ogrenci_puan=ogrenci_result[5])
+    return render_template("show_exam_result.html",0,1,2,3,4,5)
     #sinav_toplam_puan=ogrenci_result[0]
 
 @app.route("/createexam/p=2")
