@@ -14,6 +14,7 @@ current_usertype="ogrenci"
 current_user_id=0
 sinav_id=0
 sinav_toplam_puan=0
+sinav_ham_puan=0
 class User(flask_login.UserMixin):
     def __init__(self, username, password, usertype):
         self.username = username
@@ -102,6 +103,7 @@ def exam_result():
     if request.method=="POST":
        global sinav_id
        global sinav_toplam_puan
+       global sinav_ham_puan
        resultdetails = json.loads(request.data)
        penalty=1.25
        ogrenci_puan=0
@@ -121,6 +123,7 @@ def exam_result():
            if dogru_cevap==isaretlenen_:
                liste[index]=1
                sorudan_aldigi_puan=soru_puan
+               sinav_ham_puan+=sorudan_aldigi_puan
            else:
                 soru_agirlik[index]=(soru_puan/sinav_toplam_puan)*penalty
            manage.insertStudentQuestionDataBase(current_user_id,soru_id,isaretlenen_,sorudan_aldigi_puan)
@@ -130,8 +133,14 @@ def exam_result():
        yanlis_cevap_sayisi=liste.count(0)
        manage.insertStudentExamDatabase(current_user_id,sinav_id,sinav_bitiris_tarihi,dogru_cevap_sayisi,yanlis_cevap_sayisi,ogrenci_puan)
     ogrenci_result=manage.getStudentExamResult(current_user_id,sinav_id)
-    return render_template("show_exam_result.html",ogrenci_id=ogrenci_result[0],sinav_id=ogrenci_result[1],sinav_bitiris_tarihi=ogrenci_result[2],
-                               dogru_cevap=ogrenci_result[3],yanlis_cevap=ogrenci_result[4],ogrenci_puan=ogrenci_result[5],sinav_toplam_puan=sinav_toplam_puan)
+    return render_template("show_exam_result.html",ogrenci_id=ogrenci_result[0],
+                                                    sinav_id=ogrenci_result[1],
+                                                    sinav_bitiris_tarihi=ogrenci_result[2],
+                                                    dogru_cevap=ogrenci_result[3],
+                                                    yanlis_cevap=ogrenci_result[4],
+                                                    ogrenci_puan=ogrenci_result[5],
+                                                    sinav_toplam_puan=sinav_toplam_puan,
+                                                    sinav_ham_puan=sinav_ham_puan)
     #return render_template("show_exam_result.html",ogrenci_id=5,sinav_id=10,sinav_bitiris_tarihi=15,dogru_cevap=20,yanlis_cevap=30,ogrenci_puan=40)
     #sinav_toplam_puan=ogrenci_result[0]
 @app.route("/exam/examresult2")
