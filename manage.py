@@ -149,12 +149,13 @@ def getStudentExamResult(ogrenci_id,sinav_id):
 
 def getLeaderBoardExam(exam_id):
     db=Database()
+    liste=[]
     with db.get_cursor() as cursor:
         cursor.execute("SELECT k.kullanici_adi, o.puan FROM Kullanici AS k JOIN Ogrenci_Sinav AS o ON k.kullanici_id = o.ogrenci_id WHERE o.sinav_id = %s ORDER BY o.puan DESC;",(exam_id,))
         rows=cursor.fetchall()
         for row in rows:
-            liste=[row[0],row[1]]
-    
+            liste.append([[row[0],row[1]])
+    return liste
 if args.command == "init":
     if path.exists("initialized.txt"):
         print("This project already initialized")

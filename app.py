@@ -160,8 +160,8 @@ def exampagetwo():
 @app.route("/leaderboard")
 #@login_required
 def leaderboard():
-    
-    return render_template("leaderboard.html")
+    liste=manage.getLeaderBoardExam(2)
+    return render_template("leaderboard.html",leadorboard=liste)
 
 
 @app.route("/logout")

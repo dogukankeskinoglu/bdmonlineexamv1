@@ -49,10 +49,10 @@
                             <th>Username</th>
                             <th>Point</th>
                         </tr>
-                        {% for name, pnt in point %}
+                        {% for i in leadorboard %}
                         <tr>
-                            <td>{{ name }}</td>
-                            <td>{{ pnt }}</td>
+                            <td>{{ i[0] }}</td>
+                            <td>{{ i[1] }}</td>
                         </tr>
                         {% endfor %}
                     </table>
