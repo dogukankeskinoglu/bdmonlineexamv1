@@ -154,7 +154,8 @@ def getLeaderBoardExam(exam_id):
         cursor.execute("SELECT k.kullanici_adi, o.puan FROM Kullanici AS k JOIN Ogrenci_Sinav AS o ON k.kullanici_id = o.ogrenci_id WHERE o.sinav_id = %s ORDER BY o.puan DESC;",(exam_id,))
         rows=cursor.fetchall()
         for row in rows:
-            liste.append([[row[0],row[1]])
+            a=[row[0],row[1]]
+            liste.append(a)
     return liste
 if args.command == "init":
     if path.exists("initialized.txt"):
