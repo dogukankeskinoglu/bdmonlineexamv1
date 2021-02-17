@@ -101,13 +101,12 @@
                 contentType: 'application/json;charset=UTF-8',
                 url: "{{url_for('exam_result')}}",
                 type: 'POST',
-                async: false,
                 data: JSON.stringify({
                     'data': exam_questions
                 }),
                 success: function(response) {
                     alert("İşlem başarılı!");
-                    window.location = "show_exam_result.html";
+                    window.location.href = "/exam/examresult";
                 },
                 error: function(error) {
                     alert("Veriyi gönderirken hata oluştu");

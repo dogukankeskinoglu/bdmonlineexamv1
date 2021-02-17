@@ -10,9 +10,7 @@ import manage
 from database import Database
 app = Flask(__name__)
 exams = []
-
- # tıklandıktan sonra kaydedilmeleri için
-# db'den çekilecek
+usertype="ogrenci"
 class User(flask_login.UserMixin):
     def __init__(self, username, password, usertype):
         self.username = username
@@ -64,7 +62,7 @@ def show_exams():
             question_point=int(i["value"]["question_point"])
             all_choice=a_choice+"*_*"+b_choice+"*_*"+c_choice+"*_*"+d_choice+"*_*"+e_choice
             manage.insertQuestionDataBase(exam_id,question,all_choice,true_answer_choice,question_point)
-    return render_template("exams.html", user_type="Ogretmen", exam=createdexams)
+    return render_template("exams.html", user_type=usertype, exam=createdexams)
 
 
 
