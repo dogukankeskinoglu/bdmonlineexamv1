@@ -48,10 +48,6 @@ def drop_database():
         cursor.execute("DROP TABLE IF EXISTS Soru;")
         cursor.execute("DROP TABLE IF EXISTS Sinav;")
         cursor.execute("DROP TABLE IF EXISTS Kullanici;")
-        
-        
-        
-        
     db.commit()
     print("Finished dropping tables")
 
@@ -214,3 +210,7 @@ elif args.command=="ogrenciresult":
         rows = cursor.fetchall()
         for row in rows:
             print("OgrenciSınavResult:",row[0],row[1],row[2],row[3],row[4],row[5])
+
+
+elif args.command=="doldur":
+    fill_database()
