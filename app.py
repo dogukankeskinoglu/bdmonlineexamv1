@@ -11,6 +11,7 @@ from database import Database
 app = Flask(__name__)
 exams = []
 usertype="ogrenci"
+sinav_id=0
 class User(flask_login.UserMixin):
     def __init__(self, username, password, usertype):
         self.username = username
@@ -95,6 +96,7 @@ def nolr(exam_id):
 @app.route("/exam/examresult", methods=["POST","GET"])
 def exam_result():
     if request.method=="POST":
+       global sinav_id
        resultdetails = json.loads(request.data)
        penalty=1.25
        ogrenci_puan=0
@@ -122,10 +124,10 @@ def exam_result():
        dogru_cevap_sayisi=liste.count(1)
        yanlis_cevap_sayisi=liste.count(0)
        manage.insertStudentExamDatabase(2,sinav_id,sinav_bitiris_tarihi,dogru_cevap_sayisi,yanlis_cevap_sayisi,ogrenci_puan)
-       ogrenci_result=manage.getStudentExamResult(2,sinav_id)
-       return render_template("show_exam_result.html",ogrenci_id=ogrenci_result[0],sinav_id=ogrenci_result[1],sinav_bitiris_tarihi=ogrenci_result[2],
+    ogrenci_result=manage.getStudentExamResult(2,sinav_id)
+    return render_template("show_exam_result.html",ogrenci_id=ogrenci_result[0],sinav_id=ogrenci_result[1],sinav_bitiris_tarihi=ogrenci_result[2],
                                dogru_cevap=ogrenci_result[3],yanlis_cevap=ogrenci_result[4],ogrenci_puan=ogrenci_result[5])
-    return render_template("show_exam_result.html",ogrenci_id=5,sinav_id=10,sinav_bitiris_tarihi=15,dogru_cevap=20,yanlis_cevap=30,ogrenci_puan=40)
+    #return render_template("show_exam_result.html",ogrenci_id=5,sinav_id=10,sinav_bitiris_tarihi=15,dogru_cevap=20,yanlis_cevap=30,ogrenci_puan=40)
     #sinav_toplam_puan=ogrenci_result[0]
 @app.route("/exam/examresult2")
 def deneme():
