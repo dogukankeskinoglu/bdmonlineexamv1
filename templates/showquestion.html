@@ -45,7 +45,7 @@
         var soru_idler = soru_idler.replace("[", "");
         var soru_idler = soru_idler.replace("]", "");
         var soru_idler = soru_idler.split(", ")
-        var exam_questions = []
+
         var isaretlenen_ = "z";
         var soru_key = "";
         for (var i in soru_idler) {
@@ -57,6 +57,7 @@
         }
 
         function finishExam() {
+            var exam_questions = []
             var today = new Date();
             var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();

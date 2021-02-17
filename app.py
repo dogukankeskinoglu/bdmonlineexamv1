@@ -94,7 +94,6 @@ def nolr(exam_id):
 #Ogrenci_Sınav(ogrenci_id,sinav_id,ogrenci_dogru_sayı,ogrenci_yanlis_sayı,ogrenci_puan)                
 @app.route("/exam/examresult", methods=["POST","GET"])
 def exam_result():
-    sinav_id=7
     resultdetails=[]
     if request.method=="POST":
        resultdetails = json.loads(request.data)
@@ -124,7 +123,7 @@ def exam_result():
        dogru_cevap_sayisi=liste.count(1)
        yanlis_cevap_sayisi=liste.count(0)
        manage.insertStudentExamDatabase(1,sinav_id,sinav_bitiris_tarihi,dogru_cevap_sayisi,yanlis_cevap_sayisi,ogrenci_puan)
-    ogrenci_result=manage.getStudentExamResult(1,sinav_id)
+    ogrenci_result=manage.getStudentExamResult(1,16)
     return render_template("show_exam_result.html",ogrenci_id=ogrenci_result[0],sinav_id=ogrenci_result[1],sinav_bitiris_tarihi=ogrenci_result[2],
                                dogru_cevap=ogrenci_result[3],yanlis_cevap=ogrenci_result[4],ogrenci_puan=ogrenci_result[5])
     
