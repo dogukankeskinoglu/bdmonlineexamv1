@@ -152,7 +152,7 @@ def getTeacherExam(ogretmen_id):
     db=Database()
     created_exam=[]
     with db.get_cursor() as cursor:
-        cursor.execute("SELECT k.kullanici_adi, s.sinav_id, s.sinav_adi, s.sinav_baslama_tarihi , s.sinav_bitis_tarihi FROM Kullanici AS k JOIN Sinav As s on k.kullanici_id=s.ogretmen_id WHERE s.ogretmen_id= %s;",(ogretmen_id,))
+        cursor.execute("SELECT  s.sinav_id,k.kullanici_adi,s.sinav_adi, s.sinav_baslama_tarihi , s.sinav_bitis_tarihi FROM Kullanici AS k JOIN Sinav As s on k.kullanici_id=s.ogretmen_id WHERE s.ogretmen_id= %s;",(ogretmen_id,))
         rows = cursor.fetchall()
         for row in rows:
             a=[row[0],row[1],row[2],row[3],row[4]]
