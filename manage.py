@@ -146,6 +146,14 @@ def getStudentExamResult(ogrenci_id,sinav_id):
         row=cursor.fetchone()
     return [row[0],row[1],row[2],row[3],row[4],row[5]]
 
+def getLeaderBoardExam(exam_id):
+    db=Database()
+    with db.get_cursor() as cursor:
+        cursor.execute("SELECT k.kullanici_adi, o.puan FROM Kullanici AS k JOIN Ogrenci_Sinav AS o ON k.kullanici_id = o.ogrenci_id WHERE o.sinav_id = %s ORDER BY o.puan DESC;",(exam_id)")
+        rows=cursor.fetchall()
+        for row in rows:
+            liste=[row[0],row[1]]
+    
 if args.command == "init":
     if path.exists("initialized.txt"):
         print("This project already initialized")
@@ -210,7 +218,3 @@ elif args.command=="ogrenciresult":
         rows = cursor.fetchall()
         for row in rows:
             print("OgrenciSınavResult:",row[0],row[1],row[2],row[3],row[4],row[5])
-
-
-elif args.command=="doldur":
-    fill_database()
