@@ -158,8 +158,10 @@ def exampagetwo():
 def exam_leaderboard():
     if current_usertype=="Ogretmen":
         ogretmen_sinavlari=manage.getTeacherExam(current_user_id)
+        return render_template("sinavleaderboard.html",sinav=ogretmen_sinavlari)
     else:
-        sorular=manage.getQuestion(exam_id)
+        ogrenci_sinavlari=manage.getStudentExam(current_user_id)
+        return render_template("sinavleaderboard.html",sinav=ogrenci_sinavlari)
 @app.route("/leaderboard/<exam_id>")
 #@login_required
 def leaderboard(exam_id):
