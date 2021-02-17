@@ -12,7 +12,7 @@ sinav_id_sayac=0
 
 import json
 #Kullanıcı(kullanici_id,kullanici_adi,kullanici_sifre,kullanici_tipi)
-#Sınav(sinav_id,sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi)
+#Sınav(sinav_id,ogretmen_id,sinav_adi,sinav_baslama_tarihi,sinav_bitis_tarihi)
 #Ogrenci_Sınav(ogrenci_id,sinav_id,ogrenci_sinav_bitis_tarihi,dogru_sayi,yanlis_cevap,puan)
 #Soru(soru_id,soru_sinav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
 #Ogrenci_Soru(ogrenci_id,soru_id,verilen_cevap,aldigi_puan)
@@ -38,7 +38,7 @@ def fill_database():
         cursor.execute("INSERT INTO Kullanici (kullanici_adi,kullanici_sifre,kullanici_tipi) VALUES (%s, %s, %s);", ("vecdiaytac","12345","Ogretmen"))
         cursor.execute("INSERT INTO Kullanici (kullanici_adi,kullanici_sifre,kullanici_tipi) VALUES (%s, %s, %s);", ("ali","123","Ogrenci"))
     db.commit()
-    print("Inserted 4 rows of data")
+    
 
 
 
@@ -76,7 +76,7 @@ def insertQuestionDataBase(sinav_id,soru_icerik,soru_siklari,dogru_cevap,puan):
         cursor.execute("INSERT INTO Soru(soru_sinav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani) VALUES (%s, %s,%s,%s,%s);",(sinav_id,soru_icerik,soru_siklari,dogru_cevap,puan))
     db.commit()
 
-#Ogrenci_Soru(ogrenci_id,soru_id,verilen_cevap,aldigi_puan)
+
 def insertStudentQuestionDataBase(ogrenci_id,soru_id,verilen_cevap,aldigi_puan):
     db=Database()
     with db.get_cursor() as cursor:
@@ -93,7 +93,7 @@ def getExam(examname):
             return row[0]
 
 def getExamTotalPoint(examid):
-    #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
+    
     db=Database()
     sinav_toplam_puan=0
     with db.get_cursor() as cursor:
@@ -116,7 +116,7 @@ def getQuestion(exam_id):
     return liste
 
 def getQuestionPoint(soru_id):
-    #Soru(Soru_id,soru_sınav_id,soru_metni,soru_siklari,soru_dogru_cevap,soru_puani)
+    
     db=Database()
     liste=[]
     with db.get_cursor() as cursor:
@@ -133,7 +133,7 @@ def getExamId(soru_id):
         row=cursor.fetchone()
     return row[0]
 
-#Ogrenci_Sinav(ogrenci_id,sinav_id,ogrenci_sinav_bitis_tarihi,dogru_sayi,yanlis_cevap,puan)
+
 def insertStudentExamDatabase(ogrenci_id,sinav_id,sinav_bitiris_tarihi,dogru_cevap,yanlis_cevap,puan):
     db=Database()
     with db.get_cursor() as cursor:
@@ -237,7 +237,8 @@ elif args.command=="kullanicitablosu":
         rows = cursor.fetchall()
         for row in rows:
             print("Kullanici:",row[0],row[1],row[2],row[3])
-#Ogrenci_Sinav(ogrenci_id,sinav_id,ogrenci_sinav_bitis_tarihi,dogru_sayi,yanlis_cevap,puan)
+
+
 elif args.command=="ogrenciresult":
     db=Database()
     with db.get_cursor() as cursor:

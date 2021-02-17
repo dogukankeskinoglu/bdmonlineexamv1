@@ -161,8 +161,8 @@
                 soru_puan = parseInt(document.getElementById("question" + i + "point").value);
                 sınav_toplam_puan += soru_puan;
             }
-            if (sınav_toplam_puan > 100) {
-                alert("Sınav toplam puanı 100den yüksek olamaz" + sınav_toplam_puan)
+            if (sınav_toplam_puan != 100) {
+                alert("Sınav toplam puan 100 olmalıdır" + sınav_toplam_puan)
                     //sınav_toplam_puan = 0;
             } else {
                 for (var i = 1; i < question_no; i++) {
