@@ -52,7 +52,7 @@ def show_exams():
     createdexams = manage.getExamFromDataBase()
     if request.method == "POST":
         exam_number=Exam.exam_count+1
-        exam_object=Exam(exam_number,current_user_id,exams[-1][0], exams[-1][1], exams[-1][2])
+        exam_object=Exam(exam_number,exams[-1][0], exams[-1][1], exams[-1][2])
         createdexams.append(exam_object)
         manage.insertExamDataBase(exam_object)
         print(createdexams, sys.stdout.flush())
@@ -139,8 +139,7 @@ def exam_result():
                                                     dogru_cevap=ogrenci_result[3],
                                                     yanlis_cevap=ogrenci_result[4],
                                                     ogrenci_puan=ogrenci_result[5],
-                                                    sinav_toplam_puan=sinav_toplam_puan,
-                                                    sinav_ham_puan=sinav_ham_puan)
+                                                    sinav_toplam_puan=sinav_toplam_puan,sinav_ham_puan=sinav_ham_puan)
     #return render_template("show_exam_result.html",ogrenci_id=5,sinav_id=10,sinav_bitiris_tarihi=15,dogru_cevap=20,yanlis_cevap=30,ogrenci_puan=40)
     #sinav_toplam_puan=ogrenci_result[0]
 @app.route("/exam/examresult2")
