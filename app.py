@@ -14,7 +14,7 @@ current_usertype="Ogrenci"
 current_user_id=0
 sinav_id=0
 sinav_toplam_puan=0
-sinav_ham_puan=0
+
 class User(flask_login.UserMixin):
     def __init__(self, username, password, usertype):
         self.username = username
@@ -99,7 +99,7 @@ def exam_result():
     if request.method=="POST":
        global sinav_id
        global sinav_toplam_puan
-       global sinav_ham_puan
+       
        resultdetails = json.loads(request.data)
        penalty=1.25
        ogrenci_puan=0
@@ -119,7 +119,6 @@ def exam_result():
            if dogru_cevap==isaretlenen_:
                liste[index]=1
                sorudan_aldigi_puan=soru_puan
-               sinav_ham_puan+=sorudan_aldigi_puan
            else:
                 soru_agirlik[index]=(soru_puan/sinav_toplam_puan)*penalty
            manage.insertStudentQuestionDataBase(current_user_id,soru_id,isaretlenen_,sorudan_aldigi_puan)
@@ -138,7 +137,7 @@ def exam_result():
                         yanlis_cevap=ogrenci_result[4],
                         ogrenci_puan=ogrenci_result[5],
                         sinav_toplam_puan=sinav_toplam_puan,
-                        sinav_ham_puan=sinav_ham_puan)
+                        )
     
 
 

@@ -13,25 +13,7 @@
 
 <body class="is-preload">
 
-    <!-- Header -->
-    <header id="header">
-        <a class="logo" href="home">Online Exam System</a>
-        <nav>
-            <a href="#menu">Menu</a>
-        </nav>
-    </header>
 
-    <!-- Nav -->
-    <nav id="menu">
-        <ul class="links">
-            <li><a href="home">Home</a></li>
-            <li><a href="exams">Exams</a></li>
-            <li><a href="leaderboard">Leaderboard</a></li>
-            <li><a href="logout">Logout</a> </li>
-        </ul>
-    </nav>
-
-    <!-- Heading -->
     <div id="heading">
         <h1>EXAM RESULT</h1>
     </div>
@@ -49,8 +31,8 @@
                     <h3>Sınav bitiriş tarihiniz: {{sinav_bitiris_tarihi}}</h3>
                     <h3>Doğru cevap sayınız: {{dogru_cevap}}</h3>
                     <h3>Yanlış cevap sayınız: {{yanlis_cevap}}</h3>
-                    <h3>Sinavdan aldiginiz Ham Puan:{{sinav_ham_puan}}</h3>
                     <h3>Sınav puanınız: {{ogrenci_puan}} / {{sinav_toplam_puan}}</h3>
+                    <button type="submit" href="/exams">Sınavlar sayfasına gidebilirsiniz</button>
                 </div>
             </div>
         </div>
